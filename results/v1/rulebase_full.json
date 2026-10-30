@@ -1,0 +1,325 @@
+[
+ {
+  "id": 0,
+  "rule": "intercept",
+  "beta": -1.9415457220178354
+ },
+ {
+  "id": 1,
+  "rule": "PoorHealth",
+  "beta": 0.48415092380902136,
+  "ontology_sign": 1,
+  "concept_provenance": [
+   "Self-rated general health categories"
+  ]
+ },
+ {
+  "id": 2,
+  "rule": "FairHealth AND Multimorbidity",
+  "beta": 0.5603913807777621,
+  "ontology_sign": 1,
+  "concept_provenance": [
+   "Self-rated general health categories",
+   "Count of 10 doctor-told conditions"
+  ]
+ },
+ {
+  "id": 3,
+  "rule": "Female AND CurrentSmoker",
+  "beta": 0.2789195956636787,
+  "ontology_sign": 1,
+  "concept_provenance": [
+   "Self-reported sex",
+   "SMQ020/SMQ040"
+  ]
+ },
+ {
+  "id": 4,
+  "rule": "ShortSleepFreeDay AND FairHealth",
+  "beta": 0.45484276407301766,
+  "ontology_sign": 1,
+  "concept_provenance": [
+   "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h",
+   "Self-rated general health categories"
+  ]
+ },
+ {
+  "id": 5,
+  "rule": "HighIncome AND GoodOrBetterHealth",
+  "beta": -0.4561861290880375,
+  "ontology_sign": -1,
+  "concept_provenance": [
+   "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3",
+   "Self-rated general health categories"
+  ]
+ },
+ {
+  "id": 6,
+  "rule": "GoodOrBetterHealth AND NoChronicCondition",
+  "beta": -0.5630455697439006,
+  "ontology_sign": -1,
+  "concept_provenance": [
+   "Self-rated general health categories",
+   "Count of 10 doctor-told conditions"
+  ]
+ },
+ {
+  "id": 7,
+  "rule": "Female AND HighSedentary",
+  "beta": 0.42469647418239104,
+  "ontology_sign": 1,
+  "concept_provenance": [
+   "Self-reported sex",
+   "Sedentary time bands (h/day); transition width 1 h"
+  ]
+ },
+ {
+  "id": 8,
+  "rule": "OlderAdult AND GoodOrBetterHealth",
+  "beta": -0.5588724606889108,
+  "ontology_sign": -1,
+  "concept_provenance": [
+   "Conventional adult age bands; transition width 5 y",
+   "Self-rated general health categories"
+  ]
+ },
+ {
+  "id": 9,
+  "rule": "MarriedOrPartnered AND Overweight",
+  "beta": -0.3006783140814131,
+  "ontology_sign": -1,
+  "concept_provenance": [
+   "NHANES marital status categories",
+   "WHO BMI cut-points; transition width 1 kg/m2"
+  ]
+ },
+ {
+  "id": 10,
+  "rule": "CollegeGraduate AND AdequateSleepFreeDay",
+  "beta": -0.3761618376711081,
+  "ontology_sign": -1,
+  "concept_provenance": [
+   "NHANES education categories",
+   "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+  ]
+ },
+ {
+  "id": 11,
+  "rule": "PoorHealth AND Multimorbidity",
+  "beta": 0.4292408537702854,
+  "ontology_sign": 1,
+  "concept_provenance": [
+   "Self-rated general health categories",
+   "Count of 10 doctor-told conditions"
+  ]
+ },
+ {
+  "id": 12,
+  "rule": "MarriedOrPartnered AND AdequateSleepWorkday",
+  "beta": -0.24511025442642537,
+  "ontology_sign": -1,
+  "concept_provenance": [
+   "NHANES marital status categories",
+   "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+  ]
+ },
+ {
+  "id": 13,
+  "rule": "YoungAdult AND CurrentSmoker",
+  "beta": 0.4233769944735801,
+  "ontology_sign": 1,
+  "concept_provenance": [
+   "Conventional adult age bands; transition width 5 y",
+   "SMQ020/SMQ040"
+  ]
+ },
+ {
+  "id": 14,
+  "rule": "NormalWeight AND NoChronicCondition",
+  "beta": -0.4153908479393466,
+  "ontology_sign": -1,
+  "concept_provenance": [
+   "WHO BMI cut-points; transition width 1 kg/m2",
+   "Count of 10 doctor-told conditions"
+  ]
+ },
+ {
+  "id": 15,
+  "rule": "Male AND Overweight",
+  "beta": -0.4090122405230399,
+  "ontology_sign": -1,
+  "concept_provenance": [
+   "Self-reported sex",
+   "WHO BMI cut-points; transition width 1 kg/m2"
+  ]
+ },
+ {
+  "id": 16,
+  "rule": "LowIncome AND ShortSleepFreeDay",
+  "beta": 0.32424612282680526,
+  "ontology_sign": 1,
+  "concept_provenance": [
+   "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3",
+   "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+  ]
+ },
+ {
+  "id": 17,
+  "rule": "LessThanHighSchool AND LongSleepWorkday",
+  "beta": 0.2444254087409298,
+  "ontology_sign": 1,
+  "concept_provenance": [
+   "NHANES education categories",
+   "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+  ]
+ },
+ {
+  "id": 18,
+  "rule": "Underweight",
+  "beta": 0.3246968519985102,
+  "ontology_sign": 0,
+  "concept_provenance": [
+   "WHO BMI cut-points; transition width 1 kg/m2"
+  ]
+ },
+ {
+  "id": 19,
+  "rule": "YoungAdult AND FairHealth",
+  "beta": 0.36778834964964846,
+  "ontology_sign": 1,
+  "concept_provenance": [
+   "Conventional adult age bands; transition width 5 y",
+   "Self-rated general health categories"
+  ]
+ },
+ {
+  "id": 20,
+  "rule": "YoungAdult AND PreviouslyMarried",
+  "beta": 0.2981264873483141,
+  "ontology_sign": 1,
+  "concept_provenance": [
+   "Conventional adult age bands; transition width 5 y",
+   "NHANES marital status categories"
+  ]
+ },
+ {
+  "id": 21,
+  "rule": "MiddleAged AND Multimorbidity",
+  "beta": 0.2627576513878098,
+  "ontology_sign": 1,
+  "concept_provenance": [
+   "Conventional adult age bands; transition width 5 y",
+   "Count of 10 doctor-told conditions"
+  ]
+ },
+ {
+  "id": 22,
+  "rule": "Male AND HighIncome",
+  "beta": -0.3874649209218456,
+  "ontology_sign": -1,
+  "concept_provenance": [
+   "Self-reported sex",
+   "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3"
+  ]
+ },
+ {
+  "id": 23,
+  "rule": "PoorHealth AND Hypertension",
+  "beta": 0.3812813670287218,
+  "ontology_sign": 1,
+  "concept_provenance": [
+   "Self-rated general health categories",
+   "Doctor-told hypertension"
+  ]
+ },
+ {
+  "id": 24,
+  "rule": "MiddleIncome AND AdequateSleepWorkday",
+  "beta": -0.28667778188171167,
+  "ontology_sign": -1,
+  "concept_provenance": [
+   "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3",
+   "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+  ]
+ },
+ {
+  "id": 25,
+  "rule": "LessThanHighSchool AND ModerateSedentary",
+  "beta": 0.20440712159855634,
+  "ontology_sign": 1,
+  "concept_provenance": [
+   "NHANES education categories",
+   "Sedentary time bands (h/day); transition width 1 h"
+  ]
+ },
+ {
+  "id": 26,
+  "rule": "PreviouslyMarried AND PoorHealth",
+  "beta": 0.3281390363446716,
+  "ontology_sign": 1,
+  "concept_provenance": [
+   "NHANES marital status categories",
+   "Self-rated general health categories"
+  ]
+ },
+ {
+  "id": 27,
+  "rule": "LongSleepFreeDay AND HighSedentary",
+  "beta": 0.2692013003414996,
+  "ontology_sign": 1,
+  "concept_provenance": [
+   "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h",
+   "Sedentary time bands (h/day); transition width 1 h"
+  ]
+ },
+ {
+  "id": 28,
+  "rule": "NeverMarried AND Hypertension",
+  "beta": 0.250549886069945,
+  "ontology_sign": 1,
+  "concept_provenance": [
+   "NHANES marital status categories",
+   "Doctor-told hypertension"
+  ]
+ },
+ {
+  "id": 29,
+  "rule": "MiddleAged AND PreviouslyMarried",
+  "beta": 0.23466827616394986,
+  "ontology_sign": 1,
+  "concept_provenance": [
+   "Conventional adult age bands; transition width 5 y",
+   "NHANES marital status categories"
+  ]
+ },
+ {
+  "id": 30,
+  "rule": "CollegeGraduate AND Overweight",
+  "beta": -0.26666082142555997,
+  "ontology_sign": -1,
+  "concept_provenance": [
+   "NHANES education categories",
+   "WHO BMI cut-points; transition width 1 kg/m2"
+  ]
+ },
+ {
+  "id": 31,
+  "rule": "HighSchoolOrSomeCollege AND NormalWeight",
+  "beta": -0.2408328828381156,
+  "ontology_sign": 0,
+  "concept_provenance": [
+   "NHANES education categories",
+   "WHO BMI cut-points; transition width 1 kg/m2"
+  ]
+ },
+ {
+  "id": 32,
+  "rule": "CurrentSmoker AND ModerateSedentary",
+  "beta": 0.23255516580655616,
+  "ontology_sign": 1,
+  "concept_provenance": [
+   "SMQ020/SMQ040",
+   "Sedentary time bands (h/day); transition width 1 h"
+  ]
+ }
+]

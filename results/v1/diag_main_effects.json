@@ -1,0 +1,13 @@
+{
+ "LR_oof": 0.761300023525477,
+ "current_K32_oof": 0.7547130671269724,
+ "main+0pairs_oof": 0.7588971653217463,
+ "main+0pairs_nodir_oof": 0.7587745777460326,
+ "main+8pairs_oof": 0.7562071474934029,
+ "main+8pairs_nodir_oof": 0.7562994424745401,
+ "main+16pairs_oof": 0.7595664367972472,
+ "main+16pairs_nodir_oof": 0.7581056605698834,
+ "main+32pairs_oof": 0.7544358278842094,
+ "main+32pairs_nodir_oof": 0.757845959145033,
+ "n_rules_main16": 41
+}

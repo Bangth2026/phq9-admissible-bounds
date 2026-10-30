@@ -1,0 +1,3509 @@
+[
+ {
+  "index": 0,
+  "y": 0,
+  "inputs": {
+   "age": 29.0,
+   "female": 0.0,
+   "pir": 3.76,
+   "educ": 5.0,
+   "marital": 1.0,
+   "bmi": 23.7,
+   "sleep_wd": 7.0,
+   "sleep_we": 10.5,
+   "srh": 3.0,
+   "smoker": 1.0,
+   "diabetes": 0.0,
+   "hypertension": 1.0,
+   "sedentary": 2.0,
+   "n_chronic": 0.0
+  },
+  "missing_inputs": [],
+  "intercept": -1.9415457220178354,
+  "concepts": {
+   "YoungAdult": {
+    "variable": "age",
+    "membership": 1.0,
+    "provenance": "Conventional adult age bands; transition width 5 y"
+   },
+   "MiddleAged": {
+    "variable": "age",
+    "membership": 0.0,
+    "provenance": "Conventional adult age bands; transition width 5 y"
+   },
+   "OlderAdult": {
+    "variable": "age",
+    "membership": 0.0,
+    "provenance": "Conventional adult age bands; transition width 5 y"
+   },
+   "Female": {
+    "variable": "female",
+    "membership": 0.0,
+    "provenance": "Self-reported sex"
+   },
+   "Male": {
+    "variable": "female",
+    "membership": 1.0,
+    "provenance": "Self-reported sex"
+   },
+   "LowIncome": {
+    "variable": "pir",
+    "membership": 0.0,
+    "provenance": "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3"
+   },
+   "MiddleIncome": {
+    "variable": "pir",
+    "membership": 0.06666666666666676,
+    "provenance": "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3"
+   },
+   "HighIncome": {
+    "variable": "pir",
+    "membership": 0.9333333333333332,
+    "provenance": "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3"
+   },
+   "LessThanHighSchool": {
+    "variable": "educ",
+    "membership": 0.0,
+    "provenance": "NHANES education categories"
+   },
+   "HighSchoolOrSomeCollege": {
+    "variable": "educ",
+    "membership": 0.0,
+    "provenance": "NHANES education categories"
+   },
+   "CollegeGraduate": {
+    "variable": "educ",
+    "membership": 1.0,
+    "provenance": "NHANES education categories"
+   },
+   "MarriedOrPartnered": {
+    "variable": "marital",
+    "membership": 1.0,
+    "provenance": "NHANES marital status categories"
+   },
+   "PreviouslyMarried": {
+    "variable": "marital",
+    "membership": 0.0,
+    "provenance": "NHANES marital status categories"
+   },
+   "NeverMarried": {
+    "variable": "marital",
+    "membership": 0.0,
+    "provenance": "NHANES marital status categories"
+   },
+   "Underweight": {
+    "variable": "bmi",
+    "membership": 0.0,
+    "provenance": "WHO BMI cut-points; transition width 1 kg/m2"
+   },
+   "NormalWeight": {
+    "variable": "bmi",
+    "membership": 1.0,
+    "provenance": "WHO BMI cut-points; transition width 1 kg/m2"
+   },
+   "Overweight": {
+    "variable": "bmi",
+    "membership": 0.0,
+    "provenance": "WHO BMI cut-points; transition width 1 kg/m2"
+   },
+   "AdequateSleepWorkday": {
+    "variable": "sleep_wd",
+    "membership": 1.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "LongSleepWorkday": {
+    "variable": "sleep_wd",
+    "membership": 0.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "ShortSleepFreeDay": {
+    "variable": "sleep_we",
+    "membership": 0.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "AdequateSleepFreeDay": {
+    "variable": "sleep_we",
+    "membership": 0.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "LongSleepFreeDay": {
+    "variable": "sleep_we",
+    "membership": 1.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "GoodOrBetterHealth": {
+    "variable": "srh",
+    "membership": 1.0,
+    "provenance": "Self-rated general health categories"
+   },
+   "FairHealth": {
+    "variable": "srh",
+    "membership": 0.0,
+    "provenance": "Self-rated general health categories"
+   },
+   "PoorHealth": {
+    "variable": "srh",
+    "membership": 0.0,
+    "provenance": "Self-rated general health categories"
+   },
+   "CurrentSmoker": {
+    "variable": "smoker",
+    "membership": 1.0,
+    "provenance": "SMQ020/SMQ040"
+   },
+   "Hypertension": {
+    "variable": "hypertension",
+    "membership": 1.0,
+    "provenance": "Doctor-told hypertension"
+   },
+   "ModerateSedentary": {
+    "variable": "sedentary",
+    "membership": 0.0,
+    "provenance": "Sedentary time bands (h/day); transition width 1 h"
+   },
+   "HighSedentary": {
+    "variable": "sedentary",
+    "membership": 0.0,
+    "provenance": "Sedentary time bands (h/day); transition width 1 h"
+   },
+   "NoChronicCondition": {
+    "variable": "n_chronic",
+    "membership": 1.0,
+    "provenance": "Count of 10 doctor-told conditions"
+   },
+   "Multimorbidity": {
+    "variable": "n_chronic",
+    "membership": 0.0,
+    "provenance": "Count of 10 doctor-told conditions"
+   }
+  },
+  "rules": [
+   {
+    "id": 1,
+    "rule": "PoorHealth",
+    "beta": 0.48415092380902136,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 2,
+    "rule": "FairHealth AND Multimorbidity",
+    "beta": 0.5603913807777621,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 3,
+    "rule": "Female AND CurrentSmoker",
+    "beta": 0.2789195956636787,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 4,
+    "rule": "ShortSleepFreeDay AND FairHealth",
+    "beta": 0.45484276407301766,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 5,
+    "rule": "HighIncome AND GoodOrBetterHealth",
+    "beta": -0.4561861290880375,
+    "firing_lower": 0.9333333333333332,
+    "firing_upper": 0.9333333333333332,
+    "logit_contribution": -0.4257737204821683
+   },
+   {
+    "id": 6,
+    "rule": "GoodOrBetterHealth AND NoChronicCondition",
+    "beta": -0.5630455697439006,
+    "firing_lower": 1.0,
+    "firing_upper": 1.0,
+    "logit_contribution": -0.5630455697439006
+   },
+   {
+    "id": 7,
+    "rule": "Female AND HighSedentary",
+    "beta": 0.42469647418239104,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 8,
+    "rule": "OlderAdult AND GoodOrBetterHealth",
+    "beta": -0.5588724606889108,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 9,
+    "rule": "MarriedOrPartnered AND Overweight",
+    "beta": -0.3006783140814131,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 10,
+    "rule": "CollegeGraduate AND AdequateSleepFreeDay",
+    "beta": -0.3761618376711081,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 11,
+    "rule": "PoorHealth AND Multimorbidity",
+    "beta": 0.4292408537702854,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 12,
+    "rule": "MarriedOrPartnered AND AdequateSleepWorkday",
+    "beta": -0.24511025442642537,
+    "firing_lower": 1.0,
+    "firing_upper": 1.0,
+    "logit_contribution": -0.24511025442642537
+   },
+   {
+    "id": 13,
+    "rule": "YoungAdult AND CurrentSmoker",
+    "beta": 0.4233769944735801,
+    "firing_lower": 1.0,
+    "firing_upper": 1.0,
+    "logit_contribution": 0.4233769944735801
+   },
+   {
+    "id": 14,
+    "rule": "NormalWeight AND NoChronicCondition",
+    "beta": -0.4153908479393466,
+    "firing_lower": 1.0,
+    "firing_upper": 1.0,
+    "logit_contribution": -0.4153908479393466
+   },
+   {
+    "id": 15,
+    "rule": "Male AND Overweight",
+    "beta": -0.4090122405230399,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 16,
+    "rule": "LowIncome AND ShortSleepFreeDay",
+    "beta": 0.32424612282680526,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 17,
+    "rule": "LessThanHighSchool AND LongSleepWorkday",
+    "beta": 0.2444254087409298,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 18,
+    "rule": "Underweight",
+    "beta": 0.3246968519985102,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 19,
+    "rule": "YoungAdult AND FairHealth",
+    "beta": 0.36778834964964846,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 20,
+    "rule": "YoungAdult AND PreviouslyMarried",
+    "beta": 0.2981264873483141,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 21,
+    "rule": "MiddleAged AND Multimorbidity",
+    "beta": 0.2627576513878098,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 22,
+    "rule": "Male AND HighIncome",
+    "beta": -0.3874649209218456,
+    "firing_lower": 0.9333333333333332,
+    "firing_upper": 0.9333333333333332,
+    "logit_contribution": -0.36163392619372253
+   },
+   {
+    "id": 23,
+    "rule": "PoorHealth AND Hypertension",
+    "beta": 0.3812813670287218,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 24,
+    "rule": "MiddleIncome AND AdequateSleepWorkday",
+    "beta": -0.28667778188171167,
+    "firing_lower": 0.06666666666666676,
+    "firing_upper": 0.06666666666666676,
+    "logit_contribution": -0.01911185212544747
+   },
+   {
+    "id": 25,
+    "rule": "LessThanHighSchool AND ModerateSedentary",
+    "beta": 0.20440712159855634,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 26,
+    "rule": "PreviouslyMarried AND PoorHealth",
+    "beta": 0.3281390363446716,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 27,
+    "rule": "LongSleepFreeDay AND HighSedentary",
+    "beta": 0.2692013003414996,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 28,
+    "rule": "NeverMarried AND Hypertension",
+    "beta": 0.250549886069945,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 29,
+    "rule": "MiddleAged AND PreviouslyMarried",
+    "beta": 0.23466827616394986,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 30,
+    "rule": "CollegeGraduate AND Overweight",
+    "beta": -0.26666082142555997,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 31,
+    "rule": "HighSchoolOrSomeCollege AND NormalWeight",
+    "beta": -0.2408328828381156,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 32,
+    "rule": "CurrentSmoker AND ModerateSedentary",
+    "beta": 0.23255516580655616,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   }
+  ],
+  "prob_lower": 0.027970523707771536,
+  "prob_upper": 0.027970523707771536
+ },
+ {
+  "index": 1,
+  "y": 0,
+  "inputs": {
+   "age": 73.0,
+   "female": 0.0,
+   "pir": 5.0,
+   "educ": 4.0,
+   "marital": 2.0,
+   "bmi": 26.7,
+   "sleep_wd": 7.0,
+   "sleep_we": 8.0,
+   "srh": 2.0,
+   "smoker": 0.0,
+   "diabetes": 0.0,
+   "hypertension": 1.0,
+   "sedentary": 4.0,
+   "n_chronic": 2.0
+  },
+  "missing_inputs": [],
+  "intercept": -1.9415457220178354,
+  "concepts": {
+   "YoungAdult": {
+    "variable": "age",
+    "membership": 0.0,
+    "provenance": "Conventional adult age bands; transition width 5 y"
+   },
+   "MiddleAged": {
+    "variable": "age",
+    "membership": 0.0,
+    "provenance": "Conventional adult age bands; transition width 5 y"
+   },
+   "OlderAdult": {
+    "variable": "age",
+    "membership": 1.0,
+    "provenance": "Conventional adult age bands; transition width 5 y"
+   },
+   "Female": {
+    "variable": "female",
+    "membership": 0.0,
+    "provenance": "Self-reported sex"
+   },
+   "Male": {
+    "variable": "female",
+    "membership": 1.0,
+    "provenance": "Self-reported sex"
+   },
+   "LowIncome": {
+    "variable": "pir",
+    "membership": 0.0,
+    "provenance": "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3"
+   },
+   "MiddleIncome": {
+    "variable": "pir",
+    "membership": 0.0,
+    "provenance": "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3"
+   },
+   "HighIncome": {
+    "variable": "pir",
+    "membership": 1.0,
+    "provenance": "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3"
+   },
+   "LessThanHighSchool": {
+    "variable": "educ",
+    "membership": 0.0,
+    "provenance": "NHANES education categories"
+   },
+   "HighSchoolOrSomeCollege": {
+    "variable": "educ",
+    "membership": 1.0,
+    "provenance": "NHANES education categories"
+   },
+   "CollegeGraduate": {
+    "variable": "educ",
+    "membership": 0.0,
+    "provenance": "NHANES education categories"
+   },
+   "MarriedOrPartnered": {
+    "variable": "marital",
+    "membership": 0.0,
+    "provenance": "NHANES marital status categories"
+   },
+   "PreviouslyMarried": {
+    "variable": "marital",
+    "membership": 1.0,
+    "provenance": "NHANES marital status categories"
+   },
+   "NeverMarried": {
+    "variable": "marital",
+    "membership": 0.0,
+    "provenance": "NHANES marital status categories"
+   },
+   "Underweight": {
+    "variable": "bmi",
+    "membership": 0.0,
+    "provenance": "WHO BMI cut-points; transition width 1 kg/m2"
+   },
+   "NormalWeight": {
+    "variable": "bmi",
+    "membership": 0.0,
+    "provenance": "WHO BMI cut-points; transition width 1 kg/m2"
+   },
+   "Overweight": {
+    "variable": "bmi",
+    "membership": 1.0,
+    "provenance": "WHO BMI cut-points; transition width 1 kg/m2"
+   },
+   "AdequateSleepWorkday": {
+    "variable": "sleep_wd",
+    "membership": 1.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "LongSleepWorkday": {
+    "variable": "sleep_wd",
+    "membership": 0.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "ShortSleepFreeDay": {
+    "variable": "sleep_we",
+    "membership": 0.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "AdequateSleepFreeDay": {
+    "variable": "sleep_we",
+    "membership": 1.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "LongSleepFreeDay": {
+    "variable": "sleep_we",
+    "membership": 0.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "GoodOrBetterHealth": {
+    "variable": "srh",
+    "membership": 1.0,
+    "provenance": "Self-rated general health categories"
+   },
+   "FairHealth": {
+    "variable": "srh",
+    "membership": 0.0,
+    "provenance": "Self-rated general health categories"
+   },
+   "PoorHealth": {
+    "variable": "srh",
+    "membership": 0.0,
+    "provenance": "Self-rated general health categories"
+   },
+   "CurrentSmoker": {
+    "variable": "smoker",
+    "membership": 0.0,
+    "provenance": "SMQ020/SMQ040"
+   },
+   "Hypertension": {
+    "variable": "hypertension",
+    "membership": 1.0,
+    "provenance": "Doctor-told hypertension"
+   },
+   "ModerateSedentary": {
+    "variable": "sedentary",
+    "membership": 0.5,
+    "provenance": "Sedentary time bands (h/day); transition width 1 h"
+   },
+   "HighSedentary": {
+    "variable": "sedentary",
+    "membership": 0.0,
+    "provenance": "Sedentary time bands (h/day); transition width 1 h"
+   },
+   "NoChronicCondition": {
+    "variable": "n_chronic",
+    "membership": 0.0,
+    "provenance": "Count of 10 doctor-told conditions"
+   },
+   "Multimorbidity": {
+    "variable": "n_chronic",
+    "membership": 1.0,
+    "provenance": "Count of 10 doctor-told conditions"
+   }
+  },
+  "rules": [
+   {
+    "id": 1,
+    "rule": "PoorHealth",
+    "beta": 0.48415092380902136,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 2,
+    "rule": "FairHealth AND Multimorbidity",
+    "beta": 0.5603913807777621,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 3,
+    "rule": "Female AND CurrentSmoker",
+    "beta": 0.2789195956636787,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 4,
+    "rule": "ShortSleepFreeDay AND FairHealth",
+    "beta": 0.45484276407301766,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 5,
+    "rule": "HighIncome AND GoodOrBetterHealth",
+    "beta": -0.4561861290880375,
+    "firing_lower": 1.0,
+    "firing_upper": 1.0,
+    "logit_contribution": -0.4561861290880375
+   },
+   {
+    "id": 6,
+    "rule": "GoodOrBetterHealth AND NoChronicCondition",
+    "beta": -0.5630455697439006,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 7,
+    "rule": "Female AND HighSedentary",
+    "beta": 0.42469647418239104,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 8,
+    "rule": "OlderAdult AND GoodOrBetterHealth",
+    "beta": -0.5588724606889108,
+    "firing_lower": 1.0,
+    "firing_upper": 1.0,
+    "logit_contribution": -0.5588724606889108
+   },
+   {
+    "id": 9,
+    "rule": "MarriedOrPartnered AND Overweight",
+    "beta": -0.3006783140814131,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 10,
+    "rule": "CollegeGraduate AND AdequateSleepFreeDay",
+    "beta": -0.3761618376711081,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 11,
+    "rule": "PoorHealth AND Multimorbidity",
+    "beta": 0.4292408537702854,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 12,
+    "rule": "MarriedOrPartnered AND AdequateSleepWorkday",
+    "beta": -0.24511025442642537,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 13,
+    "rule": "YoungAdult AND CurrentSmoker",
+    "beta": 0.4233769944735801,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 14,
+    "rule": "NormalWeight AND NoChronicCondition",
+    "beta": -0.4153908479393466,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 15,
+    "rule": "Male AND Overweight",
+    "beta": -0.4090122405230399,
+    "firing_lower": 1.0,
+    "firing_upper": 1.0,
+    "logit_contribution": -0.4090122405230399
+   },
+   {
+    "id": 16,
+    "rule": "LowIncome AND ShortSleepFreeDay",
+    "beta": 0.32424612282680526,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 17,
+    "rule": "LessThanHighSchool AND LongSleepWorkday",
+    "beta": 0.2444254087409298,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 18,
+    "rule": "Underweight",
+    "beta": 0.3246968519985102,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 19,
+    "rule": "YoungAdult AND FairHealth",
+    "beta": 0.36778834964964846,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 20,
+    "rule": "YoungAdult AND PreviouslyMarried",
+    "beta": 0.2981264873483141,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 21,
+    "rule": "MiddleAged AND Multimorbidity",
+    "beta": 0.2627576513878098,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 22,
+    "rule": "Male AND HighIncome",
+    "beta": -0.3874649209218456,
+    "firing_lower": 1.0,
+    "firing_upper": 1.0,
+    "logit_contribution": -0.3874649209218456
+   },
+   {
+    "id": 23,
+    "rule": "PoorHealth AND Hypertension",
+    "beta": 0.3812813670287218,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 24,
+    "rule": "MiddleIncome AND AdequateSleepWorkday",
+    "beta": -0.28667778188171167,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 25,
+    "rule": "LessThanHighSchool AND ModerateSedentary",
+    "beta": 0.20440712159855634,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 26,
+    "rule": "PreviouslyMarried AND PoorHealth",
+    "beta": 0.3281390363446716,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 27,
+    "rule": "LongSleepFreeDay AND HighSedentary",
+    "beta": 0.2692013003414996,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 28,
+    "rule": "NeverMarried AND Hypertension",
+    "beta": 0.250549886069945,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 29,
+    "rule": "MiddleAged AND PreviouslyMarried",
+    "beta": 0.23466827616394986,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 30,
+    "rule": "CollegeGraduate AND Overweight",
+    "beta": -0.26666082142555997,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 31,
+    "rule": "HighSchoolOrSomeCollege AND NormalWeight",
+    "beta": -0.2408328828381156,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 32,
+    "rule": "CurrentSmoker AND ModerateSedentary",
+    "beta": 0.23255516580655616,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   }
+  ],
+  "prob_lower": 0.02290829424391032,
+  "prob_upper": 0.02290829424391032
+ },
+ {
+  "index": 2,
+  "y": 1,
+  "inputs": {
+   "age": 40.0,
+   "female": 0.0,
+   "pir": 1.03,
+   "educ": 3.0,
+   "marital": 1.0,
+   "bmi": 21.6,
+   "sleep_wd": 7.0,
+   "sleep_we": 7.0,
+   "srh": 3.0,
+   "smoker": 1.0,
+   "diabetes": 0.0,
+   "hypertension": 0.0,
+   "sedentary": 4.0,
+   "n_chronic": 1.0
+  },
+  "missing_inputs": [],
+  "intercept": -1.9415457220178354,
+  "concepts": {
+   "YoungAdult": {
+    "variable": "age",
+    "membership": 0.0,
+    "provenance": "Conventional adult age bands; transition width 5 y"
+   },
+   "MiddleAged": {
+    "variable": "age",
+    "membership": 1.0,
+    "provenance": "Conventional adult age bands; transition width 5 y"
+   },
+   "OlderAdult": {
+    "variable": "age",
+    "membership": 0.0,
+    "provenance": "Conventional adult age bands; transition width 5 y"
+   },
+   "Female": {
+    "variable": "female",
+    "membership": 0.0,
+    "provenance": "Self-reported sex"
+   },
+   "Male": {
+    "variable": "female",
+    "membership": 1.0,
+    "provenance": "Self-reported sex"
+   },
+   "LowIncome": {
+    "variable": "pir",
+    "membership": 0.95,
+    "provenance": "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3"
+   },
+   "MiddleIncome": {
+    "variable": "pir",
+    "membership": 0.05000000000000004,
+    "provenance": "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3"
+   },
+   "HighIncome": {
+    "variable": "pir",
+    "membership": 0.0,
+    "provenance": "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3"
+   },
+   "LessThanHighSchool": {
+    "variable": "educ",
+    "membership": 0.0,
+    "provenance": "NHANES education categories"
+   },
+   "HighSchoolOrSomeCollege": {
+    "variable": "educ",
+    "membership": 1.0,
+    "provenance": "NHANES education categories"
+   },
+   "CollegeGraduate": {
+    "variable": "educ",
+    "membership": 0.0,
+    "provenance": "NHANES education categories"
+   },
+   "MarriedOrPartnered": {
+    "variable": "marital",
+    "membership": 1.0,
+    "provenance": "NHANES marital status categories"
+   },
+   "PreviouslyMarried": {
+    "variable": "marital",
+    "membership": 0.0,
+    "provenance": "NHANES marital status categories"
+   },
+   "NeverMarried": {
+    "variable": "marital",
+    "membership": 0.0,
+    "provenance": "NHANES marital status categories"
+   },
+   "Underweight": {
+    "variable": "bmi",
+    "membership": 0.0,
+    "provenance": "WHO BMI cut-points; transition width 1 kg/m2"
+   },
+   "NormalWeight": {
+    "variable": "bmi",
+    "membership": 1.0,
+    "provenance": "WHO BMI cut-points; transition width 1 kg/m2"
+   },
+   "Overweight": {
+    "variable": "bmi",
+    "membership": 0.0,
+    "provenance": "WHO BMI cut-points; transition width 1 kg/m2"
+   },
+   "AdequateSleepWorkday": {
+    "variable": "sleep_wd",
+    "membership": 1.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "LongSleepWorkday": {
+    "variable": "sleep_wd",
+    "membership": 0.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "ShortSleepFreeDay": {
+    "variable": "sleep_we",
+    "membership": 0.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "AdequateSleepFreeDay": {
+    "variable": "sleep_we",
+    "membership": 1.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "LongSleepFreeDay": {
+    "variable": "sleep_we",
+    "membership": 0.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "GoodOrBetterHealth": {
+    "variable": "srh",
+    "membership": 1.0,
+    "provenance": "Self-rated general health categories"
+   },
+   "FairHealth": {
+    "variable": "srh",
+    "membership": 0.0,
+    "provenance": "Self-rated general health categories"
+   },
+   "PoorHealth": {
+    "variable": "srh",
+    "membership": 0.0,
+    "provenance": "Self-rated general health categories"
+   },
+   "CurrentSmoker": {
+    "variable": "smoker",
+    "membership": 1.0,
+    "provenance": "SMQ020/SMQ040"
+   },
+   "Hypertension": {
+    "variable": "hypertension",
+    "membership": 0.0,
+    "provenance": "Doctor-told hypertension"
+   },
+   "ModerateSedentary": {
+    "variable": "sedentary",
+    "membership": 0.5,
+    "provenance": "Sedentary time bands (h/day); transition width 1 h"
+   },
+   "HighSedentary": {
+    "variable": "sedentary",
+    "membership": 0.0,
+    "provenance": "Sedentary time bands (h/day); transition width 1 h"
+   },
+   "NoChronicCondition": {
+    "variable": "n_chronic",
+    "membership": 0.0,
+    "provenance": "Count of 10 doctor-told conditions"
+   },
+   "Multimorbidity": {
+    "variable": "n_chronic",
+    "membership": 0.0,
+    "provenance": "Count of 10 doctor-told conditions"
+   }
+  },
+  "rules": [
+   {
+    "id": 1,
+    "rule": "PoorHealth",
+    "beta": 0.48415092380902136,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 2,
+    "rule": "FairHealth AND Multimorbidity",
+    "beta": 0.5603913807777621,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 3,
+    "rule": "Female AND CurrentSmoker",
+    "beta": 0.2789195956636787,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 4,
+    "rule": "ShortSleepFreeDay AND FairHealth",
+    "beta": 0.45484276407301766,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 5,
+    "rule": "HighIncome AND GoodOrBetterHealth",
+    "beta": -0.4561861290880375,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 6,
+    "rule": "GoodOrBetterHealth AND NoChronicCondition",
+    "beta": -0.5630455697439006,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 7,
+    "rule": "Female AND HighSedentary",
+    "beta": 0.42469647418239104,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 8,
+    "rule": "OlderAdult AND GoodOrBetterHealth",
+    "beta": -0.5588724606889108,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 9,
+    "rule": "MarriedOrPartnered AND Overweight",
+    "beta": -0.3006783140814131,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 10,
+    "rule": "CollegeGraduate AND AdequateSleepFreeDay",
+    "beta": -0.3761618376711081,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 11,
+    "rule": "PoorHealth AND Multimorbidity",
+    "beta": 0.4292408537702854,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 12,
+    "rule": "MarriedOrPartnered AND AdequateSleepWorkday",
+    "beta": -0.24511025442642537,
+    "firing_lower": 1.0,
+    "firing_upper": 1.0,
+    "logit_contribution": -0.24511025442642537
+   },
+   {
+    "id": 13,
+    "rule": "YoungAdult AND CurrentSmoker",
+    "beta": 0.4233769944735801,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 14,
+    "rule": "NormalWeight AND NoChronicCondition",
+    "beta": -0.4153908479393466,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 15,
+    "rule": "Male AND Overweight",
+    "beta": -0.4090122405230399,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 16,
+    "rule": "LowIncome AND ShortSleepFreeDay",
+    "beta": 0.32424612282680526,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 17,
+    "rule": "LessThanHighSchool AND LongSleepWorkday",
+    "beta": 0.2444254087409298,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 18,
+    "rule": "Underweight",
+    "beta": 0.3246968519985102,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 19,
+    "rule": "YoungAdult AND FairHealth",
+    "beta": 0.36778834964964846,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 20,
+    "rule": "YoungAdult AND PreviouslyMarried",
+    "beta": 0.2981264873483141,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 21,
+    "rule": "MiddleAged AND Multimorbidity",
+    "beta": 0.2627576513878098,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 22,
+    "rule": "Male AND HighIncome",
+    "beta": -0.3874649209218456,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 23,
+    "rule": "PoorHealth AND Hypertension",
+    "beta": 0.3812813670287218,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 24,
+    "rule": "MiddleIncome AND AdequateSleepWorkday",
+    "beta": -0.28667778188171167,
+    "firing_lower": 0.05000000000000004,
+    "firing_upper": 0.05000000000000004,
+    "logit_contribution": -0.014333889094085594
+   },
+   {
+    "id": 25,
+    "rule": "LessThanHighSchool AND ModerateSedentary",
+    "beta": 0.20440712159855634,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 26,
+    "rule": "PreviouslyMarried AND PoorHealth",
+    "beta": 0.3281390363446716,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 27,
+    "rule": "LongSleepFreeDay AND HighSedentary",
+    "beta": 0.2692013003414996,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 28,
+    "rule": "NeverMarried AND Hypertension",
+    "beta": 0.250549886069945,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 29,
+    "rule": "MiddleAged AND PreviouslyMarried",
+    "beta": 0.23466827616394986,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 30,
+    "rule": "CollegeGraduate AND Overweight",
+    "beta": -0.26666082142555997,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 31,
+    "rule": "HighSchoolOrSomeCollege AND NormalWeight",
+    "beta": -0.2408328828381156,
+    "firing_lower": 1.0,
+    "firing_upper": 1.0,
+    "logit_contribution": -0.2408328828381156
+   },
+   {
+    "id": 32,
+    "rule": "CurrentSmoker AND ModerateSedentary",
+    "beta": 0.23255516580655616,
+    "firing_lower": 0.5,
+    "firing_upper": 0.5,
+    "logit_contribution": 0.11627758290327808
+   }
+  ],
+  "prob_lower": 0.0890293032258182,
+  "prob_upper": 0.0890293032258182
+ },
+ {
+  "index": 3,
+  "y": 0,
+  "inputs": {
+   "age": 28.0,
+   "female": 0.0,
+   "pir": 2.11,
+   "educ": 3.0,
+   "marital": 1.0,
+   "bmi": 23.2,
+   "sleep_wd": 10.5,
+   "sleep_we": 4.5,
+   "srh": 2.0,
+   "smoker": 0.0,
+   "diabetes": 0.0,
+   "hypertension": 0.0,
+   "sedentary": 3.0,
+   "n_chronic": 0.0
+  },
+  "missing_inputs": [],
+  "intercept": -1.9415457220178354,
+  "concepts": {
+   "YoungAdult": {
+    "variable": "age",
+    "membership": 1.0,
+    "provenance": "Conventional adult age bands; transition width 5 y"
+   },
+   "MiddleAged": {
+    "variable": "age",
+    "membership": 0.0,
+    "provenance": "Conventional adult age bands; transition width 5 y"
+   },
+   "OlderAdult": {
+    "variable": "age",
+    "membership": 0.0,
+    "provenance": "Conventional adult age bands; transition width 5 y"
+   },
+   "Female": {
+    "variable": "female",
+    "membership": 0.0,
+    "provenance": "Self-reported sex"
+   },
+   "Male": {
+    "variable": "female",
+    "membership": 1.0,
+    "provenance": "Self-reported sex"
+   },
+   "LowIncome": {
+    "variable": "pir",
+    "membership": 0.0,
+    "provenance": "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3"
+   },
+   "MiddleIncome": {
+    "variable": "pir",
+    "membership": 1.0,
+    "provenance": "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3"
+   },
+   "HighIncome": {
+    "variable": "pir",
+    "membership": 0.0,
+    "provenance": "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3"
+   },
+   "LessThanHighSchool": {
+    "variable": "educ",
+    "membership": 0.0,
+    "provenance": "NHANES education categories"
+   },
+   "HighSchoolOrSomeCollege": {
+    "variable": "educ",
+    "membership": 1.0,
+    "provenance": "NHANES education categories"
+   },
+   "CollegeGraduate": {
+    "variable": "educ",
+    "membership": 0.0,
+    "provenance": "NHANES education categories"
+   },
+   "MarriedOrPartnered": {
+    "variable": "marital",
+    "membership": 1.0,
+    "provenance": "NHANES marital status categories"
+   },
+   "PreviouslyMarried": {
+    "variable": "marital",
+    "membership": 0.0,
+    "provenance": "NHANES marital status categories"
+   },
+   "NeverMarried": {
+    "variable": "marital",
+    "membership": 0.0,
+    "provenance": "NHANES marital status categories"
+   },
+   "Underweight": {
+    "variable": "bmi",
+    "membership": 0.0,
+    "provenance": "WHO BMI cut-points; transition width 1 kg/m2"
+   },
+   "NormalWeight": {
+    "variable": "bmi",
+    "membership": 1.0,
+    "provenance": "WHO BMI cut-points; transition width 1 kg/m2"
+   },
+   "Overweight": {
+    "variable": "bmi",
+    "membership": 0.0,
+    "provenance": "WHO BMI cut-points; transition width 1 kg/m2"
+   },
+   "AdequateSleepWorkday": {
+    "variable": "sleep_wd",
+    "membership": 0.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "LongSleepWorkday": {
+    "variable": "sleep_wd",
+    "membership": 1.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "ShortSleepFreeDay": {
+    "variable": "sleep_we",
+    "membership": 1.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "AdequateSleepFreeDay": {
+    "variable": "sleep_we",
+    "membership": 0.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "LongSleepFreeDay": {
+    "variable": "sleep_we",
+    "membership": 0.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "GoodOrBetterHealth": {
+    "variable": "srh",
+    "membership": 1.0,
+    "provenance": "Self-rated general health categories"
+   },
+   "FairHealth": {
+    "variable": "srh",
+    "membership": 0.0,
+    "provenance": "Self-rated general health categories"
+   },
+   "PoorHealth": {
+    "variable": "srh",
+    "membership": 0.0,
+    "provenance": "Self-rated general health categories"
+   },
+   "CurrentSmoker": {
+    "variable": "smoker",
+    "membership": 0.0,
+    "provenance": "SMQ020/SMQ040"
+   },
+   "Hypertension": {
+    "variable": "hypertension",
+    "membership": 0.0,
+    "provenance": "Doctor-told hypertension"
+   },
+   "ModerateSedentary": {
+    "variable": "sedentary",
+    "membership": 0.0,
+    "provenance": "Sedentary time bands (h/day); transition width 1 h"
+   },
+   "HighSedentary": {
+    "variable": "sedentary",
+    "membership": 0.0,
+    "provenance": "Sedentary time bands (h/day); transition width 1 h"
+   },
+   "NoChronicCondition": {
+    "variable": "n_chronic",
+    "membership": 1.0,
+    "provenance": "Count of 10 doctor-told conditions"
+   },
+   "Multimorbidity": {
+    "variable": "n_chronic",
+    "membership": 0.0,
+    "provenance": "Count of 10 doctor-told conditions"
+   }
+  },
+  "rules": [
+   {
+    "id": 1,
+    "rule": "PoorHealth",
+    "beta": 0.48415092380902136,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 2,
+    "rule": "FairHealth AND Multimorbidity",
+    "beta": 0.5603913807777621,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 3,
+    "rule": "Female AND CurrentSmoker",
+    "beta": 0.2789195956636787,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 4,
+    "rule": "ShortSleepFreeDay AND FairHealth",
+    "beta": 0.45484276407301766,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 5,
+    "rule": "HighIncome AND GoodOrBetterHealth",
+    "beta": -0.4561861290880375,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 6,
+    "rule": "GoodOrBetterHealth AND NoChronicCondition",
+    "beta": -0.5630455697439006,
+    "firing_lower": 1.0,
+    "firing_upper": 1.0,
+    "logit_contribution": -0.5630455697439006
+   },
+   {
+    "id": 7,
+    "rule": "Female AND HighSedentary",
+    "beta": 0.42469647418239104,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 8,
+    "rule": "OlderAdult AND GoodOrBetterHealth",
+    "beta": -0.5588724606889108,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 9,
+    "rule": "MarriedOrPartnered AND Overweight",
+    "beta": -0.3006783140814131,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 10,
+    "rule": "CollegeGraduate AND AdequateSleepFreeDay",
+    "beta": -0.3761618376711081,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 11,
+    "rule": "PoorHealth AND Multimorbidity",
+    "beta": 0.4292408537702854,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 12,
+    "rule": "MarriedOrPartnered AND AdequateSleepWorkday",
+    "beta": -0.24511025442642537,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 13,
+    "rule": "YoungAdult AND CurrentSmoker",
+    "beta": 0.4233769944735801,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 14,
+    "rule": "NormalWeight AND NoChronicCondition",
+    "beta": -0.4153908479393466,
+    "firing_lower": 1.0,
+    "firing_upper": 1.0,
+    "logit_contribution": -0.4153908479393466
+   },
+   {
+    "id": 15,
+    "rule": "Male AND Overweight",
+    "beta": -0.4090122405230399,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 16,
+    "rule": "LowIncome AND ShortSleepFreeDay",
+    "beta": 0.32424612282680526,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 17,
+    "rule": "LessThanHighSchool AND LongSleepWorkday",
+    "beta": 0.2444254087409298,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 18,
+    "rule": "Underweight",
+    "beta": 0.3246968519985102,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 19,
+    "rule": "YoungAdult AND FairHealth",
+    "beta": 0.36778834964964846,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 20,
+    "rule": "YoungAdult AND PreviouslyMarried",
+    "beta": 0.2981264873483141,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 21,
+    "rule": "MiddleAged AND Multimorbidity",
+    "beta": 0.2627576513878098,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 22,
+    "rule": "Male AND HighIncome",
+    "beta": -0.3874649209218456,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 23,
+    "rule": "PoorHealth AND Hypertension",
+    "beta": 0.3812813670287218,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 24,
+    "rule": "MiddleIncome AND AdequateSleepWorkday",
+    "beta": -0.28667778188171167,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 25,
+    "rule": "LessThanHighSchool AND ModerateSedentary",
+    "beta": 0.20440712159855634,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 26,
+    "rule": "PreviouslyMarried AND PoorHealth",
+    "beta": 0.3281390363446716,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 27,
+    "rule": "LongSleepFreeDay AND HighSedentary",
+    "beta": 0.2692013003414996,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 28,
+    "rule": "NeverMarried AND Hypertension",
+    "beta": 0.250549886069945,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 29,
+    "rule": "MiddleAged AND PreviouslyMarried",
+    "beta": 0.23466827616394986,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 30,
+    "rule": "CollegeGraduate AND Overweight",
+    "beta": -0.26666082142555997,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 31,
+    "rule": "HighSchoolOrSomeCollege AND NormalWeight",
+    "beta": -0.2408328828381156,
+    "firing_lower": 1.0,
+    "firing_upper": 1.0,
+    "logit_contribution": -0.2408328828381156
+   },
+   {
+    "id": 32,
+    "rule": "CurrentSmoker AND ModerateSedentary",
+    "beta": 0.23255516580655616,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   }
+  ],
+  "prob_lower": 0.040667244848437624,
+  "prob_upper": 0.040667244848437624
+ },
+ {
+  "index": 4,
+  "y": 0,
+  "inputs": {
+   "age": 45.0,
+   "female": 0.0,
+   "pir": 0.42,
+   "educ": 3.0,
+   "marital": 1.0,
+   "bmi": 27.2,
+   "sleep_wd": 9.0,
+   "sleep_we": 6.0,
+   "srh": 2.0,
+   "smoker": 0.0,
+   "diabetes": 0.0,
+   "hypertension": 0.0,
+   "sedentary": 6.0,
+   "n_chronic": 0.0
+  },
+  "missing_inputs": [],
+  "intercept": -1.9415457220178354,
+  "concepts": {
+   "YoungAdult": {
+    "variable": "age",
+    "membership": 0.0,
+    "provenance": "Conventional adult age bands; transition width 5 y"
+   },
+   "MiddleAged": {
+    "variable": "age",
+    "membership": 1.0,
+    "provenance": "Conventional adult age bands; transition width 5 y"
+   },
+   "OlderAdult": {
+    "variable": "age",
+    "membership": 0.0,
+    "provenance": "Conventional adult age bands; transition width 5 y"
+   },
+   "Female": {
+    "variable": "female",
+    "membership": 0.0,
+    "provenance": "Self-reported sex"
+   },
+   "Male": {
+    "variable": "female",
+    "membership": 1.0,
+    "provenance": "Self-reported sex"
+   },
+   "LowIncome": {
+    "variable": "pir",
+    "membership": 1.0,
+    "provenance": "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3"
+   },
+   "MiddleIncome": {
+    "variable": "pir",
+    "membership": 0.0,
+    "provenance": "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3"
+   },
+   "HighIncome": {
+    "variable": "pir",
+    "membership": 0.0,
+    "provenance": "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3"
+   },
+   "LessThanHighSchool": {
+    "variable": "educ",
+    "membership": 0.0,
+    "provenance": "NHANES education categories"
+   },
+   "HighSchoolOrSomeCollege": {
+    "variable": "educ",
+    "membership": 1.0,
+    "provenance": "NHANES education categories"
+   },
+   "CollegeGraduate": {
+    "variable": "educ",
+    "membership": 0.0,
+    "provenance": "NHANES education categories"
+   },
+   "MarriedOrPartnered": {
+    "variable": "marital",
+    "membership": 1.0,
+    "provenance": "NHANES marital status categories"
+   },
+   "PreviouslyMarried": {
+    "variable": "marital",
+    "membership": 0.0,
+    "provenance": "NHANES marital status categories"
+   },
+   "NeverMarried": {
+    "variable": "marital",
+    "membership": 0.0,
+    "provenance": "NHANES marital status categories"
+   },
+   "Underweight": {
+    "variable": "bmi",
+    "membership": 0.0,
+    "provenance": "WHO BMI cut-points; transition width 1 kg/m2"
+   },
+   "NormalWeight": {
+    "variable": "bmi",
+    "membership": 0.0,
+    "provenance": "WHO BMI cut-points; transition width 1 kg/m2"
+   },
+   "Overweight": {
+    "variable": "bmi",
+    "membership": 1.0,
+    "provenance": "WHO BMI cut-points; transition width 1 kg/m2"
+   },
+   "AdequateSleepWorkday": {
+    "variable": "sleep_wd",
+    "membership": 1.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "LongSleepWorkday": {
+    "variable": "sleep_wd",
+    "membership": 0.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "ShortSleepFreeDay": {
+    "variable": "sleep_we",
+    "membership": 1.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "AdequateSleepFreeDay": {
+    "variable": "sleep_we",
+    "membership": 0.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "LongSleepFreeDay": {
+    "variable": "sleep_we",
+    "membership": 0.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "GoodOrBetterHealth": {
+    "variable": "srh",
+    "membership": 1.0,
+    "provenance": "Self-rated general health categories"
+   },
+   "FairHealth": {
+    "variable": "srh",
+    "membership": 0.0,
+    "provenance": "Self-rated general health categories"
+   },
+   "PoorHealth": {
+    "variable": "srh",
+    "membership": 0.0,
+    "provenance": "Self-rated general health categories"
+   },
+   "CurrentSmoker": {
+    "variable": "smoker",
+    "membership": 0.0,
+    "provenance": "SMQ020/SMQ040"
+   },
+   "Hypertension": {
+    "variable": "hypertension",
+    "membership": 0.0,
+    "provenance": "Doctor-told hypertension"
+   },
+   "ModerateSedentary": {
+    "variable": "sedentary",
+    "membership": 1.0,
+    "provenance": "Sedentary time bands (h/day); transition width 1 h"
+   },
+   "HighSedentary": {
+    "variable": "sedentary",
+    "membership": 0.0,
+    "provenance": "Sedentary time bands (h/day); transition width 1 h"
+   },
+   "NoChronicCondition": {
+    "variable": "n_chronic",
+    "membership": 1.0,
+    "provenance": "Count of 10 doctor-told conditions"
+   },
+   "Multimorbidity": {
+    "variable": "n_chronic",
+    "membership": 0.0,
+    "provenance": "Count of 10 doctor-told conditions"
+   }
+  },
+  "rules": [
+   {
+    "id": 1,
+    "rule": "PoorHealth",
+    "beta": 0.48415092380902136,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 2,
+    "rule": "FairHealth AND Multimorbidity",
+    "beta": 0.5603913807777621,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 3,
+    "rule": "Female AND CurrentSmoker",
+    "beta": 0.2789195956636787,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 4,
+    "rule": "ShortSleepFreeDay AND FairHealth",
+    "beta": 0.45484276407301766,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 5,
+    "rule": "HighIncome AND GoodOrBetterHealth",
+    "beta": -0.4561861290880375,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 6,
+    "rule": "GoodOrBetterHealth AND NoChronicCondition",
+    "beta": -0.5630455697439006,
+    "firing_lower": 1.0,
+    "firing_upper": 1.0,
+    "logit_contribution": -0.5630455697439006
+   },
+   {
+    "id": 7,
+    "rule": "Female AND HighSedentary",
+    "beta": 0.42469647418239104,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 8,
+    "rule": "OlderAdult AND GoodOrBetterHealth",
+    "beta": -0.5588724606889108,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 9,
+    "rule": "MarriedOrPartnered AND Overweight",
+    "beta": -0.3006783140814131,
+    "firing_lower": 1.0,
+    "firing_upper": 1.0,
+    "logit_contribution": -0.3006783140814131
+   },
+   {
+    "id": 10,
+    "rule": "CollegeGraduate AND AdequateSleepFreeDay",
+    "beta": -0.3761618376711081,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 11,
+    "rule": "PoorHealth AND Multimorbidity",
+    "beta": 0.4292408537702854,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 12,
+    "rule": "MarriedOrPartnered AND AdequateSleepWorkday",
+    "beta": -0.24511025442642537,
+    "firing_lower": 1.0,
+    "firing_upper": 1.0,
+    "logit_contribution": -0.24511025442642537
+   },
+   {
+    "id": 13,
+    "rule": "YoungAdult AND CurrentSmoker",
+    "beta": 0.4233769944735801,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 14,
+    "rule": "NormalWeight AND NoChronicCondition",
+    "beta": -0.4153908479393466,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 15,
+    "rule": "Male AND Overweight",
+    "beta": -0.4090122405230399,
+    "firing_lower": 1.0,
+    "firing_upper": 1.0,
+    "logit_contribution": -0.4090122405230399
+   },
+   {
+    "id": 16,
+    "rule": "LowIncome AND ShortSleepFreeDay",
+    "beta": 0.32424612282680526,
+    "firing_lower": 1.0,
+    "firing_upper": 1.0,
+    "logit_contribution": 0.32424612282680526
+   },
+   {
+    "id": 17,
+    "rule": "LessThanHighSchool AND LongSleepWorkday",
+    "beta": 0.2444254087409298,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 18,
+    "rule": "Underweight",
+    "beta": 0.3246968519985102,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 19,
+    "rule": "YoungAdult AND FairHealth",
+    "beta": 0.36778834964964846,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 20,
+    "rule": "YoungAdult AND PreviouslyMarried",
+    "beta": 0.2981264873483141,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 21,
+    "rule": "MiddleAged AND Multimorbidity",
+    "beta": 0.2627576513878098,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 22,
+    "rule": "Male AND HighIncome",
+    "beta": -0.3874649209218456,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 23,
+    "rule": "PoorHealth AND Hypertension",
+    "beta": 0.3812813670287218,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 24,
+    "rule": "MiddleIncome AND AdequateSleepWorkday",
+    "beta": -0.28667778188171167,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 25,
+    "rule": "LessThanHighSchool AND ModerateSedentary",
+    "beta": 0.20440712159855634,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 26,
+    "rule": "PreviouslyMarried AND PoorHealth",
+    "beta": 0.3281390363446716,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 27,
+    "rule": "LongSleepFreeDay AND HighSedentary",
+    "beta": 0.2692013003414996,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 28,
+    "rule": "NeverMarried AND Hypertension",
+    "beta": 0.250549886069945,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 29,
+    "rule": "MiddleAged AND PreviouslyMarried",
+    "beta": 0.23466827616394986,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 30,
+    "rule": "CollegeGraduate AND Overweight",
+    "beta": -0.26666082142555997,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 31,
+    "rule": "HighSchoolOrSomeCollege AND NormalWeight",
+    "beta": -0.2408328828381156,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 32,
+    "rule": "CurrentSmoker AND ModerateSedentary",
+    "beta": 0.23255516580655616,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   }
+  ],
+  "prob_lower": 0.041680574221639705,
+  "prob_upper": 0.041680574221639705
+ },
+ {
+  "index": 19,
+  "y": 0,
+  "inputs": {
+   "age": 44.0,
+   "female": 0.0,
+   "pir": null,
+   "educ": 5.0,
+   "marital": 1.0,
+   "bmi": 32.1,
+   "sleep_wd": 4.5,
+   "sleep_we": 6.0,
+   "srh": 3.0,
+   "smoker": 0.0,
+   "diabetes": 0.0,
+   "hypertension": 1.0,
+   "sedentary": 10.0,
+   "n_chronic": 0.0
+  },
+  "missing_inputs": [
+   "pir"
+  ],
+  "intercept": -1.9415457220178354,
+  "concepts": {
+   "YoungAdult": {
+    "variable": "age",
+    "membership": 0.0,
+    "provenance": "Conventional adult age bands; transition width 5 y"
+   },
+   "MiddleAged": {
+    "variable": "age",
+    "membership": 1.0,
+    "provenance": "Conventional adult age bands; transition width 5 y"
+   },
+   "OlderAdult": {
+    "variable": "age",
+    "membership": 0.0,
+    "provenance": "Conventional adult age bands; transition width 5 y"
+   },
+   "Female": {
+    "variable": "female",
+    "membership": 0.0,
+    "provenance": "Self-reported sex"
+   },
+   "Male": {
+    "variable": "female",
+    "membership": 1.0,
+    "provenance": "Self-reported sex"
+   },
+   "LowIncome": {
+    "variable": "pir",
+    "membership": null,
+    "provenance": "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3"
+   },
+   "MiddleIncome": {
+    "variable": "pir",
+    "membership": null,
+    "provenance": "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3"
+   },
+   "HighIncome": {
+    "variable": "pir",
+    "membership": null,
+    "provenance": "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3"
+   },
+   "LessThanHighSchool": {
+    "variable": "educ",
+    "membership": 0.0,
+    "provenance": "NHANES education categories"
+   },
+   "HighSchoolOrSomeCollege": {
+    "variable": "educ",
+    "membership": 0.0,
+    "provenance": "NHANES education categories"
+   },
+   "CollegeGraduate": {
+    "variable": "educ",
+    "membership": 1.0,
+    "provenance": "NHANES education categories"
+   },
+   "MarriedOrPartnered": {
+    "variable": "marital",
+    "membership": 1.0,
+    "provenance": "NHANES marital status categories"
+   },
+   "PreviouslyMarried": {
+    "variable": "marital",
+    "membership": 0.0,
+    "provenance": "NHANES marital status categories"
+   },
+   "NeverMarried": {
+    "variable": "marital",
+    "membership": 0.0,
+    "provenance": "NHANES marital status categories"
+   },
+   "Underweight": {
+    "variable": "bmi",
+    "membership": 0.0,
+    "provenance": "WHO BMI cut-points; transition width 1 kg/m2"
+   },
+   "NormalWeight": {
+    "variable": "bmi",
+    "membership": 0.0,
+    "provenance": "WHO BMI cut-points; transition width 1 kg/m2"
+   },
+   "Overweight": {
+    "variable": "bmi",
+    "membership": 0.0,
+    "provenance": "WHO BMI cut-points; transition width 1 kg/m2"
+   },
+   "AdequateSleepWorkday": {
+    "variable": "sleep_wd",
+    "membership": 0.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "LongSleepWorkday": {
+    "variable": "sleep_wd",
+    "membership": 0.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "ShortSleepFreeDay": {
+    "variable": "sleep_we",
+    "membership": 1.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "AdequateSleepFreeDay": {
+    "variable": "sleep_we",
+    "membership": 0.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "LongSleepFreeDay": {
+    "variable": "sleep_we",
+    "membership": 0.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "GoodOrBetterHealth": {
+    "variable": "srh",
+    "membership": 1.0,
+    "provenance": "Self-rated general health categories"
+   },
+   "FairHealth": {
+    "variable": "srh",
+    "membership": 0.0,
+    "provenance": "Self-rated general health categories"
+   },
+   "PoorHealth": {
+    "variable": "srh",
+    "membership": 0.0,
+    "provenance": "Self-rated general health categories"
+   },
+   "CurrentSmoker": {
+    "variable": "smoker",
+    "membership": 0.0,
+    "provenance": "SMQ020/SMQ040"
+   },
+   "Hypertension": {
+    "variable": "hypertension",
+    "membership": 1.0,
+    "provenance": "Doctor-told hypertension"
+   },
+   "ModerateSedentary": {
+    "variable": "sedentary",
+    "membership": 0.0,
+    "provenance": "Sedentary time bands (h/day); transition width 1 h"
+   },
+   "HighSedentary": {
+    "variable": "sedentary",
+    "membership": 1.0,
+    "provenance": "Sedentary time bands (h/day); transition width 1 h"
+   },
+   "NoChronicCondition": {
+    "variable": "n_chronic",
+    "membership": 1.0,
+    "provenance": "Count of 10 doctor-told conditions"
+   },
+   "Multimorbidity": {
+    "variable": "n_chronic",
+    "membership": 0.0,
+    "provenance": "Count of 10 doctor-told conditions"
+   }
+  },
+  "rules": [
+   {
+    "id": 1,
+    "rule": "PoorHealth",
+    "beta": 0.48415092380902136,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 2,
+    "rule": "FairHealth AND Multimorbidity",
+    "beta": 0.5603913807777621,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 3,
+    "rule": "Female AND CurrentSmoker",
+    "beta": 0.2789195956636787,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 4,
+    "rule": "ShortSleepFreeDay AND FairHealth",
+    "beta": 0.45484276407301766,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 5,
+    "rule": "HighIncome AND GoodOrBetterHealth",
+    "beta": -0.4561861290880375,
+    "firing_lower": 0.0,
+    "firing_upper": 1.0
+   },
+   {
+    "id": 6,
+    "rule": "GoodOrBetterHealth AND NoChronicCondition",
+    "beta": -0.5630455697439006,
+    "firing_lower": 1.0,
+    "firing_upper": 1.0,
+    "logit_contribution": -0.5630455697439006
+   },
+   {
+    "id": 7,
+    "rule": "Female AND HighSedentary",
+    "beta": 0.42469647418239104,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 8,
+    "rule": "OlderAdult AND GoodOrBetterHealth",
+    "beta": -0.5588724606889108,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 9,
+    "rule": "MarriedOrPartnered AND Overweight",
+    "beta": -0.3006783140814131,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 10,
+    "rule": "CollegeGraduate AND AdequateSleepFreeDay",
+    "beta": -0.3761618376711081,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 11,
+    "rule": "PoorHealth AND Multimorbidity",
+    "beta": 0.4292408537702854,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 12,
+    "rule": "MarriedOrPartnered AND AdequateSleepWorkday",
+    "beta": -0.24511025442642537,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 13,
+    "rule": "YoungAdult AND CurrentSmoker",
+    "beta": 0.4233769944735801,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 14,
+    "rule": "NormalWeight AND NoChronicCondition",
+    "beta": -0.4153908479393466,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 15,
+    "rule": "Male AND Overweight",
+    "beta": -0.4090122405230399,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 16,
+    "rule": "LowIncome AND ShortSleepFreeDay",
+    "beta": 0.32424612282680526,
+    "firing_lower": 0.0,
+    "firing_upper": 1.0
+   },
+   {
+    "id": 17,
+    "rule": "LessThanHighSchool AND LongSleepWorkday",
+    "beta": 0.2444254087409298,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 18,
+    "rule": "Underweight",
+    "beta": 0.3246968519985102,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 19,
+    "rule": "YoungAdult AND FairHealth",
+    "beta": 0.36778834964964846,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 20,
+    "rule": "YoungAdult AND PreviouslyMarried",
+    "beta": 0.2981264873483141,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 21,
+    "rule": "MiddleAged AND Multimorbidity",
+    "beta": 0.2627576513878098,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 22,
+    "rule": "Male AND HighIncome",
+    "beta": -0.3874649209218456,
+    "firing_lower": 0.0,
+    "firing_upper": 1.0
+   },
+   {
+    "id": 23,
+    "rule": "PoorHealth AND Hypertension",
+    "beta": 0.3812813670287218,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 24,
+    "rule": "MiddleIncome AND AdequateSleepWorkday",
+    "beta": -0.28667778188171167,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 25,
+    "rule": "LessThanHighSchool AND ModerateSedentary",
+    "beta": 0.20440712159855634,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 26,
+    "rule": "PreviouslyMarried AND PoorHealth",
+    "beta": 0.3281390363446716,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 27,
+    "rule": "LongSleepFreeDay AND HighSedentary",
+    "beta": 0.2692013003414996,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 28,
+    "rule": "NeverMarried AND Hypertension",
+    "beta": 0.250549886069945,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 29,
+    "rule": "MiddleAged AND PreviouslyMarried",
+    "beta": 0.23466827616394986,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 30,
+    "rule": "CollegeGraduate AND Overweight",
+    "beta": -0.26666082142555997,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 31,
+    "rule": "HighSchoolOrSomeCollege AND NormalWeight",
+    "beta": -0.2408328828381156,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 32,
+    "rule": "CurrentSmoker AND ModerateSedentary",
+    "beta": 0.23255516580655616,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   }
+  ],
+  "prob_lower": 0.03395276810857293,
+  "prob_upper": 0.10152943683867952
+ },
+ {
+  "index": 24,
+  "y": 0,
+  "inputs": {
+   "age": 29.0,
+   "female": 1.0,
+   "pir": 0.8,
+   "educ": 3.0,
+   "marital": 1.0,
+   "bmi": 42.4,
+   "sleep_wd": 8.0,
+   "sleep_we": 8.0,
+   "srh": null,
+   "smoker": 1.0,
+   "diabetes": 0.0,
+   "hypertension": 1.0,
+   "sedentary": 1.0,
+   "n_chronic": 1.0
+  },
+  "missing_inputs": [
+   "srh"
+  ],
+  "intercept": -1.9415457220178354,
+  "concepts": {
+   "YoungAdult": {
+    "variable": "age",
+    "membership": 1.0,
+    "provenance": "Conventional adult age bands; transition width 5 y"
+   },
+   "MiddleAged": {
+    "variable": "age",
+    "membership": 0.0,
+    "provenance": "Conventional adult age bands; transition width 5 y"
+   },
+   "OlderAdult": {
+    "variable": "age",
+    "membership": 0.0,
+    "provenance": "Conventional adult age bands; transition width 5 y"
+   },
+   "Female": {
+    "variable": "female",
+    "membership": 1.0,
+    "provenance": "Self-reported sex"
+   },
+   "Male": {
+    "variable": "female",
+    "membership": 0.0,
+    "provenance": "Self-reported sex"
+   },
+   "LowIncome": {
+    "variable": "pir",
+    "membership": 1.0,
+    "provenance": "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3"
+   },
+   "MiddleIncome": {
+    "variable": "pir",
+    "membership": 0.0,
+    "provenance": "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3"
+   },
+   "HighIncome": {
+    "variable": "pir",
+    "membership": 0.0,
+    "provenance": "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3"
+   },
+   "LessThanHighSchool": {
+    "variable": "educ",
+    "membership": 0.0,
+    "provenance": "NHANES education categories"
+   },
+   "HighSchoolOrSomeCollege": {
+    "variable": "educ",
+    "membership": 1.0,
+    "provenance": "NHANES education categories"
+   },
+   "CollegeGraduate": {
+    "variable": "educ",
+    "membership": 0.0,
+    "provenance": "NHANES education categories"
+   },
+   "MarriedOrPartnered": {
+    "variable": "marital",
+    "membership": 1.0,
+    "provenance": "NHANES marital status categories"
+   },
+   "PreviouslyMarried": {
+    "variable": "marital",
+    "membership": 0.0,
+    "provenance": "NHANES marital status categories"
+   },
+   "NeverMarried": {
+    "variable": "marital",
+    "membership": 0.0,
+    "provenance": "NHANES marital status categories"
+   },
+   "Underweight": {
+    "variable": "bmi",
+    "membership": 0.0,
+    "provenance": "WHO BMI cut-points; transition width 1 kg/m2"
+   },
+   "NormalWeight": {
+    "variable": "bmi",
+    "membership": 0.0,
+    "provenance": "WHO BMI cut-points; transition width 1 kg/m2"
+   },
+   "Overweight": {
+    "variable": "bmi",
+    "membership": 0.0,
+    "provenance": "WHO BMI cut-points; transition width 1 kg/m2"
+   },
+   "AdequateSleepWorkday": {
+    "variable": "sleep_wd",
+    "membership": 1.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "LongSleepWorkday": {
+    "variable": "sleep_wd",
+    "membership": 0.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "ShortSleepFreeDay": {
+    "variable": "sleep_we",
+    "membership": 0.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "AdequateSleepFreeDay": {
+    "variable": "sleep_we",
+    "membership": 1.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "LongSleepFreeDay": {
+    "variable": "sleep_we",
+    "membership": 0.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "GoodOrBetterHealth": {
+    "variable": "srh",
+    "membership": null,
+    "provenance": "Self-rated general health categories"
+   },
+   "FairHealth": {
+    "variable": "srh",
+    "membership": null,
+    "provenance": "Self-rated general health categories"
+   },
+   "PoorHealth": {
+    "variable": "srh",
+    "membership": null,
+    "provenance": "Self-rated general health categories"
+   },
+   "CurrentSmoker": {
+    "variable": "smoker",
+    "membership": 1.0,
+    "provenance": "SMQ020/SMQ040"
+   },
+   "Hypertension": {
+    "variable": "hypertension",
+    "membership": 1.0,
+    "provenance": "Doctor-told hypertension"
+   },
+   "ModerateSedentary": {
+    "variable": "sedentary",
+    "membership": 0.0,
+    "provenance": "Sedentary time bands (h/day); transition width 1 h"
+   },
+   "HighSedentary": {
+    "variable": "sedentary",
+    "membership": 0.0,
+    "provenance": "Sedentary time bands (h/day); transition width 1 h"
+   },
+   "NoChronicCondition": {
+    "variable": "n_chronic",
+    "membership": 0.0,
+    "provenance": "Count of 10 doctor-told conditions"
+   },
+   "Multimorbidity": {
+    "variable": "n_chronic",
+    "membership": 0.0,
+    "provenance": "Count of 10 doctor-told conditions"
+   }
+  },
+  "rules": [
+   {
+    "id": 1,
+    "rule": "PoorHealth",
+    "beta": 0.48415092380902136,
+    "firing_lower": 0.0,
+    "firing_upper": 1.0
+   },
+   {
+    "id": 2,
+    "rule": "FairHealth AND Multimorbidity",
+    "beta": 0.5603913807777621,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 3,
+    "rule": "Female AND CurrentSmoker",
+    "beta": 0.2789195956636787,
+    "firing_lower": 1.0,
+    "firing_upper": 1.0,
+    "logit_contribution": 0.2789195956636787
+   },
+   {
+    "id": 4,
+    "rule": "ShortSleepFreeDay AND FairHealth",
+    "beta": 0.45484276407301766,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 5,
+    "rule": "HighIncome AND GoodOrBetterHealth",
+    "beta": -0.4561861290880375,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 6,
+    "rule": "GoodOrBetterHealth AND NoChronicCondition",
+    "beta": -0.5630455697439006,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 7,
+    "rule": "Female AND HighSedentary",
+    "beta": 0.42469647418239104,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 8,
+    "rule": "OlderAdult AND GoodOrBetterHealth",
+    "beta": -0.5588724606889108,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 9,
+    "rule": "MarriedOrPartnered AND Overweight",
+    "beta": -0.3006783140814131,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 10,
+    "rule": "CollegeGraduate AND AdequateSleepFreeDay",
+    "beta": -0.3761618376711081,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 11,
+    "rule": "PoorHealth AND Multimorbidity",
+    "beta": 0.4292408537702854,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 12,
+    "rule": "MarriedOrPartnered AND AdequateSleepWorkday",
+    "beta": -0.24511025442642537,
+    "firing_lower": 1.0,
+    "firing_upper": 1.0,
+    "logit_contribution": -0.24511025442642537
+   },
+   {
+    "id": 13,
+    "rule": "YoungAdult AND CurrentSmoker",
+    "beta": 0.4233769944735801,
+    "firing_lower": 1.0,
+    "firing_upper": 1.0,
+    "logit_contribution": 0.4233769944735801
+   },
+   {
+    "id": 14,
+    "rule": "NormalWeight AND NoChronicCondition",
+    "beta": -0.4153908479393466,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 15,
+    "rule": "Male AND Overweight",
+    "beta": -0.4090122405230399,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 16,
+    "rule": "LowIncome AND ShortSleepFreeDay",
+    "beta": 0.32424612282680526,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 17,
+    "rule": "LessThanHighSchool AND LongSleepWorkday",
+    "beta": 0.2444254087409298,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 18,
+    "rule": "Underweight",
+    "beta": 0.3246968519985102,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 19,
+    "rule": "YoungAdult AND FairHealth",
+    "beta": 0.36778834964964846,
+    "firing_lower": 0.0,
+    "firing_upper": 1.0
+   },
+   {
+    "id": 20,
+    "rule": "YoungAdult AND PreviouslyMarried",
+    "beta": 0.2981264873483141,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 21,
+    "rule": "MiddleAged AND Multimorbidity",
+    "beta": 0.2627576513878098,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 22,
+    "rule": "Male AND HighIncome",
+    "beta": -0.3874649209218456,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 23,
+    "rule": "PoorHealth AND Hypertension",
+    "beta": 0.3812813670287218,
+    "firing_lower": 0.0,
+    "firing_upper": 1.0
+   },
+   {
+    "id": 24,
+    "rule": "MiddleIncome AND AdequateSleepWorkday",
+    "beta": -0.28667778188171167,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 25,
+    "rule": "LessThanHighSchool AND ModerateSedentary",
+    "beta": 0.20440712159855634,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 26,
+    "rule": "PreviouslyMarried AND PoorHealth",
+    "beta": 0.3281390363446716,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 27,
+    "rule": "LongSleepFreeDay AND HighSedentary",
+    "beta": 0.2692013003414996,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 28,
+    "rule": "NeverMarried AND Hypertension",
+    "beta": 0.250549886069945,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 29,
+    "rule": "MiddleAged AND PreviouslyMarried",
+    "beta": 0.23466827616394986,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 30,
+    "rule": "CollegeGraduate AND Overweight",
+    "beta": -0.26666082142555997,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 31,
+    "rule": "HighSchoolOrSomeCollege AND NormalWeight",
+    "beta": -0.2408328828381156,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 32,
+    "rule": "CurrentSmoker AND ModerateSedentary",
+    "beta": 0.23255516580655616,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   }
+  ],
+  "prob_lower": 0.18476986252638267,
+  "prob_upper": 0.3500255061220677
+ },
+ {
+  "index": 26,
+  "y": 0,
+  "inputs": {
+   "age": 18.0,
+   "female": 1.0,
+   "pir": 4.88,
+   "educ": null,
+   "marital": null,
+   "bmi": 26.5,
+   "sleep_wd": 8.0,
+   "sleep_we": 7.5,
+   "srh": 3.0,
+   "smoker": 0.0,
+   "diabetes": 0.0,
+   "hypertension": 0.0,
+   "sedentary": 7.0,
+   "n_chronic": 0.0
+  },
+  "missing_inputs": [
+   "educ",
+   "marital"
+  ],
+  "intercept": -1.9415457220178354,
+  "concepts": {
+   "YoungAdult": {
+    "variable": "age",
+    "membership": 1.0,
+    "provenance": "Conventional adult age bands; transition width 5 y"
+   },
+   "MiddleAged": {
+    "variable": "age",
+    "membership": 0.0,
+    "provenance": "Conventional adult age bands; transition width 5 y"
+   },
+   "OlderAdult": {
+    "variable": "age",
+    "membership": 0.0,
+    "provenance": "Conventional adult age bands; transition width 5 y"
+   },
+   "Female": {
+    "variable": "female",
+    "membership": 1.0,
+    "provenance": "Self-reported sex"
+   },
+   "Male": {
+    "variable": "female",
+    "membership": 0.0,
+    "provenance": "Self-reported sex"
+   },
+   "LowIncome": {
+    "variable": "pir",
+    "membership": 0.0,
+    "provenance": "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3"
+   },
+   "MiddleIncome": {
+    "variable": "pir",
+    "membership": 0.0,
+    "provenance": "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3"
+   },
+   "HighIncome": {
+    "variable": "pir",
+    "membership": 1.0,
+    "provenance": "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3"
+   },
+   "LessThanHighSchool": {
+    "variable": "educ",
+    "membership": null,
+    "provenance": "NHANES education categories"
+   },
+   "HighSchoolOrSomeCollege": {
+    "variable": "educ",
+    "membership": null,
+    "provenance": "NHANES education categories"
+   },
+   "CollegeGraduate": {
+    "variable": "educ",
+    "membership": null,
+    "provenance": "NHANES education categories"
+   },
+   "MarriedOrPartnered": {
+    "variable": "marital",
+    "membership": null,
+    "provenance": "NHANES marital status categories"
+   },
+   "PreviouslyMarried": {
+    "variable": "marital",
+    "membership": null,
+    "provenance": "NHANES marital status categories"
+   },
+   "NeverMarried": {
+    "variable": "marital",
+    "membership": null,
+    "provenance": "NHANES marital status categories"
+   },
+   "Underweight": {
+    "variable": "bmi",
+    "membership": 0.0,
+    "provenance": "WHO BMI cut-points; transition width 1 kg/m2"
+   },
+   "NormalWeight": {
+    "variable": "bmi",
+    "membership": 0.0,
+    "provenance": "WHO BMI cut-points; transition width 1 kg/m2"
+   },
+   "Overweight": {
+    "variable": "bmi",
+    "membership": 1.0,
+    "provenance": "WHO BMI cut-points; transition width 1 kg/m2"
+   },
+   "AdequateSleepWorkday": {
+    "variable": "sleep_wd",
+    "membership": 1.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "LongSleepWorkday": {
+    "variable": "sleep_wd",
+    "membership": 0.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "ShortSleepFreeDay": {
+    "variable": "sleep_we",
+    "membership": 0.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "AdequateSleepFreeDay": {
+    "variable": "sleep_we",
+    "membership": 1.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "LongSleepFreeDay": {
+    "variable": "sleep_we",
+    "membership": 0.0,
+    "provenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h"
+   },
+   "GoodOrBetterHealth": {
+    "variable": "srh",
+    "membership": 1.0,
+    "provenance": "Self-rated general health categories"
+   },
+   "FairHealth": {
+    "variable": "srh",
+    "membership": 0.0,
+    "provenance": "Self-rated general health categories"
+   },
+   "PoorHealth": {
+    "variable": "srh",
+    "membership": 0.0,
+    "provenance": "Self-rated general health categories"
+   },
+   "CurrentSmoker": {
+    "variable": "smoker",
+    "membership": 0.0,
+    "provenance": "SMQ020/SMQ040"
+   },
+   "Hypertension": {
+    "variable": "hypertension",
+    "membership": 0.0,
+    "provenance": "Doctor-told hypertension"
+   },
+   "ModerateSedentary": {
+    "variable": "sedentary",
+    "membership": 1.0,
+    "provenance": "Sedentary time bands (h/day); transition width 1 h"
+   },
+   "HighSedentary": {
+    "variable": "sedentary",
+    "membership": 0.0,
+    "provenance": "Sedentary time bands (h/day); transition width 1 h"
+   },
+   "NoChronicCondition": {
+    "variable": "n_chronic",
+    "membership": 1.0,
+    "provenance": "Count of 10 doctor-told conditions"
+   },
+   "Multimorbidity": {
+    "variable": "n_chronic",
+    "membership": 0.0,
+    "provenance": "Count of 10 doctor-told conditions"
+   }
+  },
+  "rules": [
+   {
+    "id": 1,
+    "rule": "PoorHealth",
+    "beta": 0.48415092380902136,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 2,
+    "rule": "FairHealth AND Multimorbidity",
+    "beta": 0.5603913807777621,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 3,
+    "rule": "Female AND CurrentSmoker",
+    "beta": 0.2789195956636787,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 4,
+    "rule": "ShortSleepFreeDay AND FairHealth",
+    "beta": 0.45484276407301766,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 5,
+    "rule": "HighIncome AND GoodOrBetterHealth",
+    "beta": -0.4561861290880375,
+    "firing_lower": 1.0,
+    "firing_upper": 1.0,
+    "logit_contribution": -0.4561861290880375
+   },
+   {
+    "id": 6,
+    "rule": "GoodOrBetterHealth AND NoChronicCondition",
+    "beta": -0.5630455697439006,
+    "firing_lower": 1.0,
+    "firing_upper": 1.0,
+    "logit_contribution": -0.5630455697439006
+   },
+   {
+    "id": 7,
+    "rule": "Female AND HighSedentary",
+    "beta": 0.42469647418239104,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 8,
+    "rule": "OlderAdult AND GoodOrBetterHealth",
+    "beta": -0.5588724606889108,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 9,
+    "rule": "MarriedOrPartnered AND Overweight",
+    "beta": -0.3006783140814131,
+    "firing_lower": 0.0,
+    "firing_upper": 1.0
+   },
+   {
+    "id": 10,
+    "rule": "CollegeGraduate AND AdequateSleepFreeDay",
+    "beta": -0.3761618376711081,
+    "firing_lower": 0.0,
+    "firing_upper": 1.0
+   },
+   {
+    "id": 11,
+    "rule": "PoorHealth AND Multimorbidity",
+    "beta": 0.4292408537702854,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 12,
+    "rule": "MarriedOrPartnered AND AdequateSleepWorkday",
+    "beta": -0.24511025442642537,
+    "firing_lower": 0.0,
+    "firing_upper": 1.0
+   },
+   {
+    "id": 13,
+    "rule": "YoungAdult AND CurrentSmoker",
+    "beta": 0.4233769944735801,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 14,
+    "rule": "NormalWeight AND NoChronicCondition",
+    "beta": -0.4153908479393466,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 15,
+    "rule": "Male AND Overweight",
+    "beta": -0.4090122405230399,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 16,
+    "rule": "LowIncome AND ShortSleepFreeDay",
+    "beta": 0.32424612282680526,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 17,
+    "rule": "LessThanHighSchool AND LongSleepWorkday",
+    "beta": 0.2444254087409298,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 18,
+    "rule": "Underweight",
+    "beta": 0.3246968519985102,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 19,
+    "rule": "YoungAdult AND FairHealth",
+    "beta": 0.36778834964964846,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 20,
+    "rule": "YoungAdult AND PreviouslyMarried",
+    "beta": 0.2981264873483141,
+    "firing_lower": 0.0,
+    "firing_upper": 1.0
+   },
+   {
+    "id": 21,
+    "rule": "MiddleAged AND Multimorbidity",
+    "beta": 0.2627576513878098,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 22,
+    "rule": "Male AND HighIncome",
+    "beta": -0.3874649209218456,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 23,
+    "rule": "PoorHealth AND Hypertension",
+    "beta": 0.3812813670287218,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 24,
+    "rule": "MiddleIncome AND AdequateSleepWorkday",
+    "beta": -0.28667778188171167,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 25,
+    "rule": "LessThanHighSchool AND ModerateSedentary",
+    "beta": 0.20440712159855634,
+    "firing_lower": 0.0,
+    "firing_upper": 1.0
+   },
+   {
+    "id": 26,
+    "rule": "PreviouslyMarried AND PoorHealth",
+    "beta": 0.3281390363446716,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 27,
+    "rule": "LongSleepFreeDay AND HighSedentary",
+    "beta": 0.2692013003414996,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 28,
+    "rule": "NeverMarried AND Hypertension",
+    "beta": 0.250549886069945,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 29,
+    "rule": "MiddleAged AND PreviouslyMarried",
+    "beta": 0.23466827616394986,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   },
+   {
+    "id": 30,
+    "rule": "CollegeGraduate AND Overweight",
+    "beta": -0.26666082142555997,
+    "firing_lower": 0.0,
+    "firing_upper": 1.0
+   },
+   {
+    "id": 31,
+    "rule": "HighSchoolOrSomeCollege AND NormalWeight",
+    "beta": -0.2408328828381156,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": -0.0
+   },
+   {
+    "id": 32,
+    "rule": "CurrentSmoker AND ModerateSedentary",
+    "beta": 0.23255516580655616,
+    "firing_lower": 0.0,
+    "firing_upper": 0.0,
+    "logit_contribution": 0.0
+   }
+  ],
+  "prob_lower": 0.015529100120861915,
+  "prob_upper": 0.0788377814441687
+ }
+]

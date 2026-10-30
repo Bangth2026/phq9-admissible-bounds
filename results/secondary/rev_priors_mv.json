@@ -1,0 +1,190 @@
+{
+ "n": 4304,
+ "references": {
+  "age": "MiddleAged",
+  "female": "Female",
+  "pir": "MiddleIncome",
+  "educ": "HighSchoolOrSomeCollege",
+  "marital": "MarriedOrPartnered",
+  "bmi": "Obese",
+  "sleep_wd": "AdequateSleepWorkday",
+  "srh": "GoodOrBetterHealth",
+  "smoker": "NonSmoker",
+  "diabetes": "NoDiabetes",
+  "hypertension": "NoHypertension",
+  "sedentary": "ModerateSedentary",
+  "n_chronic": "NoChronicCondition"
+ },
+ "changes": [
+  {
+   "concept": "OlderAdult",
+   "direction_crude": 0,
+   "direction_mv": -1
+  },
+  {
+   "concept": "Female",
+   "direction_crude": 1,
+   "direction_mv": 0
+  },
+  {
+   "concept": "MiddleIncome",
+   "direction_crude": -1,
+   "direction_mv": 0
+  },
+  {
+   "concept": "HighIncome",
+   "direction_crude": -1,
+   "direction_mv": 0
+  },
+  {
+   "concept": "LessThanHighSchool",
+   "direction_crude": 1,
+   "direction_mv": 0
+  },
+  {
+   "concept": "CollegeGraduate",
+   "direction_crude": -1,
+   "direction_mv": 0
+  },
+  {
+   "concept": "MarriedOrPartnered",
+   "direction_crude": -1,
+   "direction_mv": 0
+  },
+  {
+   "concept": "Overweight",
+   "direction_crude": -1,
+   "direction_mv": 0
+  },
+  {
+   "concept": "Obese",
+   "direction_crude": 1,
+   "direction_mv": 0
+  },
+  {
+   "concept": "AdequateSleepWorkday",
+   "direction_crude": -1,
+   "direction_mv": 0
+  },
+  {
+   "concept": "GoodOrBetterHealth",
+   "direction_crude": -1,
+   "direction_mv": 0
+  },
+  {
+   "concept": "NonSmoker",
+   "direction_crude": -1,
+   "direction_mv": 0
+  },
+  {
+   "concept": "Diabetes",
+   "direction_crude": 1,
+   "direction_mv": 0
+  },
+  {
+   "concept": "NoDiabetes",
+   "direction_crude": -1,
+   "direction_mv": 0
+  },
+  {
+   "concept": "Hypertension",
+   "direction_crude": 1,
+   "direction_mv": 0
+  },
+  {
+   "concept": "NoHypertension",
+   "direction_crude": -1,
+   "direction_mv": 0
+  },
+  {
+   "concept": "LowSedentary",
+   "direction_crude": -1,
+   "direction_mv": 0
+  },
+  {
+   "concept": "NoChronicCondition",
+   "direction_crude": -1,
+   "direction_mv": 0
+  },
+  {
+   "concept": "OneChronicCondition",
+   "direction_crude": 0,
+   "direction_mv": 1
+  }
+ ],
+ "Proposed": {
+  "internal_test": 0.7801539975684595,
+  "temporal": 0.7555202271927456,
+  "external_pooled": 0.7871964800912352,
+  "n_at_zero": 0,
+  "n_signed": 15,
+  "rules": [
+   "YoungAdult (+0.279)",
+   "OlderAdult (-0.469)",
+   "Male (-0.448)",
+   "LowIncome (+0.184)",
+   "HighIncome (-0.192)",
+   "LessThanHighSchool (+0.188)",
+   "CollegeGraduate (-0.338)",
+   "PreviouslyMarried (+0.308)",
+   "NeverMarried (+0.260)",
+   "Underweight (+0.336)",
+   "NormalWeight (-0.232)",
+   "Overweight (-0.167)",
+   "ShortSleepWorkday (+0.196)",
+   "LongSleepWorkday (+0.358)",
+   "ShortSleepFreeDay (+0.433)",
+   "LongSleepFreeDay (+0.038)",
+   "FairHealth (+0.776)",
+   "PoorHealth (+1.228)",
+   "CurrentSmoker (+0.313)",
+   "Diabetes (+0.087)",
+   "Hypertension (+0.171)",
+   "LowSedentary (-0.098)",
+   "HighSedentary (+0.249)",
+   "OneChronicCondition (+0.286)",
+   "Multimorbidity (+0.786)"
+  ]
+ },
+ "Version 1": {
+  "internal_test": 0.7609400027017119,
+  "temporal": 0.7380028738151942,
+  "external_pooled": 0.7718230843294476,
+  "n_at_zero": 0,
+  "n_signed": 19,
+  "rules": [
+   "PoorHealth (+0.615)",
+   "FairHealth AND Multimorbidity (+0.491)",
+   "Female AND CurrentSmoker (+0.429)",
+   "ShortSleepFreeDay AND FairHealth (+0.454)",
+   "HighIncome AND GoodOrBetterHealth (-0.545)",
+   "GoodOrBetterHealth AND NoChronicCondition (-0.619)",
+   "Female AND HighSedentary (+0.484)",
+   "OlderAdult AND GoodOrBetterHealth (-0.594)",
+   "MarriedOrPartnered AND Overweight (-0.614)",
+   "CollegeGraduate AND AdequateSleepFreeDay (-0.346)",
+   "Underweight AND NoHypertension (+0.372)",
+   "Female AND Overweight (+0.401)",
+   "PoorHealth AND Multimorbidity (+0.475)",
+   "MiddleIncome AND AdequateSleepWorkday (-0.367)",
+   "YoungAdult AND CurrentSmoker (+0.423)",
+   "NormalWeight AND NoChronicCondition (-0.483)",
+   "NeverMarried AND NoChronicCondition (+0.401)",
+   "YoungAdult AND PreviouslyMarried (+0.346)",
+   "Male AND HighIncome (-0.418)",
+   "MarriedOrPartnered AND ShortSleepFreeDay (+0.441)",
+   "MiddleAged AND PreviouslyMarried (+0.436)",
+   "LongSleepWorkday AND Hypertension (+0.288)",
+   "LessThanHighSchool AND ModerateSedentary (+0.200)",
+   "YoungAdult AND FairHealth (+0.305)",
+   "NeverMarried AND Hypertension (+0.328)",
+   "PreviouslyMarried AND PoorHealth (+0.378)",
+   "CollegeGraduate AND Overweight (-0.340)",
+   "NonSmoker AND Multimorbidity (+0.331)",
+   "Underweight AND AdequateSleepWorkday (+0.260)",
+   "HighIncome AND LongSleepWorkday (+0.242)",
+   "YoungAdult AND HighIncome (+0.306)",
+   "LessThanHighSchool AND MarriedOrPartnered (+0.261)"
+  ]
+ }
+}

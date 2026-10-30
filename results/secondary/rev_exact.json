@@ -1,0 +1,29 @@
+{
+ "Proposed (full)": {
+  "n": 2483,
+  "n_fallback_rows": 0,
+  "n_short": 0,
+  "max_short": 8.881784197001252e-16,
+  "dec_changed": 0,
+  "components": 9431,
+  "fallback_components": 0
+ },
+ "Main effects + interactions": {
+  "n": 2483,
+  "n_fallback_rows": 36,
+  "n_short": 0,
+  "max_short": 8.881784197001252e-16,
+  "dec_changed": 0,
+  "components": 7396,
+  "fallback_components": 36
+ },
+ "Version 1 (conjunctive rules)": {
+  "n": 2483,
+  "n_fallback_rows": 257,
+  "n_short": 4,
+  "max_short": 0.006479417874294624,
+  "dec_changed": 0,
+  "components": 4800,
+  "fallback_components": 257
+ }
+}

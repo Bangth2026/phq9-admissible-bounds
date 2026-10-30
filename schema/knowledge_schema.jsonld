@@ -1,0 +1,1750 @@
+{
+ "@context": {
+  "@vocab": "urn:phq-prescreen:schema:",
+  "skos": "http://www.w3.org/2004/02/skos/core#",
+  "dct": "http://purl.org/dc/terms/",
+  "xsd": "http://www.w3.org/2001/XMLSchema#",
+  "prov": "http://www.w3.org/ns/prov#",
+  "broader": {
+   "@id": "skos:broader",
+   "@type": "@id"
+  },
+  "inScheme": {
+   "@id": "skos:inScheme",
+   "@type": "@id"
+  },
+  "prefLabel": "skos:prefLabel",
+  "definition": "skos:definition",
+  "source": "dct:source",
+  "wasDerivedFrom": "prov:wasDerivedFrom"
+ },
+ "@graph": [
+  {
+   "@id": "scheme",
+   "@type": "skos:ConceptScheme",
+   "prefLabel": "Non-symptom predictors of PHQ-9 >= 10 (NHANES)",
+   "dct:created": "2026-10-28",
+   "dct:modified": "2026-10-30"
+  },
+  {
+   "@id": "var/age",
+   "@type": "ObservationVariable",
+   "prefLabel": "age",
+   "domain": "Demographic",
+   "valueType": "continuous",
+   "admissibleMin": 18,
+   "admissibleMax": 80,
+   "unit": "years",
+   "source": "DEMO.RIDAGEYR"
+  },
+  {
+   "@id": "var/female",
+   "@type": "ObservationVariable",
+   "prefLabel": "female",
+   "domain": "Demographic",
+   "valueType": "binary",
+   "admissibleMin": 0,
+   "admissibleMax": 1,
+   "unit": "-",
+   "source": "DEMO.RIAGENDR"
+  },
+  {
+   "@id": "var/pir",
+   "@type": "ObservationVariable",
+   "prefLabel": "pir",
+   "domain": "Socioeconomic",
+   "valueType": "continuous",
+   "admissibleMin": 0,
+   "admissibleMax": 5,
+   "unit": "ratio",
+   "source": "DEMO.INDFMPIR"
+  },
+  {
+   "@id": "var/educ",
+   "@type": "ObservationVariable",
+   "prefLabel": "educ",
+   "domain": "Socioeconomic",
+   "valueType": "ordinal",
+   "admissibleMin": 1,
+   "admissibleMax": 5,
+   "unit": "level",
+   "source": "DEMO.DMDEDUC2"
+  },
+  {
+   "@id": "var/marital",
+   "@type": "ObservationVariable",
+   "prefLabel": "marital",
+   "domain": "Socioeconomic",
+   "valueType": "nominal",
+   "admissibleMin": 1,
+   "admissibleMax": 3,
+   "unit": "category",
+   "source": "DEMO.DMDMARTZ"
+  },
+  {
+   "@id": "var/bmi",
+   "@type": "ObservationVariable",
+   "prefLabel": "bmi",
+   "domain": "Somatic",
+   "valueType": "continuous",
+   "admissibleMin": 12,
+   "admissibleMax": 90,
+   "unit": "kg/m2",
+   "source": "BMX.BMXBMI"
+  },
+  {
+   "@id": "var/sleep_wd",
+   "@type": "ObservationVariable",
+   "prefLabel": "sleep_wd",
+   "domain": "Sleep",
+   "valueType": "continuous",
+   "admissibleMin": 2,
+   "admissibleMax": 14,
+   "unit": "h",
+   "source": "SLQ.SLD012"
+  },
+  {
+   "@id": "var/sleep_we",
+   "@type": "ObservationVariable",
+   "prefLabel": "sleep_we",
+   "domain": "Sleep",
+   "valueType": "continuous",
+   "admissibleMin": 2,
+   "admissibleMax": 14,
+   "unit": "h",
+   "source": "SLQ.SLD013"
+  },
+  {
+   "@id": "var/srh",
+   "@type": "ObservationVariable",
+   "prefLabel": "srh",
+   "domain": "Somatic",
+   "valueType": "ordinal",
+   "admissibleMin": 1,
+   "admissibleMax": 5,
+   "unit": "level",
+   "source": "HUQ.HUQ010"
+  },
+  {
+   "@id": "var/smoker",
+   "@type": "ObservationVariable",
+   "prefLabel": "smoker",
+   "domain": "Lifestyle",
+   "valueType": "binary",
+   "admissibleMin": 0,
+   "admissibleMax": 1,
+   "unit": "-",
+   "source": "SMQ.SMQ020/SMQ040"
+  },
+  {
+   "@id": "var/diabetes",
+   "@type": "ObservationVariable",
+   "prefLabel": "diabetes",
+   "domain": "Somatic",
+   "valueType": "binary",
+   "admissibleMin": 0,
+   "admissibleMax": 1,
+   "unit": "-",
+   "source": "DIQ.DIQ010"
+  },
+  {
+   "@id": "var/hypertension",
+   "@type": "ObservationVariable",
+   "prefLabel": "hypertension",
+   "domain": "Somatic",
+   "valueType": "binary",
+   "admissibleMin": 0,
+   "admissibleMax": 1,
+   "unit": "-",
+   "source": "BPQ.BPQ020"
+  },
+  {
+   "@id": "var/sedentary",
+   "@type": "ObservationVariable",
+   "prefLabel": "sedentary",
+   "domain": "Lifestyle",
+   "valueType": "continuous",
+   "admissibleMin": 0,
+   "admissibleMax": 24,
+   "unit": "h/day",
+   "source": "PAQ.PAD680"
+  },
+  {
+   "@id": "var/n_chronic",
+   "@type": "ObservationVariable",
+   "prefLabel": "n_chronic",
+   "domain": "Somatic",
+   "valueType": "count",
+   "admissibleMin": 0,
+   "admissibleMax": 10,
+   "unit": "conditions",
+   "source": "MCQ (10 items)"
+  },
+  {
+   "@id": "var/told_sleep_trouble",
+   "@type": "ObservationVariable",
+   "prefLabel": "told_sleep_trouble",
+   "domain": "Sleep",
+   "valueType": "binary",
+   "admissibleMin": 0,
+   "admissibleMax": 1,
+   "unit": "-",
+   "source": "SLQ.SLQ050"
+  },
+  {
+   "@id": "var/daytime_sleepy",
+   "@type": "ObservationVariable",
+   "prefLabel": "daytime_sleepy",
+   "domain": "Sleep",
+   "valueType": "ordinal",
+   "admissibleMin": 0,
+   "admissibleMax": 4,
+   "unit": "level",
+   "source": "SLQ.SLQ120"
+  },
+  {
+   "@id": "concept/YoungAdult",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "YoungAdult",
+   "boundTo": {
+    "@id": "var/age"
+   },
+   "cutPointProvenance": "Conventional adult age bands; transition width 5 y",
+   "membership": {
+    "@type": "TrapezoidalMembership",
+    "a": 17.999999999,
+    "b": 17.999999999,
+    "c": 30,
+    "d": 40,
+    "partition": "Ruspini"
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": 0,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 0.8484093595495621,
+    "ciLower": 0.6887952703076105,
+    "ciUpper": 1.0450107200211205,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/MiddleAged",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "MiddleAged",
+   "boundTo": {
+    "@id": "var/age"
+   },
+   "cutPointProvenance": "Conventional adult age bands; transition width 5 y",
+   "membership": {
+    "@type": "TrapezoidalMembership",
+    "a": 30,
+    "b": 40,
+    "c": 55,
+    "d": 65,
+    "partition": "Ruspini"
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": 0,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 1.166877718895012,
+    "ciLower": 0.9695039461819832,
+    "ciUpper": 1.4044332838620992,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/OlderAdult",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "OlderAdult",
+   "boundTo": {
+    "@id": "var/age"
+   },
+   "cutPointProvenance": "Conventional adult age bands; transition width 5 y",
+   "membership": {
+    "@type": "TrapezoidalMembership",
+    "a": 55,
+    "b": 65,
+    "c": 80.000000001,
+    "d": 80.000000001,
+    "partition": "Ruspini"
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": 0,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 1.015604852163992,
+    "ciLower": 0.8344450003662878,
+    "ciUpper": 1.2360949077366123,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/Female",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "Female",
+   "boundTo": {
+    "@id": "var/female"
+   },
+   "cutPointProvenance": "Self-reported sex",
+   "membership": {
+    "@type": "CrispSetMembership",
+    "values": [
+     1
+    ]
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": 1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 1.4617149332194008,
+    "ciLower": 1.209943339718468,
+    "ciUpper": 1.7658765297999393,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/Male",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "Male",
+   "boundTo": {
+    "@id": "var/female"
+   },
+   "cutPointProvenance": "Self-reported sex",
+   "membership": {
+    "@type": "CrispSetMembership",
+    "values": [
+     0
+    ]
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": -1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 0.684127922123309,
+    "ciLower": 0.5662910079637858,
+    "ciUpper": 0.8264849825386716,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/LowIncome",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "LowIncome",
+   "boundTo": {
+    "@id": "var/pir"
+   },
+   "cutPointProvenance": "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3",
+   "membership": {
+    "@type": "TrapezoidalMembership",
+    "a": -1e-09,
+    "b": -1e-09,
+    "c": 1.0,
+    "d": 1.6,
+    "partition": "Ruspini"
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": 1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 2.443350242948385,
+    "ciLower": 2.014638390503704,
+    "ciUpper": 2.9632912972651693,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/MiddleIncome",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "MiddleIncome",
+   "boundTo": {
+    "@id": "var/pir"
+   },
+   "cutPointProvenance": "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3",
+   "membership": {
+    "@type": "TrapezoidalMembership",
+    "a": 1.0,
+    "b": 1.6,
+    "c": 3.2,
+    "d": 3.8,
+    "partition": "Ruspini"
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": -1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 0.7518939393939393,
+    "ciLower": 0.6121597558459155,
+    "ciUpper": 0.9235244406357836,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/HighIncome",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "HighIncome",
+   "boundTo": {
+    "@id": "var/pir"
+   },
+   "cutPointProvenance": "130% FPL (SNAP gross-income limit) and 350% FPL; transition width 0.3",
+   "membership": {
+    "@type": "TrapezoidalMembership",
+    "a": 3.2,
+    "b": 3.8,
+    "c": 5.000000001,
+    "d": 5.000000001,
+    "partition": "Ruspini"
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": -1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 0.368637524782675,
+    "ciLower": 0.2726839156989455,
+    "ciUpper": 0.4983558503242619,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/LessThanHighSchool",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "LessThanHighSchool",
+   "boundTo": {
+    "@id": "var/educ"
+   },
+   "cutPointProvenance": "NHANES education categories",
+   "membership": {
+    "@type": "CrispSetMembership",
+    "values": [
+     1,
+     2
+    ]
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": 1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 1.701821448108652,
+    "ciLower": 1.3974015796369466,
+    "ciUpper": 2.072558299236414,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/HighSchoolOrSomeCollege",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "HighSchoolOrSomeCollege",
+   "boundTo": {
+    "@id": "var/educ"
+   },
+   "cutPointProvenance": "NHANES education categories",
+   "membership": {
+    "@type": "CrispSetMembership",
+    "values": [
+     3,
+     4
+    ]
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": 0,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 1.0626557060951471,
+    "ciLower": 0.8795524009766531,
+    "ciUpper": 1.2838770588798043,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/CollegeGraduate",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "CollegeGraduate",
+   "boundTo": {
+    "@id": "var/educ"
+   },
+   "cutPointProvenance": "NHANES education categories",
+   "membership": {
+    "@type": "CrispSetMembership",
+    "values": [
+     5
+    ]
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": -1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 0.4364343055895426,
+    "ciLower": 0.3267989619717295,
+    "ciUpper": 0.5828503920153326,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/MarriedOrPartnered",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "MarriedOrPartnered",
+   "boundTo": {
+    "@id": "var/marital"
+   },
+   "cutPointProvenance": "NHANES marital status categories",
+   "membership": {
+    "@type": "CrispSetMembership",
+    "values": [
+     1
+    ]
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": -1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 0.5061645384511013,
+    "ciLower": 0.4186256651717794,
+    "ciUpper": 0.6120086781594863,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/PreviouslyMarried",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "PreviouslyMarried",
+   "boundTo": {
+    "@id": "var/marital"
+   },
+   "cutPointProvenance": "NHANES marital status categories",
+   "membership": {
+    "@type": "CrispSetMembership",
+    "values": [
+     2
+    ]
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": 1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 1.6457707170459426,
+    "ciLower": 1.3462535701736371,
+    "ciUpper": 2.01192502890564,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/NeverMarried",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "NeverMarried",
+   "boundTo": {
+    "@id": "var/marital"
+   },
+   "cutPointProvenance": "NHANES marital status categories",
+   "membership": {
+    "@type": "CrispSetMembership",
+    "values": [
+     3
+    ]
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": 1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 1.530721422982002,
+    "ciLower": 1.236971549862,
+    "ciUpper": 1.8942295601199948,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/Underweight",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "Underweight",
+   "boundTo": {
+    "@id": "var/bmi"
+   },
+   "cutPointProvenance": "WHO BMI cut-points; transition width 1 kg/m2",
+   "membership": {
+    "@type": "TrapezoidalMembership",
+    "a": 11.999999999,
+    "b": 11.999999999,
+    "c": 17.5,
+    "d": 19.5,
+    "partition": "Ruspini"
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": 0,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 1.2018147402577894,
+    "ciLower": 0.6178281506807316,
+    "ciUpper": 2.33780003114051,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/NormalWeight",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "NormalWeight",
+   "boundTo": {
+    "@id": "var/bmi"
+   },
+   "cutPointProvenance": "WHO BMI cut-points; transition width 1 kg/m2",
+   "membership": {
+    "@type": "TrapezoidalMembership",
+    "a": 17.5,
+    "b": 19.5,
+    "c": 24.0,
+    "d": 26.0,
+    "partition": "Ruspini"
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": 0,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 0.9032135076252724,
+    "ciLower": 0.7288096689844733,
+    "ciUpper": 1.1193521094382293,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/Overweight",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "Overweight",
+   "boundTo": {
+    "@id": "var/bmi"
+   },
+   "cutPointProvenance": "WHO BMI cut-points; transition width 1 kg/m2",
+   "membership": {
+    "@type": "TrapezoidalMembership",
+    "a": 24.0,
+    "b": 26.0,
+    "c": 29.0,
+    "d": 31.0,
+    "partition": "Ruspini"
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": -1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 0.6669334694947766,
+    "ciLower": 0.5356115787691248,
+    "ciUpper": 0.8304530192467535,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/Obese",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "Obese",
+   "boundTo": {
+    "@id": "var/bmi"
+   },
+   "cutPointProvenance": "WHO BMI cut-points; transition width 1 kg/m2",
+   "membership": {
+    "@type": "TrapezoidalMembership",
+    "a": 29.0,
+    "b": 31.0,
+    "c": 90.000000001,
+    "d": 90.000000001,
+    "partition": "Ruspini"
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": 1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 1.486764705882353,
+    "ciLower": 1.2349719993252215,
+    "ciUpper": 1.7898942582222277,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/ShortSleepWorkday",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "ShortSleepWorkday",
+   "boundTo": {
+    "@id": "var/sleep_wd"
+   },
+   "cutPointProvenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h",
+   "membership": {
+    "@type": "TrapezoidalMembership",
+    "a": 1.999999999,
+    "b": 1.999999999,
+    "c": 6.0,
+    "d": 7.0,
+    "partition": "Ruspini"
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": 1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 1.2829758223347087,
+    "ciLower": 1.0406285537974636,
+    "ciUpper": 1.58176224810355,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/AdequateSleepWorkday",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "AdequateSleepWorkday",
+   "boundTo": {
+    "@id": "var/sleep_wd"
+   },
+   "cutPointProvenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h",
+   "membership": {
+    "@type": "TrapezoidalMembership",
+    "a": 6.0,
+    "b": 7.0,
+    "c": 9.0,
+    "d": 10.0,
+    "partition": "Ruspini"
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": -1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 0.503343310195504,
+    "ciLower": 0.4174903257016013,
+    "ciUpper": 0.6068511587491274,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/LongSleepWorkday",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "LongSleepWorkday",
+   "boundTo": {
+    "@id": "var/sleep_wd"
+   },
+   "cutPointProvenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h",
+   "membership": {
+    "@type": "TrapezoidalMembership",
+    "a": 9.0,
+    "b": 10.0,
+    "c": 14.000000001,
+    "d": 14.000000001,
+    "partition": "Ruspini"
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": 1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 1.8865294436570816,
+    "ciLower": 1.5141489769095535,
+    "ciUpper": 2.3504908671861107,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/ShortSleepFreeDay",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "ShortSleepFreeDay",
+   "boundTo": {
+    "@id": "var/sleep_we"
+   },
+   "cutPointProvenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h",
+   "membership": {
+    "@type": "TrapezoidalMembership",
+    "a": 1.999999999,
+    "b": 1.999999999,
+    "c": 6.0,
+    "d": 7.0,
+    "partition": "Ruspini"
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": 1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": null,
+    "ciLower": null,
+    "ciUpper": null,
+    "note": "inherited from ShortSleepWorkday"
+   }
+  },
+  {
+   "@id": "concept/AdequateSleepFreeDay",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "AdequateSleepFreeDay",
+   "boundTo": {
+    "@id": "var/sleep_we"
+   },
+   "cutPointProvenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h",
+   "membership": {
+    "@type": "TrapezoidalMembership",
+    "a": 6.0,
+    "b": 7.0,
+    "c": 9.0,
+    "d": 10.0,
+    "partition": "Ruspini"
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": -1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": null,
+    "ciLower": null,
+    "ciUpper": null,
+    "note": "inherited from AdequateSleepWorkday"
+   }
+  },
+  {
+   "@id": "concept/LongSleepFreeDay",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "LongSleepFreeDay",
+   "boundTo": {
+    "@id": "var/sleep_we"
+   },
+   "cutPointProvenance": "AASM/SRS consensus (>=7 h recommended); transition width 0.5 h",
+   "membership": {
+    "@type": "TrapezoidalMembership",
+    "a": 9.0,
+    "b": 10.0,
+    "c": 14.000000001,
+    "d": 14.000000001,
+    "partition": "Ruspini"
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": 1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": null,
+    "ciLower": null,
+    "ciUpper": null,
+    "note": "inherited from LongSleepWorkday"
+   }
+  },
+  {
+   "@id": "concept/GoodOrBetterHealth",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "GoodOrBetterHealth",
+   "boundTo": {
+    "@id": "var/srh"
+   },
+   "cutPointProvenance": "Self-rated general health categories",
+   "membership": {
+    "@type": "CrispSetMembership",
+    "values": [
+     1,
+     2,
+     3
+    ]
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": -1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 0.1989187398349497,
+    "ciLower": 0.1645780371685171,
+    "ciUpper": 0.2404249421021391,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/FairHealth",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "FairHealth",
+   "boundTo": {
+    "@id": "var/srh"
+   },
+   "cutPointProvenance": "Self-rated general health categories",
+   "membership": {
+    "@type": "CrispSetMembership",
+    "values": [
+     4
+    ]
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": 1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 2.738657481386788,
+    "ciLower": 2.2788419302218887,
+    "ciUpper": 3.291252763470755,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/PoorHealth",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "PoorHealth",
+   "boundTo": {
+    "@id": "var/srh"
+   },
+   "cutPointProvenance": "Self-rated general health categories",
+   "membership": {
+    "@type": "CrispSetMembership",
+    "values": [
+     5
+    ]
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": 1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 5.389208314904909,
+    "ciLower": 4.428535234373164,
+    "ciUpper": 6.558278239723926,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/CurrentSmoker",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "CurrentSmoker",
+   "boundTo": {
+    "@id": "var/smoker"
+   },
+   "cutPointProvenance": "SMQ020/SMQ040",
+   "membership": {
+    "@type": "CrispSetMembership",
+    "values": [
+     1
+    ]
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": 1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 2.6931297151404787,
+    "ciLower": 2.2381334818202667,
+    "ciUpper": 3.24062336830502,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/NonSmoker",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "NonSmoker",
+   "boundTo": {
+    "@id": "var/smoker"
+   },
+   "cutPointProvenance": "SMQ020/SMQ040",
+   "membership": {
+    "@type": "CrispSetMembership",
+    "values": [
+     0
+    ]
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": -1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 0.3713152004443418,
+    "ciLower": 0.3085826047483702,
+    "ciUpper": 0.4468008758739015,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/Diabetes",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "Diabetes",
+   "boundTo": {
+    "@id": "var/diabetes"
+   },
+   "cutPointProvenance": "Doctor-told diabetes",
+   "membership": {
+    "@type": "CrispSetMembership",
+    "values": [
+     1
+    ]
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": 1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 1.538421980605348,
+    "ciLower": 1.229171872573395,
+    "ciUpper": 1.9254770168590567,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/NoDiabetes",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "NoDiabetes",
+   "boundTo": {
+    "@id": "var/diabetes"
+   },
+   "cutPointProvenance": "Doctor-told diabetes",
+   "membership": {
+    "@type": "CrispSetMembership",
+    "values": [
+     0
+    ]
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": -1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 0.6500167136239913,
+    "ciLower": 0.5193518235970712,
+    "ciUpper": 0.8135558763693472,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/Hypertension",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "Hypertension",
+   "boundTo": {
+    "@id": "var/hypertension"
+   },
+   "cutPointProvenance": "Doctor-told hypertension",
+   "membership": {
+    "@type": "CrispSetMembership",
+    "values": [
+     1
+    ]
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": 1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 1.5247968673519336,
+    "ciLower": 1.267237130427584,
+    "ciUpper": 1.834704358687612,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/NoHypertension",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "NoHypertension",
+   "boundTo": {
+    "@id": "var/hypertension"
+   },
+   "cutPointProvenance": "Doctor-told hypertension",
+   "membership": {
+    "@type": "CrispSetMembership",
+    "values": [
+     0
+    ]
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": -1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 0.655825061955084,
+    "ciLower": 0.5450469419036607,
+    "ciUpper": 0.789118292061554,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/LowSedentary",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "LowSedentary",
+   "boundTo": {
+    "@id": "var/sedentary"
+   },
+   "cutPointProvenance": "Sedentary time bands (h/day); transition width 1 h",
+   "membership": {
+    "@type": "TrapezoidalMembership",
+    "a": -1e-09,
+    "b": -1e-09,
+    "c": 3.0,
+    "d": 5.0,
+    "partition": "Ruspini"
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": -1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 0.7734423729988218,
+    "ciLower": 0.6311529238741801,
+    "ciUpper": 0.9478100817121492,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/ModerateSedentary",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "ModerateSedentary",
+   "boundTo": {
+    "@id": "var/sedentary"
+   },
+   "cutPointProvenance": "Sedentary time bands (h/day); transition width 1 h",
+   "membership": {
+    "@type": "TrapezoidalMembership",
+    "a": 3.0,
+    "b": 5.0,
+    "c": 7.0,
+    "d": 9.0,
+    "partition": "Ruspini"
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": 0,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 0.9662434905863866,
+    "ciLower": 0.8011179451652147,
+    "ciUpper": 1.1654045309246226,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/HighSedentary",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "HighSedentary",
+   "boundTo": {
+    "@id": "var/sedentary"
+   },
+   "cutPointProvenance": "Sedentary time bands (h/day); transition width 1 h",
+   "membership": {
+    "@type": "TrapezoidalMembership",
+    "a": 7.0,
+    "b": 9.0,
+    "c": 24.000000001,
+    "d": 24.000000001,
+    "partition": "Ruspini"
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": 1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 1.3024329902770435,
+    "ciLower": 1.0776965255229247,
+    "ciUpper": 1.5740346693044225,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/NoChronicCondition",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "NoChronicCondition",
+   "boundTo": {
+    "@id": "var/n_chronic"
+   },
+   "cutPointProvenance": "Count of 10 doctor-told conditions",
+   "membership": {
+    "@type": "CrispSetMembership",
+    "values": [
+     0
+    ]
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": -1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 0.4447302529141943,
+    "ciLower": 0.366609727951568,
+    "ciUpper": 0.5394974076717685,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/OneChronicCondition",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "OneChronicCondition",
+   "boundTo": {
+    "@id": "var/n_chronic"
+   },
+   "cutPointProvenance": "Count of 10 doctor-told conditions",
+   "membership": {
+    "@type": "CrispSetMembership",
+    "values": [
+     1
+    ]
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": 0,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 1.2160632218968603,
+    "ciLower": 0.9962377910471888,
+    "ciUpper": 1.4843943614061572,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/Multimorbidity",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "Multimorbidity",
+   "boundTo": {
+    "@id": "var/n_chronic"
+   },
+   "cutPointProvenance": "Count of 10 doctor-told conditions",
+   "membership": {
+    "@type": "CrispSetMembership",
+    "values": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10
+    ]
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": 1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 2.334395093481057,
+    "ciLower": 1.929345729057117,
+    "ciUpper": 2.8244810509579263,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/ReportedSleepTrouble",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "ReportedSleepTrouble",
+   "boundTo": {
+    "@id": "var/told_sleep_trouble"
+   },
+   "cutPointProvenance": "SLQ050",
+   "membership": {
+    "@type": "CrispSetMembership",
+    "values": [
+     1
+    ]
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": 1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 4.755529367805355,
+    "ciLower": 3.928983280865872,
+    "ciUpper": 5.755957190806696,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/NoReportedSleepTrouble",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "NoReportedSleepTrouble",
+   "boundTo": {
+    "@id": "var/told_sleep_trouble"
+   },
+   "cutPointProvenance": "SLQ050",
+   "membership": {
+    "@type": "CrispSetMembership",
+    "values": [
+     0
+    ]
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": -1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 0.2102815318037859,
+    "ciLower": 0.1737330502730598,
+    "ciUpper": 0.2545187720370292,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/FrequentDaytimeSleepiness",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "FrequentDaytimeSleepiness",
+   "boundTo": {
+    "@id": "var/daytime_sleepy"
+   },
+   "cutPointProvenance": "SLQ120 frequency",
+   "membership": {
+    "@type": "CrispSetMembership",
+    "values": [
+     3,
+     4
+    ]
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": 1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 3.5631013567826955,
+    "ciLower": 2.965680211300134,
+    "ciUpper": 4.280869943540197,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/OccasionalDaytimeSleepiness",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "OccasionalDaytimeSleepiness",
+   "boundTo": {
+    "@id": "var/daytime_sleepy"
+   },
+   "cutPointProvenance": "SLQ120 frequency",
+   "membership": {
+    "@type": "CrispSetMembership",
+    "values": [
+     2
+    ]
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": -1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 0.7456393987638134,
+    "ciLower": 0.6047616930220143,
+    "ciUpper": 0.9193342094976616,
+    "note": null
+   }
+  },
+  {
+   "@id": "concept/RareDaytimeSleepiness",
+   "@type": [
+    "skos:Concept",
+    "LinguisticConcept"
+   ],
+   "inScheme": "scheme",
+   "prefLabel": "RareDaytimeSleepiness",
+   "boundTo": {
+    "@id": "var/daytime_sleepy"
+   },
+   "cutPointProvenance": "SLQ120 frequency",
+   "membership": {
+    "@type": "CrispSetMembership",
+    "values": [
+     0,
+     1
+    ]
+   },
+   "directionPrior": {
+    "@type": "DirectionPrior",
+    "value": -1,
+    "estimatedOn": "NHANES 2015-2016 (cohort_I)",
+    "riskRatio": 0.3035073011424067,
+    "ciLower": 0.2368675860838341,
+    "ciUpper": 0.3888952615667086,
+    "note": null
+   }
+  },
+  {
+   "@id": "rulebase/v2",
+   "@type": "AdditiveRuleBase",
+   "intercept": -2.990539227530074,
+   "link": "logit",
+   "aggregation": "additive",
+   "tnorm": "minimum",
+   "rules": [
+    {
+     "@type": "Rule",
+     "antecedent": [
+      {
+       "@id": "concept/YoungAdult"
+      }
+     ],
+     "coefficient": 0.2792692300019063,
+     "signConstraint": 0
+    },
+    {
+     "@type": "Rule",
+     "antecedent": [
+      {
+       "@id": "concept/OlderAdult"
+      }
+     ],
+     "coefficient": -0.46836545979826766,
+     "signConstraint": 0
+    },
+    {
+     "@type": "Rule",
+     "antecedent": [
+      {
+       "@id": "concept/Male"
+      }
+     ],
+     "coefficient": -0.4480078109569826,
+     "signConstraint": -1
+    },
+    {
+     "@type": "Rule",
+     "antecedent": [
+      {
+       "@id": "concept/LowIncome"
+      }
+     ],
+     "coefficient": 0.18457278706406907,
+     "signConstraint": 1
+    },
+    {
+     "@type": "Rule",
+     "antecedent": [
+      {
+       "@id": "concept/HighIncome"
+      }
+     ],
+     "coefficient": -0.1923183957423063,
+     "signConstraint": -1
+    },
+    {
+     "@type": "Rule",
+     "antecedent": [
+      {
+       "@id": "concept/LessThanHighSchool"
+      }
+     ],
+     "coefficient": 0.1882011937186071,
+     "signConstraint": 1
+    },
+    {
+     "@type": "Rule",
+     "antecedent": [
+      {
+       "@id": "concept/CollegeGraduate"
+      }
+     ],
+     "coefficient": -0.3382692168154717,
+     "signConstraint": -1
+    },
+    {
+     "@type": "Rule",
+     "antecedent": [
+      {
+       "@id": "concept/PreviouslyMarried"
+      }
+     ],
+     "coefficient": 0.30771528041712015,
+     "signConstraint": 1
+    },
+    {
+     "@type": "Rule",
+     "antecedent": [
+      {
+       "@id": "concept/NeverMarried"
+      }
+     ],
+     "coefficient": 0.2595967361866114,
+     "signConstraint": 1
+    },
+    {
+     "@type": "Rule",
+     "antecedent": [
+      {
+       "@id": "concept/Underweight"
+      }
+     ],
+     "coefficient": 0.3356365794351451,
+     "signConstraint": 0
+    },
+    {
+     "@type": "Rule",
+     "antecedent": [
+      {
+       "@id": "concept/NormalWeight"
+      }
+     ],
+     "coefficient": -0.23238581408385747,
+     "signConstraint": 0
+    },
+    {
+     "@type": "Rule",
+     "antecedent": [
+      {
+       "@id": "concept/Overweight"
+      }
+     ],
+     "coefficient": -0.1674150684567588,
+     "signConstraint": -1
+    },
+    {
+     "@type": "Rule",
+     "antecedent": [
+      {
+       "@id": "concept/ShortSleepWorkday"
+      }
+     ],
+     "coefficient": 0.19577749632222616,
+     "signConstraint": 1
+    },
+    {
+     "@type": "Rule",
+     "antecedent": [
+      {
+       "@id": "concept/LongSleepWorkday"
+      }
+     ],
+     "coefficient": 0.35767412955834155,
+     "signConstraint": 1
+    },
+    {
+     "@type": "Rule",
+     "antecedent": [
+      {
+       "@id": "concept/ShortSleepFreeDay"
+      }
+     ],
+     "coefficient": 0.43261983505583346,
+     "signConstraint": 1
+    },
+    {
+     "@type": "Rule",
+     "antecedent": [
+      {
+       "@id": "concept/LongSleepFreeDay"
+      }
+     ],
+     "coefficient": 0.037928870983234574,
+     "signConstraint": 1
+    },
+    {
+     "@type": "Rule",
+     "antecedent": [
+      {
+       "@id": "concept/FairHealth"
+      }
+     ],
+     "coefficient": 0.77587764473648,
+     "signConstraint": 1
+    },
+    {
+     "@type": "Rule",
+     "antecedent": [
+      {
+       "@id": "concept/PoorHealth"
+      }
+     ],
+     "coefficient": 1.2282394455573589,
+     "signConstraint": 1
+    },
+    {
+     "@type": "Rule",
+     "antecedent": [
+      {
+       "@id": "concept/CurrentSmoker"
+      }
+     ],
+     "coefficient": 0.3126691760088538,
+     "signConstraint": 1
+    },
+    {
+     "@type": "Rule",
+     "antecedent": [
+      {
+       "@id": "concept/Diabetes"
+      }
+     ],
+     "coefficient": 0.08700095146957802,
+     "signConstraint": 1
+    },
+    {
+     "@type": "Rule",
+     "antecedent": [
+      {
+       "@id": "concept/Hypertension"
+      }
+     ],
+     "coefficient": 0.1716363978251349,
+     "signConstraint": 1
+    },
+    {
+     "@type": "Rule",
+     "antecedent": [
+      {
+       "@id": "concept/LowSedentary"
+      }
+     ],
+     "coefficient": -0.09840927779094505,
+     "signConstraint": -1
+    },
+    {
+     "@type": "Rule",
+     "antecedent": [
+      {
+       "@id": "concept/HighSedentary"
+      }
+     ],
+     "coefficient": 0.24963809734650103,
+     "signConstraint": 1
+    },
+    {
+     "@type": "Rule",
+     "antecedent": [
+      {
+       "@id": "concept/OneChronicCondition"
+      }
+     ],
+     "coefficient": 0.28629479878285163,
+     "signConstraint": 0
+    },
+    {
+     "@type": "Rule",
+     "antecedent": [
+      {
+       "@id": "concept/Multimorbidity"
+      }
+     ],
+     "coefficient": 0.786041255226851,
+     "signConstraint": 1
+    }
+   ]
+  }
+ ]
+}

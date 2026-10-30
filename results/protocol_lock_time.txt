@@ -1,0 +1,1 @@
+2026-10-28T13:45:10Z (mtime of protocol_v2.md before the post-analysis addendum was appended; observed with ls --full-time at lock)

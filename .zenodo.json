@@ -1,0 +1,28 @@
+{
+  "title": "Exact admissible-value bounds for missing inputs in an interpretable fuzzy additive prescreening model (NHANES): code, knowledge schema and results",
+  "upload_type": "software",
+  "description": "Code, JSON-LD knowledge schema, analysis protocol and results for a fuzzy additive model that prescreens elevated depressive symptoms (PHQ-9 >= 10) from non-symptom NHANES survey data, with exact admissible-value bounds for missing inputs (Algorithm 1) and bound-guided input acquisition (Algorithm 2). Includes the statistics file that populates the manuscript.",
+  "creators": [
+    {
+      "name": "Truong, Hai Bang",
+      "affiliation": "Saigon International University",
+      "orcid": "0000-0001-5094-3128"
+    },
+    {
+      "name": "Phan Thi, Van An",
+      "affiliation": "Nguyen Tat Thanh University",
+      "orcid": "0009-0005-4135-5689"
+    }
+  ],
+  "license": "MIT",
+  "keywords": [
+    "depression screening",
+    "PHQ-9",
+    "fuzzy rules",
+    "missing data",
+    "interpretable machine learning",
+    "NHANES"
+  ],
+  "access_right": "open",
+  "version": "2.0.0"
+}

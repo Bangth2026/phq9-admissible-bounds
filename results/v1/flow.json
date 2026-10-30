@@ -1,0 +1,82 @@
+{
+ "P": {
+  "demo_records": 15560,
+  "adults": 9693,
+  "adults_with_DPQ_record": 8308,
+  "excluded_missing_or_invalid_PHQ9": 1417,
+  "analytic": 8276,
+  "positives": 767,
+  "prevalence_unweighted": 0.09267762203963267,
+  "prevalence_weighted": 0.08588904725349186
+ },
+ "L": {
+  "demo_records": 11933,
+  "adults": 8153,
+  "adults_with_DPQ_record": 5519,
+  "excluded_missing_or_invalid_PHQ9": 2698,
+  "analytic": 5455,
+  "positives": 723,
+  "prevalence_unweighted": 0.13253895508707608,
+  "prevalence_weighted": 0.12778340532916083
+ },
+ "I": {
+  "demo_records": 9971,
+  "adults": 5992,
+  "adults_with_DPQ_record": 5164,
+  "excluded_missing_or_invalid_PHQ9": 858,
+  "analytic": 5134,
+  "positives": 415,
+  "prevalence_unweighted": 0.08083365796649786,
+  "prevalence_weighted": 0.07399604987926511
+ },
+ "D": {
+  "demo_records": 10348,
+  "adults": 5563,
+  "adults_with_DPQ_record": 4836,
+  "excluded_missing_or_invalid_PHQ9": 764,
+  "analytic": 4799,
+  "positives": 297,
+  "prevalence_unweighted": 0.06188789331110648,
+  "prevalence_weighted": 0.053754635506212935
+ },
+ "E": {
+  "demo_records": 10149,
+  "adults": 6228,
+  "adults_with_DPQ_record": 5449,
+  "excluded_missing_or_invalid_PHQ9": 813,
+  "analytic": 5415,
+  "positives": 523,
+  "prevalence_unweighted": 0.09658356417359187,
+  "prevalence_weighted": 0.08088141981852129
+ },
+ "F": {
+  "demo_records": 10537,
+  "adults": 6527,
+  "adults_with_DPQ_record": 5579,
+  "excluded_missing_or_invalid_PHQ9": 981,
+  "analytic": 5546,
+  "positives": 523,
+  "prevalence_unweighted": 0.09430219978362785,
+  "prevalence_weighted": 0.07705324612146387
+ },
+ "G": {
+  "demo_records": 9756,
+  "adults": 5864,
+  "adults_with_DPQ_record": 4951,
+  "excluded_missing_or_invalid_PHQ9": 939,
+  "analytic": 4925,
+  "positives": 440,
+  "prevalence_unweighted": 0.08934010152284264,
+  "prevalence_weighted": 0.07902889198806881
+ },
+ "H": {
+  "demo_records": 10175,
+  "adults": 6113,
+  "adults_with_DPQ_record": 5398,
+  "excluded_missing_or_invalid_PHQ9": 741,
+  "analytic": 5372,
+  "positives": 511,
+  "prevalence_unweighted": 0.09512285927029039,
+  "prevalence_weighted": 0.08642478434665743
+ }
+}
