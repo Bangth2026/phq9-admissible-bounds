@@ -13,6 +13,8 @@ python rev_missing.py && python rev_exact.py # Algorithm 1 exactness, MCAR stres
 python rev_priors_splits.py priors && python rev_priors_splits.py splits 20 && python rev_priors_mv.py
 python narrowed_slr.py && python contrib_ranges.py
 python sec2_models.py && python sec2_missing.py   # spline LR, refits without free-day sleep, natural/MNAR missingness
-python export_schema.py && python figs_r1.py
-python stats.py && python stats_r1.py && python stats_r2.py && python fig_flow.py
-python manuscript_r2.py && node render.js ../manuscript.docx ../results/manuscript_r2.json
+python sec3.py                               # imputation-spread abstention, risk-coverage, sex-specific thresholds
+python export_schema.py && python figs_r1.py && python figs_r3.py
+python stats.py && python stats_r1.py && python stats_r2.py && python stats_r3.py && python fig_flow.py
+python manuscript_r3.py && node render.js ../manuscript.docx ../results/manuscript_r3.json
+cd .. && python tests/test_cohort_priors.py && python tests/test_trace_fidelity.py && python tests/test_bounds_bruteforce.py

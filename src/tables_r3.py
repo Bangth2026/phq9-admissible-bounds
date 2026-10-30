@@ -19,8 +19,8 @@ def tables(V):
     M = pickle.load(open(R + "models.pkl", "rb"))
     ch = ["≥ 1 chronic condition, %"] + [f"{100 * (d.n_chronic >= 1).sum() / d.n_chronic.notna().sum():.1f}" for d in (M["dev"], M["test"], M["L"], M["POOL"])]
     rows.insert([r[0] for r in rows].index("Hypertension, %") + 1, ch)
-    T1 = dict(cap="Table 1. Characteristics of the development, internal test, temporal and external validation cohorts (unweighted unless stated).",
-              head=["Characteristic", "Development (2017–2020)", "Internal test (2017–2020)", "Temporal (2021–2023)", "External (2005–2014)"], rows=rows,
+    T1 = dict(cap="Table 1. Characteristics of the development, internal test, later-period and earlier-period validation cohorts (unweighted unless stated).",
+              head=["Characteristic", "Development (2017–2020)", "Internal test (2017–2020)", "Later period (2021–2023)", "Earlier period (2005–2014)"], rows=rows,
               note="IQR, interquartile range; BMI, body mass index. Percentages of categorical variables use non-missing values as denominator. Weighted prevalence uses NHANES interview weights; it differs between development and internal test because the split was stratified on the unweighted outcome. Free-day sleep was not collected in 2005–2014; workday sleep was recorded in whole hours.",
               w=[2.2, 1.1, 1.1, 1.1, 1.1], small=True)
     # ---------------------------------------------------------------- Table 2
@@ -56,12 +56,12 @@ def tables(V):
     for lab, s in [("Proposed", "full"), ("Logistic regression (indicators)", "lr"), ("LR, no indicators", "lrni"),
                    ("LR, multiple imputation", "lrmi"), ("LR, restricted cubic splines", "rcs"), ("Sign-constrained LR", "slr"), ("GA²M (EBM)", "ebm"),
                    ("Gradient-boosted trees", "gbt"), ("Monotone GBT", "mgbt")]:
-        for sl, setlab in [("int", "Internal"), ("tmp", "Temporal"), ("ext", "External")]:
+        for sl, setlab in [("int", "Internal"), ("tmp", "2021–2023"), ("ext", "2005–2014")]:
             rows4.append([lab if sl == "int" else "", setlab, "{{%s_%s_AUROC}} ({{%s_%s_AUROC_ci}})" % (s, sl, s, sl),
                           "{{%s_%s_wAUROC}}" % (s, sl), "{{%s_%s_AUPRC}}" % (s, sl), "{{%s_%s_Sensitivity}}" % (s, sl),
                           "{{%s_%s_Specificity}}" % (s, sl), "{{%s_%s_flag}}" % (s, sl), "{{%s_%s_Brier}}" % (s, sl),
                           "{{%s_%s_OE}}" % (s, sl), "{{%s_%s_slope}}" % (s, sl)])
-    T4 = dict(cap="Table 4. Discrimination, operating characteristics and calibration on internal testing (n = {{n_int}}), temporal validation (n = {{n_tmp}}) and external validation (n = {{n_ext}}).",
+    T4 = dict(cap="Table 4. Discrimination, operating characteristics and calibration on internal testing (n = {{n_int}}), later-period validation (n = {{n_tmp}}) and earlier-period validation (n = {{n_ext}}).",
               head=["Model", "Set", "AUROC (95% CI)", "wAUROC", "AUPRC", "Sens.", "Spec.", "Flagged (%)", "Brier", "O/E", "Slope"], rows=rows4,
               note="wAUROC, AUROC weighted by NHANES interview weights. Sensitivity, specificity and proportion flagged at thresholds fixed on development out-of-fold predictions (target sensitivity ≥ 0.80). O/E, observed-to-expected ratio; slope, calibration slope; both after development-set Platt recalibration. LR, logistic regression; GA²M (EBM), explainable boosting machine with pairwise interactions; GBT, gradient-boosted trees.",
               w=[1.35, 0.65, 1.15, 0.55, 0.5, 0.45, 0.45, 0.55, 0.52, 0.4, 0.42], small=True)
@@ -70,9 +70,9 @@ def tables(V):
     rowsC = [[lab, "{{n_%s}}" % c, "{{pos_%s}} ({{prev_%s}})" % (c, c), "{{full_%s_AUROC}} ({{full_%s_AUROC_ci}})" % (c, c),
               "{{lr_%s_AUROC}}" % c, "{{rcs_%s_AUROC}}" % c, "{{slr_%s_AUROC}}" % c, "{{ebm_%s_AUROC}}" % c, "{{gbt_%s_AUROC}}" % c,
               "{{d_lr_%s}} ({{d_lr_%s_ci}})" % (c, c), "{{full_%s_OE}} / {{lr_%s_OE}} / {{slr_%s_OE}}" % (c, c, c)] for c, lab in cyc]
-    TC = dict(cap="Table 5. External validation by NHANES cycle (frozen models and thresholds).",
+    TC = dict(cap="Table 5. Earlier-period validation by NHANES cycle (frozen models and thresholds).",
               head=["Cycle", "n", "PHQ-9 ≥ 10, n (%)", "AUROC proposed (95% CI)", "LR", "Spline LR", "Sign-constrained LR", "GA²M", "GBT", "ΔAUROC vs LR (95% CI)", "O/E proposed / LR / sign-constrained LR"],
-              rows=rowsC, note="Free-day sleep was absent in every cycle and sedentary time in 2005–2006. ΔAUROC is proposed minus logistic regression (with indicators) from paired bootstrap resamples (1,000 per cycle, 2,000 pooled); the pooled row is the primary comparison.",
+              rows=rowsC, note="Free-day sleep was not collected in any of these cycles, and sedentary time not in 2005–2006. ΔAUROC is proposed minus logistic regression (with indicators) from paired bootstrap resamples (1,000 per cycle, 2,000 pooled); the pooled row is the primary comparison.",
               w=[0.8, 0.5, 0.8, 1.15, 0.45, 0.5, 0.6, 0.45, 0.45, 1.25, 1.0], small=True)
     # ---------------------------------------------------------------- Table ablations / paired
     var = [("Logistic regression (indicators)", "lr", "lr"), ("LR, no indicators", "lrni", None), ("LR, multiple imputation", "lrmi", None), ("LR, restricted cubic splines", "rcs", None),
@@ -86,13 +86,13 @@ def tables(V):
         r.append("{{spl_%s_mean}} ({{spl_%s_lo}} to {{spl_%s_hi}}); {{spl_%s_frac}}%%" % (sp, sp, sp, sp) if sp else "–")
         rowsA.append(r)
     TA = dict(cap="Table 6. Paired AUROC differences between the proposed model and each comparator or variant (proposed minus comparator; positive values favour the proposed model).",
-              head=["Comparator or variant", "Internal (95% CI)", "Temporal (95% CI)", "External (95% CI)", "Repeated splits: mean (2.5–97.5th pct); % of splits proposed higher"],
+              head=["Comparator or variant", "Internal (95% CI)", "2021–2023 (95% CI)", "2005–2014 (95% CI)", "Repeated splits: mean (2.5–97.5th pct); % of splits proposed higher"],
               rows=rowsA,
-              note="2,000 paired bootstrap resamples of each test set; p-values are two-sided and unadjusted. Only the external comparison with logistic regression is primary. Repeated splits: {{spl_B}} stratified 70/30 splits of the 2017–2020 release with all models refitted at fixed hyperparameters. Box bounds leave the point score unchanged and are compared only on decisions (Table 8).",
+              note="2,000 paired bootstrap resamples of each test set; p-values are two-sided and unadjusted. Only the 2005–2014 comparison with logistic regression is primary. Repeated splits: {{spl_B}} stratified 70/30 splits of the 2017–2020 release with all models refitted at fixed hyperparameters. Box bounds leave the point score unchanged and are compared only on decisions (Table 8).",
               w=[1.9, 1.45, 1.45, 1.45, 1.5], small=True)
     # ---------------------------------------------------------------- Table PHQ-2 / operating points
     rowsP = []
-    for sl, setlab in [("int", "Internal"), ("tmp", "Temporal"), ("ext", "External")]:
+    for sl, setlab in [("int", "Internal"), ("tmp", "2021–2023"), ("ext", "2005–2014")]:
         rowsP.append([setlab, "PHQ-2 ≥ 3 (reference)", "{{phq2_%s_sens}}" % sl, "{{phq2_%s_spec}}" % sl, "{{phq2_%s_flag}}" % sl,
                       "{{phq2_%s_avoid}}" % sl, "{{phq2_%s_missed}}" % sl])
         for lab, s in [("Proposed", "full"), ("Logistic regression", "lr"), ("Gradient-boosted trees", "gbt")]:
@@ -103,8 +103,8 @@ def tables(V):
                               "{{op_%s_%s_flag_a}}" % (sl, s), "{{op_%s_%s_avoid_a}}" % (sl, s), "{{op_%s_%s_missed_a}}" % (sl, s)])
         rowsP.append(["", "Proposed, record-typical predictors (9)", "{{ehr9_full_%s_sens}}" % sl, "{{ehr9_full_%s_spec}}" % sl,
                       "{{ehr9_full_%s_flag}}" % sl, "–", "–"])
-    TP = dict(cap="Table 7. PHQ-2 reference point and operating points of the non-symptom models per 1,000 adults.",
-              head=["Set", "Strategy", "Sensitivity", "Specificity", "Flagged (%)", "Questionnaires avoided per 1,000", "Cases missed per 1,000"],
+    TP = dict(cap="Table 7. PHQ-2 reference point and operating points of the non-symptom models per 1,000 participants.",
+              head=["Set", "Strategy", "Sensitivity", "Specificity", "Flagged (%)", "Questionnaires avoided per 1,000 participants", "Cases missed per 1,000 participants"],
               rows=rowsP,
               note="PHQ-2 ≥ 3 uses items DPQ010 and DPQ020 and is shown as a reference, not as a competitor in the same input space. Model rows use thresholds fixed in development. 'After intercept update': intercept estimated on a random half of the cohort, metrics on the other half, mean of 200 repetitions, same probability threshold. Record-typical predictors: age, sex, BMI, diabetes, hypertension, chronic-condition count, smoking, education, marital status (AUROC {{ehr9_full_int}}, {{ehr9_full_tmp}} and {{ehr9_full_ext}}).",
               w=[0.75, 2.3, 0.75, 0.75, 0.75, 1.0, 0.9], small=True)
@@ -130,15 +130,28 @@ def tables(V):
     rowsA_ = [r[:11] for r in rowsM]; rowsB_ = [[r[0]] + r[11:] for r in rowsM]
     TM = dict(cap="Table 9. Simulated missingness on the internal test set. (a) AUROC of point scores.",
               head=["Scenario", "Proposed", "Median imp.", "Version 1", "LR ind.", "LR no ind.", "LR MI", "Sign LR", "Spline LR", "GBT", "GA²M"], rows=rowsA_,
-              note="Mean of 10 repetitions with the same masks for every model (spline LR at 20% and 50% MCAR: first 3 repetitions). MCAR, each of the 12 predictors other than age and sex masked completely at random; MNAR, income-to-poverty ratio (or self-rated health) masked with probability 0.6 in records below 130% of the poverty level (or with fair or poor health) and 0.1 otherwise. 'None' includes naturally occurring missingness. Version 1 does not use diabetes, so its effective masking rate is lower than nominal (e.g. {{st_v1_30_eff_mask_rate}}% at 30%).",
+              note="Mean of 10 repetitions with the same masks for every model. MCAR, each of the 12 predictors other than age and sex masked completely at random; MNAR, income-to-poverty ratio (or self-rated health) masked with probability 0.6 in records below 130% of the poverty level (or with fair or poor health) and 0.1 otherwise. 'None' includes naturally occurring missingness. Version 1 does not use diabetes, so its effective masking rate is lower than nominal (e.g. {{st_v1_30_eff_mask_rate}}% at 30%).",
               w=[1.9] + [0.55] * 10, small=True)
     TM2 = dict(cap="Table 9 (continued). (b) Percentage of participants receiving a decision, and decisions of the proposed model.",
                head=["Scenario", "Admissible bounds", "Box bounds", "Sign LR bounds", "Spline LR bounds", "Complete case", "Proposed, covered: Sens. / Spec. (%)", "Proposed, refer-on-abstain: Sens. / Spec. (%)"], rows=rowsB_,
                note="Coverage, percentage of participants whose bounds do not straddle the threshold; complete case: decision only if every input is observed. Spline LR bounds were not computed for domain removal.",
                w=[1.9, 0.7, 0.6, 0.7, 0.7, 0.7, 1.1, 1.1], small=True)
+    rowsAB = []
+    for sk, lab in [("int", "Internal test, natural"), ("tmp", "2021–2023, natural"), ("ext", "2005–2014, natural (free-day sleep not collected)"),
+                    ("mc30", "Internal test, 30% MCAR"), ("mninc", "MNAR: income"), ("mnsrh", "MNAR: self-rated health"), ("mnboth", "MNAR: both")]:
+        r = [lab]
+        for m in ("bounds", "linear", "mi"): r.append("{{ab_%s_%s_own_coverage}}" % (sk, m))
+        for m in ("bounds", "linear", "mi"): r.append("{{ab_%s_%s_at_sens}} / {{ab_%s_%s_at_spec}}" % (sk, m, sk, m))
+        for m in ("bounds", "linear", "mi"): r.append("{{ab_%s_%s_at_bacc}}" % (sk, m))
+        rowsAB.append(r)
+    TAB = dict(cap="Table 10. Abstention rules compared: own coverage, and classification of the decided participants at the coverage reached by admissible-value bounds.",
+               head=["Scenario", "Coverage (%): bounds", "linear bounds", "imputation spread", "Sens./Spec. (%) at bounds' coverage: bounds", "linear bounds", "imputation spread",
+                     "Balanced accuracy: bounds", "linear bounds", "imputation spread"], rows=rowsAB,
+               note="Bounds: admissible-value bounds of the proposed model; linear bounds: exact bounds of sign-constrained logistic regression; imputation spread: 20 completed data sets from the chained-equation model, abstain unless at least 90% or at most 10% of predictions exceed the threshold. At the bounds' coverage, each rule decides the participants it is most confident about (ranking as in Fig. 7). Masking results are means over 10 repetitions.",
+               w=[1.7, 0.6, 0.55, 0.6, 0.85, 0.8, 0.85, 0.55, 0.55, 0.6], tiny=True)
     # ---------------------------------------------------------------- Table natural missingness
     rowsN = []
-    for sl, lab in [("int", "Internal test (2017–2020)"), ("tmp", "Temporal (2021–2023)"), ("ext", "External (2005–2014)"), ("cD", "  2005–2006"), ("cE", "  2007–2008"), ("cF", "  2009–2010"), ("cG", "  2011–2012"), ("cH", "  2013–2014")]:
+    for sl, lab in [("int", "Internal test (2017–2020)"), ("tmp", "Later period (2021–2023)"), ("ext", "Earlier period (2005–2014)"), ("cD", "  2005–2006"), ("cE", "  2007–2008"), ("cF", "  2009–2010"), ("cG", "  2011–2012"), ("cH", "  2013–2014")]:
         rowsN.append([lab, "{{nat_%s_anymiss}}" % sl] + ["{{nat_%s_%s_Coverage}}" % (sl, s) for s in ("full", "box", "slr", "rcs", "cc")] +
                      ["{{nat_%s_full_Sens_covered}} / {{nat_%s_full_Spec_covered}}" % (sl, sl), "{{nat_%s_full_Sens_refer}} / {{nat_%s_full_Spec_refer}}" % (sl, sl),
                       "{{nat_%s_full_Flag_refer}}" % sl, "{{natm_%s_full_Sens}} / {{natm_%s_lrni_Sens}} / {{natm_%s_rcs_Sens}}" % (sl, sl, sl)])
@@ -146,33 +159,52 @@ def tables(V):
               head=["Cohort", "Any input missing (%)", "Cov. admissible", "Cov. box", "Cov. sign LR", "Cov. spline LR", "Cov. complete case",
                     "Prop. covered Sens./Spec. (%)", "Prop. refer-on-abstain Sens./Spec. (%)", "Referred (%)", "Matched workload Sens. (%): proposed / LR no ind. / spline LR"],
               rows=rowsN,
-              note="Coverage (Cov.), percentage of participants whose probability bounds do not straddle the referral threshold (admissible-value and box bounds of the proposed model; exact linear bounds of sign-constrained LR; grid bounds of spline LR; complete case: decision only if every input is observed). Free-day sleep is missing for every external participant, so every external decision is made with it unknown. Matched workload: point-score threshold set so that each model flags the same proportion as the proposed refer-on-abstain policy ('Referred').",
+              note="Coverage (Cov.), percentage of participants whose probability bounds do not straddle the referral threshold (admissible-value and box bounds of the proposed model; exact linear bounds of sign-constrained LR; grid bounds of spline LR; complete case: decision only if every input is observed). Free-day sleep was not collected in 2005–2014, so every decision there is made with it unknown. Matched workload: point-score threshold set so that each model flags the same proportion as the proposed refer-on-abstain policy ('Referred').",
               w=[1.35, 0.6, 0.55, 0.45, 0.5, 0.5, 0.55, 0.8, 0.8, 0.55, 1.2], tiny=True)
     # ---------------------------------------------------------------- Table acquisition
     rowsQ = []
-    for key, lab in [("m10", "Internal, 10% masked"), ("m30", "Internal, 30% masked"), ("t30", "Temporal, 30% masked")]:
+    for key, lab in [("m10", "Internal, 10% masked"), ("m30", "Internal, 30% masked"), ("t30", "2021–2023, 30% masked")]:
         for pol, pl in [("bound", "Algorithm 2 (bound-guided)"), ("fixed", "Fixed order (contribution range)"), ("cost", "Cost order (record items first)"), ("random", "Random order")]:
             d = "–" if pol == "bound" else "{{acq2_%s_d_%s}} ({{acq2_%s_d_%s_ci}}); {{acq2_%s_fewer_%s}} / {{acq2_%s_more_%s}}" % (key, pol, key, pol, key, pol, key, pol)
             rowsQ.append([lab if pol == "bound" else "", "{{acq_%s_bound_n}}" % key if pol == "bound" else "", "{{acq_%s_bound_resolved}}" % key if pol == "bound" else "",
                           pl, "{{acq2_%s_%s_mean}}" % (key, pol), d])
-    TQ = dict(cap="Table 10. Bound-guided input acquisition (Algorithm 2) on records where the proposed model abstained.",
+    TQ = dict(cap="Table 11. Bound-guided input acquisition (Algorithm 2) on records where the proposed model abstained.",
               head=["Scenario", "Abstentions", "Resolved (%)", "Order", "Mean inputs requested", "Extra inputs vs Algorithm 2 (95% CI); % of records with more / fewer inputs than Algorithm 2"],
               rows=rowsQ, note="Masked inputs are revealed with their true values when requested; inputs missing in the original data cannot be revealed, so every order resolves the same records with the same final decisions. Means are over all abstentions. Differences are paired by record (2,000 bootstrap resamples). Fixed order: {{acq_order}}. Cost order: {{cost_order}}.",
               w=[1.2, 0.7, 0.6, 1.7, 0.7, 2.2], small=True)
     # ---------------------------------------------------------------- Algorithm box
-    steps = [["Input: rule base {(A_r, β_r)}, β_0; record with observed x_O and missing set M; admissible sets 𝒳_{v} (Table S5)."],
+    steps1 = [["Input: intercept β_0; single-concept rules (k, β_k) with trapezoidal or set memberships μ_k; record with observed inputs x_O and missing set M; admissible sets 𝒳_{v} (Table A5); threshold t."],
+              ["1. η_0 ← β_0 + Σ over rules whose variable is observed of β_k μ_k(x_v)."],
+              ["2. For each missing variable v: candidate set C_v ← category values of v (discrete), or {range ends of 𝒳_{v}} ∪ {trapezoid corners of the concepts of v inside 𝒳_{v}} (continuous)."],
+              ["3.   g_v(c) ← Σ over rules on v of β_k μ_k(c) for every c in C_v; lo_v ← min g_v, hi_v ← max g_v."],
+              ["4. η_L ← η_0 + Σ_v lo_v,  η_U ← η_0 + Σ_v hi_v;  p_L ← σ(η_L),  p_U ← σ(η_U)."],
+              ["5. Decision: refer if p_L ≥ t; do not refer if p_U < t; otherwise abstain."],
+              ["Cost: O(Σ_v |C_v| · rules on v). Exactness: each g_v is piecewise linear with breakpoints at trapezoid corners, so its extremes on a closed interval lie in C_v."]]
+    TAlg = dict(cap="Box 1. Algorithm 1: admissible-value bounds and abstention for the main-effects model.", head=["Steps"], rows=steps1, note="", w=[1.0], small=True)
+    steps2 = [["Input: record with observed x_O, missing set M, requestable set Q ⊆ M (inputs that can be obtained); development support points and weights {(v_{j}, w_{vj})} for each v; Algorithm 1; threshold t."],
+              ["1. n ← 0."],
+              ["2. while true:"],
+              ["3.   (p_L, p_U) ← Algorithm 1(x_O, M)."],
+              ["4.   if p_L ≥ t: return (refer, n);  if p_U < t: return (do not refer, n)."],
+              ["5.   if Q = ∅: return (abstain, n)."],
+              ["6.   for each v in Q:  ρ_{v} ← Σ_j w_{vj} · 1[ Algorithm 1(x_O ∪ {v = v_{j}}, M \\ {v}) resolves the decision ]   (other missing inputs stay unknown)."],
+              ["7.   v* ← argmax_{v ∈ Q} ρ_{v}   (ties broken by the order of Q)."],
+              ["8.   request x_{v*}; x_O ← x_O ∪ {x_{v*}};  M ← M \\ {v*};  Q ← Q \\ {v*};  n ← n + 1."],
+              ["Cost per step: Σ_{v ∈ Q} (number of support points of v) bound evaluations. The fixed, cost and random orders replace step 7 by the first remaining input of a predefined list or a random choice."]]
+    TAlg2 = dict(cap="Box 2. Algorithm 2: bound-guided input acquisition.", head=["Steps"], rows=steps2, note="", w=[1.0], small=True)
+    steps = [["Input: rule base {(A_r, β_r)}, β_0; record with observed x_O and missing set M; admissible sets 𝒳_{v} (Table A5)."],
              ["1. Build the graph on M with an edge between two missing variables if some rule contains both; take connected components M_1, …, M_q."],
              ["2. η_L ← η_U ← β_0 + Σ over rules with no missing variable of β_r μ_r(x_O)."],
              ["3. For each component M_c with rule set ℛ_{c}: enumerate the categories of its discrete variables; for each combination:"],
-             ["   (a) one continuous variable x: candidates 𝒞 = {l, u} ∪ trapezoid corners ∪ {a + c_r(b − a), d − c_r(d − c)} for every rule with observed partner membership c_r (Proposition 1);"],
-             ["   (b) two continuous variables (x, z): on each rectangle of the breakpoint grid add corners, intersections of switching lines μ_k(x) = μ_m(z) with the edges, and pairwise intersections of switching lines (Proposition 2);"],
+             ["   (a) one continuous variable x: candidates 𝒞 = {l, u} ∪ trapezoid corners ∪ {a + c_r(b − a), d − c_r(d − c)} for every rule with observed partner membership c_r (Statement C1);"],
+             ["   (b) two continuous variables (x, z): on each rectangle of the breakpoint grid add corners, intersections of switching lines μ_k(x) = μ_m(z) with the edges, and pairwise intersections of switching lines (Statement C2);"],
              ["   (c) more than two continuous variables: use the box bound for ℛ_{c} (outer bound; flagged in the trace)."],
              ["   Evaluate g_c = Σ β_r μ_r over the rules in ℛ_{c} on all candidates; keep the minimum and maximum over candidates and combinations."],
              ["4. η_L ← η_L + Σ_c min g_c,  η_U ← η_U + Σ_c max g_c;  return p_L = σ(η_L), p_U = σ(η_U)."],
-             ["Algorithm 2 (bound-guided acquisition): while p_L < t ≤ p_U and a revealable missing input exists, request v* = argmax_{v} ρ_v (Section 2.10), enter its value and recompute the bounds with Algorithm 1."]]
-    TAlg = dict(cap="Box 1. Algorithm 1 (exact admissible-value bounds) and Algorithm 2 (bound-guided acquisition).", head=["Steps"], rows=steps, note="", w=[1.0], small=True)
+             ["Return the bounds; components handled by step 3(c) are flagged in the trace."]]
+    TAlgGen = dict(cap="Box C1. Algorithm C1: exact admissible-value bounds for rule bases with one- and two-concept antecedents.", head=["Steps"], rows=steps, note="", w=[1.0], small=True)
     # ---------------------------------------------------------------- Supplementary
-    adj = pd.read_csv(RV + "priors_adjusted.csv").set_index("concept"); mv = pd.read_csv(RV + "priors_multivariable.csv").set_index("concept")
+    adj = pd.read_csv(RV + "priors_adjusted.csv").set_index("concept"); rc = pd.read_csv(RV + "priors_reference_contrast.csv").set_index("concept"); mv = pd.read_csv(RV + "priors_multivariable.csv").set_index("concept")
     rowsS1 = []
     for r in pri.itertuples():
         a = adj.loc[r.concept] if r.concept in adj.index else None
@@ -180,13 +212,14 @@ def tables(V):
         m_ = mv.loc[r.concept] if r.concept in mv.index else None
         mvd = ("ref." if (m_ is not None and isinstance(m_.get("note"), str)) else (sgn[int(m_.direction_mv)] if m_ is not None else "–"))
         rowsS1.append([r.concept, r.variable, f"{int(r.n_in)}" if pd.notna(r.n_in) else "–", f"{100*r.rate_in:.1f}" if pd.notna(r.rate_in) else "–",
-                       f"{r.RR:.2f} ({r.lo:.2f}–{r.hi:.2f})" if pd.notna(r.RR) else "inherited", sgn[int(r.direction)], aor, mvd])
+                       f"{r.RR:.2f} ({r.lo:.2f}–{r.hi:.2f})" if pd.notna(r.RR) else "inherited", sgn[int(r.direction)], aor, mvd,
+                       (f"{sgn[int(rc.loc[r.concept, 'direction_reference_contrast'])]} vs {rc.loc[r.concept, 'reference']}" if r.concept in rc.index else ("ref." if mvd == "ref." else "–"))])
     TS1 = dict(cap="Table A1. Direction priors estimated on NHANES 2015–2016 (n = {{flow_pri_analytic}} adults): crude, age- and sex-adjusted, and mutually adjusted.",
-               head=["Concept", "Variable", "n (μ ≥ 0.5)", "% PHQ-9 ≥ 10", "Risk ratio (95% CI)", "Direction", "Age–sex adjusted OR (95% CI)", "Mutually adjusted direction"], rows=rowsS1,
-               note="Risk ratio compares membership ≥ 0.5 with < 0.5. Direction +1 if the lower confidence limit exceeds 1, −1 if the upper limit is below 1, 0 otherwise. Age–sex adjusted: logistic model with age, age² and sex (age concepts adjusted for sex only, sex concepts for age only); no direction changed. Mutually adjusted: one logistic model with every concept of the 14 base variables, one reference concept per variable (ref.). SLQ050 and SLQ120 concepts were used only in the extended-sleep sensitivity analysis.", small=True)
+               head=["Concept", "Variable", "n (μ ≥ 0.5)", "% PHQ-9 ≥ 10", "Risk ratio (95% CI)", "Direction", "Age–sex adjusted OR (95% CI)", "Mutually adjusted direction", "Reference-contrast direction"], rows=rowsS1,
+               note="Risk ratio compares membership ≥ 0.5 with < 0.5. Direction +1 if the lower confidence limit exceeds 1, −1 if the upper limit is below 1, 0 otherwise. Age–sex adjusted: logistic model with age, age² and sex (age concepts adjusted for sex only, sex concepts for age only); no direction changed. Mutually adjusted: one logistic model with every concept of the 14 base variables, one reference concept per variable (ref.). Reference contrast: risk ratio of the concept against the reference concept of the fitted model. SLQ050 and SLQ120 concepts were used only in the extended-sleep sensitivity analysis.", small=True)
     sub = pd.read_csv(R + "subgroups.csv"); so = pd.read_csv(RV + "subgroup_oe.csv")
     sub = sub.merge(so, on=["set", "group"], how="left")
-    setlab = {"internal_test": "Internal", "temporal": "Temporal", "external_pooled": "External"}
+    setlab = {"internal_test": "Internal", "temporal": "2021–2023", "external_pooled": "2005–2014"}
     rowsS2 = [[setlab[r.set], r.group.replace(">=", "≥ "), f"{r.n:,}", f"{r.positives:,}", f"{r['Proposed (full) AUROC']:.3f}", f"{r['Logistic regression AUROC']:.3f}",
                f"{r['Gradient-boosted trees AUROC']:.3f}", f"{100*r['Proposed (full) Sens']:.1f}", f"{100*r['Logistic regression Sens']:.1f}",
                f"{r['Proposed (full) OE']:.2f}", f"{r['Logistic regression OE']:.2f}"] for _, r in sub.iterrows()]
@@ -207,7 +240,7 @@ def tables(V):
         for s, ml in [("full", "proposed"), ("slr", "sign-constrained LR"), ("rcs", "spline LR")]:
             rowsS5.append([f"Coverage, {ml}, {lab}", "%", "{{sbmc_%s_%s_Coverage}}" % (lvl, s), "{{sbmc_%s_%s_Coverage_p99}}" % (lvl, s)])
     for s, ml in [("full", "proposed"), ("slr", "sign-constrained LR"), ("rcs", "spline LR")]:
-        rowsS5.append([f"Coverage, {ml}, external cohort", "%", "{{nat_ext_%s_Coverage}}" % s, "{{nat_ext_%s_Coverage_p99}}" % s])
+        rowsS5.append([f"Coverage, {ml}, 2005–2014 cohort", "%", "{{nat_ext_%s_Coverage}}" % s, "{{nat_ext_%s_Coverage_p99}}" % s])
     TS5 = dict(cap="Table A5. Admissible ranges of continuous variables and the effect of narrowing them to the 1st–99th development percentiles on coverage.",
                head=["Variable or quantity", "Unit", "Admissible range (schema)", "1st–99th percentile"], rows=rowsS5,
                note="Coverage under masking is the mean over the same 10 masks used in Table 9. Discrete variables use their category sets (education 1–5, marital status 3 categories, self-rated health 1–5, chronic-condition count 0–10, binary items 0–1).", small=True)
@@ -216,4 +249,4 @@ def tables(V):
     TT = dict(cap="Table B1. TRIPOD+AI checklist (Collins et al. [@collins2024]): items and where they are reported.",
               head=["Item", "Section/topic", "Checklist item (abbreviated)", "Where reported"], rows=ROWS, note="", w=[0.5, 1.3, 3.0, 2.2], small=True)
     return dict(tableTRIPOD=TT, table1=T1, table2=T2, table3=T3, table4=T4, tableCycle=TC, tableAbl=TA, tablePHQ2=TP, tableMiss=TM,
-                tableAcq=TQ, tableNat=TN, tableMiss2=TM2, tableAlg=TAlg, tableS1=TS1, tableS2=TS2, tableS3=TS3, tableS4=TS4, tableS5=TS5)
+                tableAcq=TQ, tableNat=TN, tableMiss2=TM2, tableAlg=TAlg, tableAlg2=TAlg2, tableAlgGen=TAlgGen, tableAbst=TAB, tableS1=TS1, tableS2=TS2, tableS3=TS3, tableS4=TS4, tableS5=TS5)

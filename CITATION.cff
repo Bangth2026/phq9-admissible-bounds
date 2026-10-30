@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
-title: "Exact admissible-value bounds for missing inputs in an interpretable fuzzy additive prescreening model (NHANES): code, schema and results"
+title: "Abstention by worst-case bounds for missing inputs in an interpretable additive prescreening model (NHANES): code, schema and results"
 authors:
   - family-names: Truong
     given-names: Hai Bang
@@ -10,6 +10,6 @@ authors:
     given-names: Van An
     affiliation: Nguyen Tat Thanh University, Ho Chi Minh City, Vietnam
     orcid: https://orcid.org/0009-0005-4135-5689
-version: 2.0.0
-date-released: 2026-10-30
+version: 3.0.0
+date-released: 2026-10-31
 license: MIT

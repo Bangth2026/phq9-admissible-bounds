@@ -1,7 +1,7 @@
 {
-  "title": "Exact admissible-value bounds for missing inputs in an interpretable fuzzy additive prescreening model (NHANES): code, knowledge schema and results",
+  "title": "Abstention by worst-case bounds for missing inputs in an interpretable additive prescreening model (NHANES): code, knowledge schema and results",
   "upload_type": "software",
-  "description": "Code, JSON-LD knowledge schema, analysis protocol and results for a fuzzy additive model that prescreens elevated depressive symptoms (PHQ-9 >= 10) from non-symptom NHANES survey data, with exact admissible-value bounds for missing inputs (Algorithm 1) and bound-guided input acquisition (Algorithm 2). Includes the statistics file that populates the manuscript.",
+  "description": "Code, JSON-LD knowledge schema, analysis protocol, tests and results for a fuzzy additive model that prescreens elevated depressive symptoms (PHQ-9 >= 10) from non-symptom NHANES survey data, with admissible-value bounds and abstention for missing inputs, a bound-guided input acquisition rule, and comparisons with linear bounds, complete-case abstention and imputation-spread abstention. Includes the statistics file that populates the manuscript.",
   "creators": [
     {
       "name": "Truong, Hai Bang",
@@ -24,5 +24,5 @@
     "NHANES"
   ],
   "access_right": "open",
-  "version": "2.0.0"
+  "version": "3.0.0"
 }

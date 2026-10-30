@@ -59,4 +59,5 @@ REFS = {
     "harrell2015": "F.E. Harrell Jr, Regression Modeling Strategies, 2nd ed., Springer, Cham, 2015. https://doi.org/10.1007/978-3-319-19425-7",
     "nhanes_rr_2021": "National Center for Health Statistics, Unweighted response rates for NHANES August 2021–August 2023 by age and sex. https://wwwn.cdc.gov/nchs/data/ResponseRates/NHANES-August-2021-August-2023-Response-Rates.pdf (accessed 30 October 2026).",
     "nhanes_rr_2017": "National Center for Health Statistics, Unweighted response rates for NHANES 2017–March 2020 by age and sex. https://wwwn.cdc.gov/nchs/data/ResponseRates/NHANES-2017-2020-Response%20Rates-2017-March2020.pdf (accessed 30 October 2026).",
+    "brfss2018": "Centers for Disease Control and Prevention, Behavioral Risk Factor Surveillance System: 2018 BRFSS questionnaire (core sections and optional modules, including Module 9: Depression and Anxiety), 18 January 2018. https://secure.in.gov/health/oda/files/BRFSS2018QUEST.pdf (accessed 31 October 2026).",
 }
