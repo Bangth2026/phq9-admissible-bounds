@@ -3,7 +3,9 @@ from ms4_helpers import *  # noqa
 
 h1("4. Discussion")
 h2("4.1. Principal findings")
-p("For RQ1, with the base model held fixed, the abstention rules differed little where few inputs were missing and "
+p("The main result concerns the rules, not the base models: the three base models discriminated about equally well, "
+  "and the fuzzy additive model was included because its bounded terms give worst-case bounds their best chance. For "
+  "RQ1, with the base model held fixed, the abstention rules differed little where few inputs were missing and "
   "clearly where many were. Imputation spread, pattern submodels and point-score selective prediction decided more "
   "participants than worst-case bounds and classified the decided participants more accurately at equal coverage. "
   "Their net benefit at a threshold probability of 0.10 was higher in 2005–2014, under 30% MCAR and when an input was "
@@ -97,6 +99,18 @@ p("With the full predictor set, which includes self-rated health, sleep and sede
   "A model for that survey would have to be refitted on its items. Whether a prioritisation step saves effort in a "
   "real service, and whether its explanations help staff, has not been evaluated.")
 
+p("Where no symptom questions are available, the burden of each rule should also be judged by what refer-on-abstain "
+  "costs. Every abstention becomes a referral, so a rule that abstains often shifts work onto the assessment it was "
+  "meant to target. In 2005–2014 worst-case bounds under refer-on-abstain referred {{a4_ext_fuzzy_wc_ref}} of every "
+  "1,000 participants, against {{a4_ext_fuzzy_ps_ref}} for pattern submodels and {{a4_ext_fuzzy_sel_ref}} for point-score "
+  "selective prediction. A service would pay for the {{a4_ext_fuzzy_wc_ref}} referrals in staff time and respondent "
+  "burden to miss {{a4_ext_fuzzy_wc_mis}} rather than {{a4_ext_fuzzy_ps_mis}} cases per 1,000.")
+p("Generalisability to other settings is limited. NHANES is a household survey of the United States with standardised "
+  "interviews and examinations; the predictors, their missingness and the prevalence of elevated symptoms will differ in "
+  "health records, in other surveys and in other countries, and the 2021–2023 cohort showed how quickly calibration "
+  "can drift even within one survey. The ordering of the rules depends on how much is missing and why, so it should be "
+  "checked with the missingness of the target setting before a rule is chosen.")
+
 h2("4.6. Limitations")
 p("The fuzzy model was designed after version-1 results on the internal and later-period sets had been seen, and the "
   "protocol that fixed it was not registered; that it preceded the download of the 2005–2014 files rests on our "
@@ -114,15 +128,16 @@ p("The fuzzy model was designed after version-1 results on the internal and late
   "for several groups.")
 
 h1("5. Conclusions")
-p("With the base model held fixed, abstaining on worst-case bounds over admissible input values decided fewer "
-  "participants than abstaining on the spread of multiple imputations, on a band around the threshold of the point "
-  "score, or using pattern submodels, and decided them less accurately. Its net benefit at a threshold probability of "
-  "0.10 was lower when an input was missing by design or at random and equivalent when missingness signalled risk; it "
-  "was higher only where all models under-predicted. Worst-case bounds missed fewer cases because they referred more "
-  "people, and their guarantee concerns the model's output, not the person's outcome. For an input missing by design, "
-  "a model fitted without it was a simple and good choice. The fuzzy additive model built on the knowledge schema "
-  "ranked people as well as linear logistic regression, and two symptom questions remain far more efficient than any "
-  "non-symptom model where they can be asked.")
+p("Where two symptom questions can be asked, the PHQ-2 is far more efficient than any non-symptom model studied here, "
+  "and it should be used. Where they cannot, and inputs are missing, the choice of abstention rule matters more than "
+  "the choice among the base models, which discriminated about equally well. With the base model held fixed, abstaining "
+  "on worst-case bounds over admissible input values decided fewer participants than abstaining on the spread of "
+  "multiple imputations, on a band around the threshold of the point score, or using pattern submodels, and decided "
+  "them less accurately. Its net benefit at a threshold probability of 0.10 was lower when an input was missing by "
+  "design or at random and similar when missingness signalled risk; it was higher only where all models "
+  "under-predicted. Worst-case bounds missed fewer cases because they referred more people, and their guarantee "
+  "concerns the model's output, not the person's outcome. For an input missing by design, a model fitted without it "
+  "was a simple and good choice.")
 
 h1("Declarations")
 p("*Ethics approval and consent:* NHANES protocols were approved by the NCHS Research Ethics Review Board and all "
@@ -133,8 +148,8 @@ p("*Data availability:* NHANES data are publicly available from the National Cen
   "August 2021–August 2023.")
 p("*Code availability:* The full pipeline (cohort construction, knowledge schema in JSON-LD, models, Algorithms 1–3, "
   "abstention rules, comparators, experiments, tests, figures, the analysis protocol with its addendum, and the "
-  "statistics file that populates this manuscript) is publicly available at {{repo_url}} (release v5.0.0) and archived "
-  "at Zenodo ({{zenodo_doi_v5}}). The release contains the scripts and the statistics file that produced every number "
+  "statistics file that populates this manuscript) is publicly available at {{repo_url}} (release v6.0.0) and archived "
+  "at Zenodo ({{zenodo_doi_v6}}). The release contains the scripts and the statistics file that produced every number "
   "reported here.")
 p("*Funding:* This research did not receive any specific grant from funding agencies in the public, commercial, or "
   "not-for-profit sectors.")
@@ -152,17 +167,29 @@ p("*Declaration of generative AI and AI-assisted technologies in the manuscript 
 h1("References")
 B.append({"t": "refs"})
 pb()
-h1("Appendix A. Additional tables")
+h1("Appendix A. Additional tables and figures")
 p("Tables A1–A5 give the direction priors, subgroup results, the version-1 rule base, included and excluded adults, and "
   "the admissible ranges. Table A6 gives decision consequences for the regression base models, Table A7 the 2005–2014 "
   "results by cycle, Table A8 the paired AUROC differences for all comparators, variants and ablations, Table A9 the "
   "point-score AUROC and worst-case coverage under further MCAR rates and domain removal, and Table A10 worst-case "
-  "coverage by cycle. The variants and ablations of the fuzzy model were: version 1 (K = 32 rules of any arity); main "
+  "coverage by cycle; Tables A11 and A12 give the knowledge schema and the rule base of the fuzzy model, and Table A13 "
+  "the abstention rules under the 13 simulated scenarios for all base models. Fig. A1 shows the architecture of the "
+  "fuzzy system and Fig. A2 an example of Algorithm 2. The variants and ablations of the fuzzy model were: version 1 (K = 32 rules of any arity); main "
   "effects plus 16 pair rules; normalised zero-order TSK aggregation p = Σ_r w_r μ_r c_r / Σ_r w_r μ_r (K = 32); no "
   "direction constraints; crisp memberships at the same cut-points; quantile-based memberships with no constraints and "
   "median imputation ('fuzzy without schema'); median imputation instead of bounds; and box bounds, in which each "
   "missing membership ranges over [0, 1].")
-for k in ("tableS1", "tableS2", "tableS3", "tableS4", "tableS5", "tableA6", "tableCycle", "tableAbl", "tableMiss", "tableMiss2", "tableNat"):
+for k in ("tableS1", "tableS2", "tableS3", "tableS4", "tableS5", "tableA6", "tableCycle", "tableAbl", "tableMiss", "tableMiss2", "tableNat",
+          "table2", "table3", "tableAbst6"):
     tab(k)
+fig("fig_framework.png", "Fig. A1. Architecture of the prescreening system. The knowledge schema (orange) declares "
+    "variables, admissible sets, concepts, cut-point sources and sign priors; the worst-case bounds (Algorithms 1 and 2) "
+    "and the acquisition rule (Algorithm 3) use these declarations when inputs are missing.", 6.6)
+
+fig("fig_alg1.png", "Fig. A2. Exact bounds (Algorithm 2) on one participant of the internal test set under the version-1 "
+    "rule base with one continuous input missing. The linear predictor is piecewise linear in the missing input; its "
+    "maximum lies at a breakpoint where a membership equals the observed partner membership (Statement 1), which the "
+    "41-point grid with trapezoid corners does not contain.", 6.0)
+
 h1("Appendix B. TRIPOD+AI checklist")
 tab("tableTRIPOD")

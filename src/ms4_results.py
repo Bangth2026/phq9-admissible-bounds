@@ -27,8 +27,6 @@ p("Direction priors from 2015–2016 agreed with established epidemiology: low i
   "adds up to {{we_beta_short}} log-odds. The sign constraint on ShortSleepFreeDay comes from an inherited prior that "
   "was never estimated. The point score instead adds {{we_fill}} log-odds, the development-mean memberships of the "
   "two concepts weighted by their coefficients, to every 2005–2014 participant.")
-tab("table2")
-tab("table3")
 
 h2("3.3. Base models: discrimination and calibration")
 p("The pre-specified primary comparison was AUROC in 2005–2014: {{full_ext_AUROC}} ({{full_ext_AUROC_ci}}) for the "
@@ -43,7 +41,13 @@ p("The pre-specified primary comparison was AUROC in 2005–2014: {{full_ext_AUR
   "the fuzzy model was the lowest of the main models ({{full_int_AUROC}} against {{int_min_oth}}–{{int_max_oth}}). Over "
   "{{spl_B}} repeated splits of 2017–2020 it averaged {{spl_full_mean}} (SD {{spl_full_sd}}), and its mean difference "
   "to linear logistic regression was {{spl_lr_mean}} (SD {{spl_lr_sd}}). Design-based intervals were close to "
-  "participant-level intervals and changed no conclusion (Table 4; Fig. 3).")
+  "participant-level intervals and changed no conclusion (Table 4; Fig. 3). The base models therefore discriminated "
+  "about equally well, and none should be read as superior for prediction. Differences of 0.01 AUROC are small in "
+  "operational terms: with each model's threshold set to reach 80% sensitivity in 2005–2014, the fuzzy model flagged "
+  "{{op80_ext_full_flag}} participants per 1,000, regression without indicators {{op80_ext_lrni_flag}} and spline "
+  "regression {{op80_ext_rcs_flag}}, so the better-ranking spline model would save about {{op80_ext_d_rcs}} referrals per "
+  "1,000 at the same sensitivity. The differences that matter for this study are those between abstention rules, not "
+  "between base models.")
 tab("table4")
 fig("fig_roc.png", "Fig. 3. ROC curves on internal testing (2017–March 2020), later-period validation (2021–2023) and "
     "earlier-period validation (2005–2014). AUROC in parentheses.", 6.6)
@@ -67,6 +71,9 @@ fig("fig_calibration.png", "Fig. 4. Calibration by deciles of predicted probabil
     "recalibration. All models under-predict in 2021–2023.", 6.6)
 
 h2("3.4. Abstention rules with the base model held fixed")
+p("Throughout this section, a decision made by worst-case bounds is one that holds for every admissible value of the "
+  "missing inputs *under the model*. It is not a guarantee that the decision is correct: where the model is "
+  "miscalibrated, as all models were in 2021–2023, a decision that holds for every completion can still be wrong.")
 p("*Cohorts as observed.* Where few inputs were missing (internal test and 2021–2023), the five rules differed little: "
   "with the fuzzy model, worst-case bounds decided {{a4_int_fuzzy_wc_cov}}% of internal test participants, imputation "
   "spread {{a4_int_fuzzy_mi_cov}}%, point-score selective prediction {{a4_int_fuzzy_sel_cov}}% and complete cases "
@@ -124,7 +131,6 @@ p("*Structural absence with a shifted conditional distribution.* When self-rated
   "accuracy {{ord_wc_atb}}, {{ord_mi_atb}} and {{ord_ps_atb}}; sensitivity {{ord_wc_sensr}}%, {{ord_mi_sensr}}% and "
   "{{ord_ps_sensr}}%). With free-day sleep absent and shifted, the ordering of 2005–2014 was reproduced (balanced "
   "accuracy {{a4_sh1we_fuzzy_wc_atb}}, {{a4_sh1we_fuzzy_mi_atb}}, {{a4_sh1we_fuzzy_ps_atb}} and {{a4_sh1we_fuzzy_sel_atb}}).")
-tab("tableAbst6")
 fig("fig_riskcov4.png", "Fig. 5. Risk–coverage curves of the abstention rules with the fuzzy additive model as the "
     "fixed base model: balanced accuracy among decided participants against the percentage decided, with participants "
     "ranked by each rule's confidence. Open circles mark each rule's own operating point. The grey curve ranks by the "
@@ -132,7 +138,20 @@ fig("fig_riskcov4.png", "Fig. 5. Risk–coverage curves of the abstention rules 
     "complete cases among complete records). Simulated panels show the first of 10 repetitions; pattern submodels were "
     "not fitted under MCAR.", 6.8)
 
-h2("3.5. Decision consequences")
+h2("3.5. Summary across scenarios")
+p("Table @SUM@ condenses the 16 scenarios for the fuzzy model, and separates results that held across scenarios from "
+  "those confined to a few. Three results held in every scenario with substantial missingness. Worst-case bounds "
+  "decided the fewest participants, missed the fewest cases and avoided the fewest questionnaires; their net benefit at "
+  "0.10 was never above that of the best other rule except in 2021–2023; and when an input was absent for everyone, "
+  "pattern submodels or point-score selective prediction did best on both AURC and net benefit (worst-case AURC up to "
+  "{{sum_wc_gap_max}} higher). Two results were confined to particular mechanisms. Worst-case bounds had the lowest "
+  "AURC in {{sum_n_wc_aurc_best}} of the 16 scenarios, all with non-random or outcome-dependent masking or in "
+  "2021–2023, but by at most {{sum_wc_lead_max}}. Their net benefit at 0.10 was lower than that of the best rule in "
+  "{{sum_n_wc_nb_lower}} scenarios, similar or equivalent in {{sum_n_wc_nb_eq}} and highest in {{sum_n_wc_nb_high}} "
+  "(2021–2023).")
+tab("tableSum")
+
+h2("3.6. Decision consequences")
 p("Table 7 converts each rule into the prescreening currency of Section 2.1, under refer-on-abstain. In 2005–2014, per "
   "1,000 participants, worst-case bounds of the fuzzy model referred {{a4_ext_fuzzy_wc_ref}}, missed "
   "{{a4_ext_fuzzy_wc_mis}} cases and avoided {{a4_ext_fuzzy_wc_avd}} questionnaires; imputation spread referred "
@@ -160,22 +179,13 @@ p("Across scenarios, worst-case bounds always missed the fewest cases and avoide
   "{{a4_odep_fuzzy_wc_mis}} for worst-case bounds). Results for the regression base models are in Table A6.")
 tab("tableCons")
 
-h2("3.6. Worst-case bounds for conjunctive rule bases")
-p("For the main-effects fuzzy model the bounds of Algorithm 1 agreed with dense brute force on every record. For the "
-  "conjunctive version 1, a 41-point grid augmented with trapezoid corners under-covered the exact range of Algorithm 2 "
-  "in {{ex_v1_nshort}} of {{n_int}} internal test records with 30% of inputs masked, by at most {{ex_v1_short}} log-odds, "
-  "and changed no decision; {{ex_v1_fbrows}} records ({{ex_v1_fbrows_pct}}%) had a component with more than two "
-  "continuous missing variables and needed the outer bound. For the variant with 16 pair rules the grid was exact on "
-  "every record ({{ex_inter_fbrows}} records needed the outer bound). Against dense brute force in 80 records per model "
-  "with one or two masked inputs, Algorithm 2 never returned a range that excluded a brute-force value (largest excess "
-  "{{ex_max_outside}}). Bounds for {{n_int}} masked records took {{ex_full_sec}} s for the main-effects model and "
-  "{{ex_v1_sec}} s for version 1 (Fig. 6).")
-fig("fig_alg1.png", "Fig. 6. Exact bounds (Algorithm 2) on one participant of the internal test set under the version-1 "
-    "rule base with one continuous input missing. The linear predictor is piecewise linear in the missing input; its "
-    "maximum lies at a breakpoint where a membership equals the observed partner membership (Statement 1), which the "
-    "41-point grid with trapezoid corners does not contain.", 6.0)
-
-h2("3.7. Bound-guided acquisition")
+h2("3.7. Worst-case bounds for conjunctive rule bases")
+p("Algorithm 1 agreed with dense brute force on every record. For the conjunctive version 1, a 41-point grid with "
+  "trapezoid corners under-covered the exact range of Algorithm 2 in {{ex_v1_nshort}} of {{n_int}} records with 30% of "
+  "inputs masked, by at most {{ex_v1_short}} log-odds, and changed no decision; {{ex_v1_fbrows}} records "
+  "({{ex_v1_fbrows_pct}}%) needed the outer bound. Against dense brute force, Algorithm 2 never returned a range that "
+  "excluded a brute-force value (largest excess {{ex_max_outside}}; Fig. A2).")
+h2("3.8. Bound-guided acquisition")
 p("Among records on which the fuzzy model abstained under 30% masking, Algorithm 3 requested {{acq2_m30_bound_mean}} "
   "inputs per abstention, against {{acq2_m30_fixed_mean}} for the fixed order (paired difference {{acq2_m30_d_fixed}}, "
   "{{acq2_m30_d_fixed_ci}}; {{acq_per1000_fixed}} fewer inputs per 1,000 abstentions), {{acq2_m30_cost_mean}} for the cost "
@@ -188,7 +198,7 @@ p("Among records on which the fuzzy model abstained under 30% masking, Algorithm
   "at random with true values revealed on request; free-day sleep in 2005–2014 cannot be requested.")
 tab("tableAcq")
 
-h2("3.8. PHQ-2 reference, record-typical predictors and subgroups")
+h2("3.9. PHQ-2 reference, record-typical predictors and subgroups")
 p("PHQ-2 ≥ 3 had sensitivity {{phq2_int_sens}} and specificity {{phq2_int_spec}} internally and flagged "
   "{{phq2_int_flag}}% of participants; the fuzzy model at its development threshold had sensitivity "
   "{{full_int_Sensitivity}} at specificity {{full_int_Specificity}} and flagged {{full_int_flag}}% (Table 9). The PHQ-2 "

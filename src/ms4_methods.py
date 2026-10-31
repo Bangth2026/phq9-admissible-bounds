@@ -13,7 +13,6 @@ p("This is a retrospective study that develops prediction models and compares ru
   "do not estimate future incidence and are not tools for assessing self-harm risk. Predictors and outcome are "
   "measured in the same survey, so the target is concurrent elevated symptoms. All estimates are unweighted and refer "
   "to study participants unless stated otherwise.")
-
 h2("2.2. Data sources")
 p("NHANES is a continuous cross-sectional survey of the non-institutionalised United States population. Development "
   "data came from the 2017–March 2020 pre-pandemic release, which combines the 2017–2018 cycle with data collected "
@@ -63,7 +62,7 @@ p("Two predictors overlap in content with the PHQ-9. Sleep duration touches the 
   "questionnaire. Self-rated general health is the strongest predictor and plausibly reflects fatigue, sleep and "
   "appetite problems that the PHQ-9 asks about directly; a person who rates their health as poor may be reporting "
   "some of the same experience. Both are therefore closer to the outcome than demographic or record items, and we "
-  "report models without them (Section 3.7). Contact with a mental health professional was not used, because it is "
+  "report models without them (Section 3.9). Contact with a mental health professional was not used, because it is "
   "close to the outcome. Race and ethnicity served only for subgroup evaluation. Two sleep items with strong "
   "associations in the earlier cycle (SLQ050, SLQ120) were not fielded in 2021–2023 and were examined only in a "
   "development-period sensitivity analysis. In the development set {{any_missing_dev}}% of participants had at least "
@@ -97,9 +96,6 @@ p("and the first and last concepts are shoulders that stay at 1 up to the range 
   "and 350% of the federal poverty level (h = 0.3), age bands at 35 and 60 years (h = 5) and sedentary-time bands at 4 "
   "and 8 h/day (h = 1). Ordinal and categorical variables have crisp set memberships (e.g. FairHealth, PoorHealth, "
   "Multimorbidity for ≥ 2 conditions).")
-fig("fig_framework.png", "Fig. 2. Architecture of the prescreening system. The knowledge schema (orange) declares "
-    "variables, admissible sets, concepts, cut-point sources and sign priors; the worst-case bounds (Algorithms 1 and 2) "
-    "and the acquisition rule (Algorithm 3) use these declarations when inputs are missing.", 6.6)
 p("A rule r has an antecedent A_r of one or two concepts and fires with strength μ_r(x) = min_{k ∈ A_r} μ_k(x_k). "
   "Rules combine additively on the log-odds scale,")
 eq("η(x) = logit p(x) = β_0 + Σ_{r=1}^{R} β_r μ_r(x),   subject to s_r β_r ≥ 0,", 3)
@@ -129,8 +125,18 @@ p("*Regression base models and other comparators.* Sign-constrained logistic reg
   "without the schema, median imputation) are described in Appendix A.")
 
 h2("2.6. Abstention rules")
-p("Every rule returns one of three outputs for a person: refer for questionnaire completion, do not refer, or abstain. "
-  "Abstentions were never counted as negative predictions; we report decisions among decided participants and, as "
+p("*Terminology.* A rule *decides* a person when it returns *refer* (recommend completing the PHQ-9 or an equivalent "
+  "assessment) or *do not refer*; otherwise it *abstains*. *Coverage* is the proportion of participants decided. "
+  "*Refer-on-abstain* is the policy that sends every abstention for assessment, so it turns any rule into a referral "
+  "decision for everyone. *Selective prediction* is the general practice of deciding only when a model is confident "
+  "enough, and abstaining otherwise [@geifman2017].")
+p("Fig. @DES@ summarises the design: three base models, each held fixed while five abstention rules are applied to "
+  "the same records under 16 missingness scenarios.")
+fig("fig_design.png", "Fig. @DES@. Design of the comparison. Each base model is fitted once on development data and "
+    "held fixed; each abstention rule turns its output into refer, do not refer or abstain for the same records; the "
+    "rules are compared on coverage, accuracy at matched coverage, risk–coverage curves and decision consequences.", 6.8)
+
+p("Every rule returns one of these three outputs for a person. Abstentions were never counted as negative predictions; we report decisions among decided participants and, as "
   "the conservative policy for prescreening, refer-on-abstain, in which every abstention is referred [@chow1970]. Each "
   "rule uses its base model's threshold t, fixed on development data (Section 2.11) and applied on the raw probability "
   "scale σ(η), before recalibration; for the fuzzy model t = {{thr_full}}. The rules differ in what they assume about "
@@ -217,13 +223,21 @@ p("Components with more than two continuous missing variables fall back to the b
   "missing membership range over [0, 1]; this is a valid outer bound, not an exact one, and the trace flags it. For a "
   "component with m_c categorical combinations, n_b breakpoints per axis and q pair rules, the cost is O(m_c n_b) "
   "evaluations for one continuous variable and O(m_c n_b² q²) for two. Algorithm 2 was checked against a 41-point grid "
-  "augmented with trapezoid corners and against dense brute force (Section 3.5).")
+  "augmented with trapezoid corners and against dense brute force (Section 3.7).")
 tab("tableAlgGen")
 
 h2("2.8. Missingness scenarios")
 p("*Natural missingness.* All models were applied to the three validation cohorts as observed. In 2005–2014 "
   "free-day sleep was not collected and sedentary time was not collected in 2005–2006; income-to-poverty ratio is "
   "missing for 7.5–13.3% of participants in every cohort.")
+p("*Choice of simulated scenarios.* The simulated scenarios were chosen to violate, one at a time, the assumption each "
+  "rule relies on, not to reproduce a particular survey. MCAR is the setting in which imputation is valid and pattern "
+  "submodels are impractical. Non-random masking of income and of self-rated health mimics the item non-response "
+  "seen in surveys, where people with low income or poor health answer less often, at a moderate and at an extreme "
+  "strength. Outcome-dependent masking is the hardest case for imputation, because the missing value carries "
+  "information about the outcome that the observed inputs do not. Structural absence with a shifted conditional "
+  "distribution is the case for which worst-case bounds were proposed. Real missingness is likely to be milder than the "
+  "extreme scenarios and to mix mechanisms, so the scenarios bracket rather than represent practice.")
 p("*Simulated missingness on the internal test set* (10 repetitions each, the same masks for every model and rule): "
   "(i) MCAR, each of the 12 predictors other than age and sex masked with probability 0.3 (other rates and the "
   "removal of whole domains are in Appendix A); (ii) MNAR, income-to-poverty ratio masked with probability 0.6 if "
@@ -293,7 +307,9 @@ p("Every model produced out-of-fold predictions in the development set by 5-fold
   "observed-to-expected ratio (O/E) [@vancalster2019], and net benefit across threshold probabilities 0.02–0.30 "
   "[@vickers2006,@vickers2016]. Confidence intervals came from 1,000 bootstrap resamples of participants (500 for "
   "AUROC in single cycles); AUROC differences used 2,000 paired resamples with percentile intervals and two-sided "
-  "bootstrap p-values, which are not reported for differences smaller than 0.001. Because NHANES has a stratified "
+  "bootstrap p-values, which are not reported for differences smaller than 0.001. Intervals are 95% percentile "
+  "intervals; intervals for differences, which may include negative values, are written 'a to b', and other intervals "
+  "'a–b'. Proportions are given to one decimal, AUROC, AURC and balanced accuracy to three and net benefit to four. Because NHANES has a stratified "
   "cluster design, the primary comparison was repeated with a design-based bootstrap that resamples primary sampling "
   "units within strata ({{db_nstrata}} strata, {{db_npsu}} units in 2005–2014). AUROC weighted by interview weights is a "
   "sensitivity analysis. To include training variability, the fuzzy model, its variants and five comparators were "
@@ -322,9 +338,13 @@ p("The fuzzy model above is the second version of the system. Version 1 selected
   "protocol's addendum, the 2005–2014 files were downloaded after the protocol was saved; no independently verifiable "
   "record predates the download, and the earliest verifiable record of the protocol is its deposit with the code "
   "({{zenodo_doi_v3}}); the protocol file is unchanged in every later release. The 2005–2014 comparison is therefore free of earlier results according to our records only. "
-  "Every other comparator, every abstention rule other than worst-case bounds, every simulated missingness scenario "
-  "other than MCAR, the acquisition rule, the repeated splits and the design-based analysis were specified after "
-  "results were known; tables mark them with ‡.")
+  "We therefore classify the analyses in three groups. The primary analysis is that pre-specified comparison. "
+  "Secondary analyses were also pre-specified: the other performance measures, the comparators and ablations named in "
+  "the protocol, worst-case coverage and MCAR masking. Exploratory analyses were specified after the original results "
+  "were known: every other comparator, every abstention rule other than worst-case bounds, every simulated scenario "
+  "other than MCAR, the acquisition rule, the repeated splits and the design-based analysis. Tables mark exploratory "
+  "analyses with ‡; their results should be read as hypothesis-generating, although the comparison of abstention "
+  "rules, the main subject of the paper, falls in this group.")
 
 h2("2.13. Explanation trace, software and use of generative AI")
 p("For each person the system exports a JSON trace with the inputs, missing-input flags, each concept's membership and "

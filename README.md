@@ -21,7 +21,7 @@ diagnostic tool and is not a substitute for the PHQ-2 where symptom questions ca
 | `src/rev_common.py` | Comparators: sign-constrained LR (exact linear bounds), spline LR (restricted cubic splines, grid bounds), LR without indicators, LR with multiple imputation, monotone GBT, EBM (GA²M) |
 | `schema/knowledge_schema.jsonld` | Knowledge schema as JSON-LD 1.1 with a SKOS concept scheme |
 | `results/protocol_v2.md` | Analysis protocol of version 2 with its addendum (not registered; time stamps are file modification times recorded in the addendum) |
-| `results/paper_stats_r5.json` | Every number in the manuscript, written by `src/stats_r5.py` (earlier statistics files are kept) |
+| `results/paper_stats_r6.json` | Every number in the manuscript, written by `src/stats_r6.py` (earlier statistics files are kept) |
 | `results/v1/` | Archived outputs of version 1 (conjunctive rule base), used as inputs |
 | `results/secondary/` | Outputs of the secondary analyses |
 | `run_all.sh` | Full pipeline in order |
