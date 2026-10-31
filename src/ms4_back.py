@@ -137,10 +137,9 @@ p("*CRediT authorship contribution statement:* Truong Hai Bang: Conceptualizatio
   "analysis, Visualization, Writing – original draft, Writing – review & editing, Supervision. Van An Phan Thi: "
   "Conceptualization, Data curation, Investigation, Validation, Writing – review & editing.")
 p("*Declaration of generative AI and AI-assisted technologies in the manuscript preparation process:* During the "
-  "preparation of this work the authors used Claude (Anthropic) to draft and edit manuscript text and to check "
-  "bibliographic records; its use in writing the analysis code and tests is described in Section 2.13. After using this "
-  "tool, the authors reviewed and edited the content as needed and take full responsibility for the content of the "
-  "published article.")
+  "preparation of this work the authors used Claude (Anthropic) to help structure the manuscript, write analysis code "
+  "and edit its language. The authors reviewed and edited all content, verified every reference and statistic against "
+  "its source, and take full responsibility for the publication.")
 
 h1("References")
 B.append({"t": "refs"})
