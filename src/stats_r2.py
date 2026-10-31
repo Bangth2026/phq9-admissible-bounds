@@ -26,7 +26,7 @@ short = {"Proposed (full)": "full", "Logistic regression": "lr", "Gradient-boost
          "LR, multiple imputation": "lrmi", "Monotone gradient-boosted trees": "mgbt", "Explainable boosting machine (GA2M)": "ebm",
          "LR with restricted cubic splines": "rcs", "Abstain if any input missing": "cc"}
 
-# ---- paired differences: never print ±0.0000 (minor comment)
+# ---- paired differences: never print ±0.0000
 for src in (main["paired_auroc"], RM["new_paired"]):
     for k, v in src.items():
         st, m = k.split("|"); s = short[m]; sl = SETS[st]

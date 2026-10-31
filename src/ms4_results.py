@@ -1,0 +1,203 @@
+# Results of version 4.
+from ms4_helpers import *  # noqa
+
+h1("3. Results")
+h2("3.1. Cohorts")
+p("Table 1 summarises the cohorts. Prevalence of PHQ-9 ≥ 10 was {{prev_ext}}% in 2005–2014, "
+  "{{flow_dev_prevalence_unweighted}}% in 2017–2020 and {{prev_tmp}}% in 2021–2023. The 2021–2023 cohort was older and "
+  "more educated, with fewer participants rating their health as fair or poor but more sedentary time and more chronic "
+  "conditions. The 2005–2014 cohort was younger, had more current smokers and reported about half an hour less workday "
+  "sleep, partly because sleep was recorded in whole hours. Every 2005–2014 participant lacked free-day sleep; "
+  "excluding that input, {{amx_ext}}% had at least one missing predictor, against {{amx_int}}% in the internal test set "
+  "and {{amx_tmp}}% in 2021–2023. Excluded adults of the development release were slightly older and more often women "
+  "than included adults (Table A4).")
+tab("table1")
+
+h2("3.2. Knowledge schema and rule base")
+p("Direction priors from 2015–2016 agreed with established epidemiology: low income (RR {{rr_LowIncome}}), current "
+  "smoking ({{rr_CurrentSmoker}}), poor self-rated health ({{rr_PoorHealth}}), multimorbidity ({{rr_Multimorbidity}}), "
+  "short ({{rr_ShortSleepWorkday}}) and long ({{rr_LongSleepWorkday}}) workday sleep were positive; college education "
+  "({{rr_CollegeGraduate}}) and being married or partnered ({{rr_MarriedOrPartnered}}) were negative. Of the "
+  "{{n_rules}} rules, {{n_rules_signed}} carry a sign constraint; none of the constrained coefficients sits at its zero "
+  "bound, and refitting without constraints changed no sign, so the constraints were not binding. Table 3 lists the "
+  "rules. Each coefficient is a contrast with the reference concept of its variable; the negative coefficients of "
+  "NormalWeight and Overweight, for example, are contrasts with Obese. One coefficient shapes the 2005–2014 bounds: "
+  "within free-day sleep the reference concept contributes 0, ShortSleepFreeDay +{{we_beta_short}} and "
+  "LongSleepFreeDay +{{we_beta_long}}, so with free-day sleep unknown the lower bound adds nothing and the upper bound "
+  "adds up to {{we_beta_short}} log-odds. The sign constraint on ShortSleepFreeDay comes from an inherited prior that "
+  "was never estimated. The point score instead adds {{we_fill}} log-odds, the development-mean memberships of the "
+  "two concepts weighted by their coefficients, to every 2005–2014 participant.")
+tab("table2")
+tab("table3")
+
+h2("3.3. Base models: discrimination and calibration")
+p("The pre-specified primary comparison was AUROC in 2005–2014: {{full_ext_AUROC}} ({{full_ext_AUROC_ci}}) for the "
+  "fuzzy model against {{lr_ext_AUROC}} for logistic regression with missing indicators, a difference of {{d_lr_ext}} "
+  "({{d_lr_ext_ci}}; design-based interval {{db_lr_ci}}). This contrast is uninformative about the fuzzy model or its "
+  "schema. Free-day sleep was not collected in 2005–2014; the indicator model applies a learnt indicator coefficient to "
+  "everyone and over-predicts (O/E {{lr_ext_OE}}), whereas logistic regression without indicators reached "
+  "{{lrni_ext_AUROC}}, the same as the fuzzy model ({{d_lrni_ext}}, {{d_lrni_ext_ci}}; design-based {{db_lrni_ci}}). "
+  "Refitted without free-day sleep, the fuzzy model reached {{nowe_full_ext}} and regression without indicators "
+  "{{nowe_lrni_ext}}. Spline regression ranked best in the later and earlier periods ({{rcs_tmp_AUROC}} and "
+  "{{rcs_ext_AUROC}}; difference to the fuzzy model in 2005–2014 {{d_rcs_ext}}, design-based {{db_rcs_ci}}). Internally "
+  "the fuzzy model was the lowest of the main models ({{full_int_AUROC}} against {{int_min_oth}}–{{int_max_oth}}). Over "
+  "{{spl_B}} repeated splits of 2017–2020 it averaged {{spl_full_mean}} (SD {{spl_full_sd}}), and its mean difference "
+  "to linear logistic regression was {{spl_lr_mean}} (SD {{spl_lr_sd}}). Design-based intervals were close to "
+  "participant-level intervals and changed no conclusion (Table 4; Fig. 3).")
+tab("table4")
+fig("fig_roc.png", "Fig. 3. ROC curves on internal testing (2017–March 2020), later-period validation (2021–2023) and "
+    "earlier-period validation (2005–2014). AUROC in parentheses.", 6.6)
+p("Calibration differed more than ranking (Fig. 4). Internally O/E was close to 1 for every model; the calibration "
+  "slope of logistic regression with indicators was {{lr_int_slope}}, i.e. its predictions were too moderate. Before "
+  "recalibration the slope was already {{calm_lr_raw}}: the L2 penalty chosen to maximise cross-validated AUROC shrank "
+  "the coefficients, and the Platt map fitted on out-of-fold scores corrected part of this. Fitting the map on the "
+  "refit's in-sample scores gave a slope of {{calm_lr_platt_insample}} and isotonic recalibration on out-of-fold scores "
+  "{{calm_lr_isotonic_oof}}; for the fuzzy model the corresponding slopes were {{calm_full_platt_oof}}, "
+  "{{calm_full_platt_insample}} and {{calm_full_isotonic_oof}}. In 2021–2023 every model under-predicted (O/E "
+  "{{full_tmp_OE}} for the fuzzy model), and an intercept update estimated on half the cohort brought O/E on the other "
+  "half to {{rec_tmp_full_OE_after}}. In 2005–2014 the fuzzy model ({{full_ext_OE}}) and the regression models without "
+  "indicators were calibrated in the large, whereas models that learnt a separate value for missingness over-predicted. "
+  "Results by cycle, paired differences for all comparators and ablations are in Tables A7–A8. Of the design elements "
+  "of the fuzzy model, rule structure mattered most: the conjunctive version 1 was {{d_v1_ext_abs}} lower in 2005–2014 "
+  "({{d_v1_ext_ci}}). Fuzzy memberships gave a small advantage over crisp memberships at the same cut-points in "
+  "2017–2023 data ({{d_crisp_int}} internally, {{d_crisp_tmp}} in 2021–2023, {{spl_crisp_mean}} on average over repeated "
+  "splits with SD {{spl_crisp_sd}}) that was not seen in 2005–2014 ({{d_crisp_ext}}, {{d_crisp_ext_ci}}). Removing the schema "
+  "or the sign constraints had no detectable effect on discrimination.")
+fig("fig_calibration.png", "Fig. 4. Calibration by deciles of predicted probability after development-set Platt "
+    "recalibration. All models under-predict in 2021–2023.", 6.6)
+
+h2("3.4. Abstention rules with the base model held fixed")
+p("*Cohorts as observed.* Where few inputs were missing (internal test and 2021–2023), the four rules differed little: "
+  "with the fuzzy model, worst-case bounds decided {{a4_int_fuzzy_wc_cov}}% of internal test participants, imputation "
+  "spread {{a4_int_fuzzy_mi_cov}}% and complete cases {{a4_int_fuzzy_cc_cov}}%, balanced accuracy at matched coverage "
+  "ranged from {{a4_int_fuzzy_cc_atb}} to {{a4_int_fuzzy_mi_atb}}, and every AURC interval for the difference to "
+  "worst-case bounds included zero (Table 5). In 2005–2014, where free-day sleep was missing for everyone, the rules "
+  "separated. With the fuzzy model, worst-case bounds decided {{a4_ext_fuzzy_wc_cov}}% of participants "
+  "({{a4_ext_fuzzy_wc_covr}}% referred, {{a4_ext_fuzzy_wc_covn}}% not referred), imputation spread "
+  "{{a4_ext_fuzzy_mi_cov}}% ({{a4_ext_fuzzy_mi_covr}}% and {{a4_ext_fuzzy_mi_covn}}%), pattern submodels everyone "
+  "({{a4_ext_fuzzy_ps_covr}}% and {{a4_ext_fuzzy_ps_covn}}%) and complete cases nobody; weighted by interview weights, "
+  "worst-case coverage was {{a4w_ext_fuzzy_wc_cov}}% and imputation-spread coverage {{a4w_ext_fuzzy_mi_cov}}%. The "
+  "asymmetry of the worst-case decisions follows from the free-day sleep coefficients (Section 3.2): with the upper "
+  "bound raised by up to {{we_beta_short}} log-odds, 'do not refer' required a low risk from every other input, so the "
+  "bounds decided many participants to refer and few not to refer. Among decided participants, worst-case bounds had "
+  "sensitivity {{a4_ext_fuzzy_wc_sens}}% and specificity {{a4_ext_fuzzy_wc_spec}}%, against {{a4_ext_fuzzy_mi_sens}}% and "
+  "{{a4_ext_fuzzy_mi_spec}}% for imputation spread on the same model. At the coverage of worst-case bounds, balanced "
+  "accuracy was {{a4_ext_fuzzy_wc_atb}} for worst-case bounds, {{a4_ext_fuzzy_mi_atb}} for imputation spread and "
+  "{{a4_ext_fuzzy_ps_atb}} for pattern submodels, and AURC was lower for imputation spread ({{a4_ext_fuzzy_mi_daurc}}; "
+  "{{a4_ext_fuzzy_mi_daurcci}}) and pattern submodels ({{a4_ext_fuzzy_ps_daurc}}; {{a4_ext_fuzzy_ps_daurcci}}). The same "
+  "ordering held with the regression base models, by a wider margin for spline regression, whose linear tails widen "
+  "the bounds: worst-case coverage {{a4_ext_rcs_wc_cov}}% and balanced accuracy {{a4_ext_rcs_wc_atb}}, against "
+  "{{a4_ext_rcs_mi_cov}}% and {{a4_ext_rcs_mi_atb}} for imputation spread. Ranking participants by the distance of the "
+  "point score from the threshold, the confidence used for complete cases, gave a lower AURC than the distance of the "
+  "bounds ({{a4_ext_fuzzy_cc_aurc}} against {{a4_ext_fuzzy_wc_aurc}}).")
+tab("tableAbst5")
+p("*Random and non-random missingness.* Under 30% MCAR, worst-case bounds decided {{a4_mc30_fuzzy_wc_cov}}% of "
+  "participants and imputation spread {{a4_mc30_fuzzy_mi_cov}}% with the fuzzy model; at matched coverage balanced "
+  "accuracy was {{a4_mc30_fuzzy_wc_atb}} against {{a4_mc30_fuzzy_mi_atb}}, and the regression models showed the same "
+  "gap (Table 6). Non-random missingness of income changed little. Non-random missingness of self-rated health, the "
+  "strongest predictor, narrowed the differences. With masking probabilities 0.9 in fair or poor health and 0.05 "
+  "otherwise, worst-case bounds decided {{a4_m9srh_fuzzy_wc_cov}}%, imputation spread {{a4_m9srh_fuzzy_mi_cov}}% and "
+  "pattern submodels everyone; balanced accuracy at matched coverage was {{a4_m9srh_fuzzy_wc_atb}}, "
+  "{{a4_m9srh_fuzzy_mi_atb}} and {{a4_m9srh_fuzzy_ps_atb}}; and the fuzzy model's AURC was lowest for worst-case bounds "
+  "({{a4_m9srh_fuzzy_wc_aurc}}, against {{a4_m9srh_fuzzy_mi_aurc}} and {{a4_m9srh_fuzzy_ps_aurc}}; ΔAURC of the two "
+  "rules against worst-case bounds in the first repetition {{a4_m9srh_fuzzy_mi_daurcci}} and {{a4_m9srh_fuzzy_ps_daurcci}}). With the regression base models the "
+  "three rules were within 0.01 AURC of each other. Under outcome-dependent masking, worst-case bounds again had a lower "
+  "AURC than imputation spread and pattern submodels for every base model, though by at most {{odep_maxgap}} and with "
+  "first-repetition intervals that included zero.")
+p("*Structural absence with a shifted conditional distribution.* When self-rated health was absent for everyone, "
+  "worst-case bounds of the fuzzy model decided {{a4_sh0srh_fuzzy_wc_cov}}% of participants without shift and "
+  "{{a4_sh1srh_fuzzy_wc_cov}}% with γ = 1, and with γ = 1 those of sign-constrained and spline regression "
+  "{{a4_sh1srh_slr_wc_cov}}% and {{a4_sh1srh_rcs_wc_cov}}%, because the full range of self-rated health spans most of the linear predictor. Imputation "
+  "spread decided {{a4_sh1srh_fuzzy_mi_cov}}% with the fuzzy model. The shift degraded imputation as intended: per "
+  "1,000 participants, imputation spread under refer-on-abstain missed {{a4_sh0srh_fuzzy_mi_mis}} cases without shift "
+  "and {{a4_sh1srh_fuzzy_mi_mis}} with γ = 1, and pattern submodels {{a4_sh0srh_fuzzy_ps_mis}} and "
+  "{{a4_sh1srh_fuzzy_ps_mis}}, whereas worst-case bounds missed {{a4_sh0srh_fuzzy_wc_mis}} and {{a4_sh1srh_fuzzy_wc_mis}}. "
+  "Yet at matched coverage the decided records were still classified better by imputation spread "
+  "({{a4_sh1srh_fuzzy_mi_atb}} against {{a4_sh1srh_fuzzy_wc_atb}}) and pattern submodels ({{a4_sh1srh_fuzzy_ps_atb}}). "
+  "The shift made imputation less sensitive, not less accurate among the records it chose to decide. With free-day "
+  "sleep absent and shifted, the ordering of 2005–2014 was reproduced (balanced accuracy {{a4_sh1we_fuzzy_wc_atb}}, "
+  "{{a4_sh1we_fuzzy_mi_atb}} and {{a4_sh1we_fuzzy_ps_atb}}).")
+tab("tableAbst6")
+fig("fig_riskcov4.png", "Fig. 5. Risk–coverage curves of four abstention rules with the fuzzy additive model as the "
+    "fixed base model: balanced accuracy among decided participants against the percentage decided, with participants "
+    "ranked by each rule's confidence. Open circles mark each rule's own operating point. The complete-case curve ranks "
+    "by the distance of the point score from the threshold, which is also the confidence of a model without abstention. "
+    "Simulated panels show the first of 10 repetitions; pattern submodels were not fitted under MCAR.", 6.8)
+
+h2("3.5. Decision consequences")
+p("Table 7 converts each rule into the prescreening currency of Section 2.1, under refer-on-abstain. In 2005–2014, per "
+  "1,000 participants, worst-case bounds of the fuzzy model referred {{a4_ext_fuzzy_wc_ref}}, missed "
+  "{{a4_ext_fuzzy_wc_mis}} cases and avoided {{a4_ext_fuzzy_wc_avd}} questionnaires; imputation spread referred "
+  "{{a4_ext_fuzzy_mi_ref}}, missed {{a4_ext_fuzzy_mi_mis}} and avoided {{a4_ext_fuzzy_mi_avd}}; pattern submodels "
+  "referred {{a4_ext_fuzzy_ps_ref}}, missed {{a4_ext_fuzzy_ps_mis}} and avoided {{a4_ext_fuzzy_ps_avd}}. Net benefit at "
+  "a threshold probability of 0.10 was {{a4_ext_fuzzy_wc_nb10}}, {{a4_ext_fuzzy_mi_nb10}} and {{a4_ext_fuzzy_ps_nb10}} "
+  "(referring everyone {{a4_ext_fuzzy_cc_nb10}}), and at 0.05 {{a4_ext_fuzzy_wc_nb05}}, {{a4_ext_fuzzy_mi_nb05}} and "
+  "{{a4_ext_fuzzy_ps_nb05}}. Across scenarios the pattern was consistent: worst-case bounds missed the fewest cases and "
+  "avoided the fewest questionnaires, and wherever much was missing their net benefit at 0.10 was the lowest of the three "
+  "rules, except under outcome-dependent masking, where it equalled that of imputation spread ({{a4_odep_fuzzy_wc_nb10}} and "
+  "{{a4_odep_fuzzy_mi_nb10}}). At a threshold probability of 0.05, which weighs a missed case as 19 unnecessary "
+  "questionnaires, worst-case bounds had the highest net benefit under non-random masking of self-rated health "
+  "({{a4_m9srh_fuzzy_wc_nb05}} against {{a4_m9srh_fuzzy_mi_nb05}} and {{a4_m9srh_fuzzy_ps_nb05}} at 0.9/0.05) and "
+  "outcome-dependent masking ({{a4_odep_fuzzy_wc_nb05}} against {{a4_odep_fuzzy_mi_nb05}} and {{a4_odep_fuzzy_ps_nb05}}), "
+  "and with self-rated health absent and shifted they matched referring everyone ({{a4_sh1srh_fuzzy_wc_nb05}} against "
+  "{{a4_sh1srh_fuzzy_cc_nb05}}). Pattern submodels missed the most cases whenever missingness was related to the outcome "
+  "({{a4_odep_fuzzy_ps_mis}} per 1,000 under outcome-dependent masking, against {{a4_odep_fuzzy_wc_mis}} for worst-case "
+  "bounds). Results for the regression base models are in Table A6.")
+tab("tableCons")
+
+h2("3.6. Worst-case bounds for conjunctive rule bases")
+p("For the main-effects fuzzy model the bounds of Algorithm 1 agreed with dense brute force on every record. For the "
+  "conjunctive version 1, a 41-point grid augmented with trapezoid corners under-covered the exact range of Algorithm 2 "
+  "in {{ex_v1_nshort}} of {{n_int}} internal test records with 30% of inputs masked, by at most {{ex_v1_short}} log-odds, "
+  "and changed no decision; {{ex_v1_fbrows}} records ({{ex_v1_fbrows_pct}}%) had a component with more than two "
+  "continuous missing variables and needed the outer bound. For the variant with 16 pair rules the grid was exact on "
+  "every record ({{ex_inter_fbrows}} records needed the outer bound). Against dense brute force in 80 records per model "
+  "with one or two masked inputs, Algorithm 2 never returned a range that excluded a brute-force value (largest excess "
+  "{{ex_max_outside}}). Bounds for {{n_int}} masked records took {{ex_full_sec}} s for the main-effects model and "
+  "{{ex_v1_sec}} s for version 1 (Fig. 6).")
+fig("fig_alg1.png", "Fig. 6. Exact bounds (Algorithm 2) on one participant of the internal test set under the version-1 "
+    "rule base with one continuous input missing. The linear predictor is piecewise linear in the missing input; its "
+    "maximum lies at a breakpoint where a membership equals the observed partner membership (Statement 1), which the "
+    "41-point grid with trapezoid corners does not contain.", 6.0)
+
+h2("3.7. Bound-guided acquisition")
+p("Among records on which the fuzzy model abstained under 30% masking, Algorithm 3 requested {{acq2_m30_bound_mean}} "
+  "inputs per abstention, against {{acq2_m30_fixed_mean}} for the fixed order (paired difference {{acq2_m30_d_fixed}}, "
+  "{{acq2_m30_d_fixed_ci}}; {{acq_per1000_fixed}} fewer inputs per 1,000 abstentions), {{acq2_m30_cost_mean}} for the cost "
+  "order ({{acq_per1000_cost}} fewer per 1,000) and {{acq2_m30_random_mean}} for a random order (Table 9). With item "
+  "costs of 1 for record items, 2 for income and 3 for interview items, expected cost per abstention was "
+  "{{aqc_bound_cost_3}} for the cost-weighted variant, {{aqc_bound_3}} for Algorithm 3, {{aqc_cost_3}} for the cost order "
+  "and {{aqc_fixed_3}} for the fixed order; the cost order asked first for cheap record items that often could not settle "
+  "the decision, needed more inputs ({{aqc_cost_n}} per abstention) and did not minimise cost ({{aqd_cost_3}} more than the cost-weighted variant, {{aqd_cost_3_ci}}). With interview items "
+  "costing 5 the ordering was the same ({{aqc_bound_cost_5}} against {{aqc_cost_5}}). These results come from masking "
+  "at random with true values revealed on request; free-day sleep in 2005–2014 cannot be requested.")
+tab("tableAcq")
+
+h2("3.8. PHQ-2 reference, record-typical predictors and subgroups")
+p("PHQ-2 ≥ 3 had sensitivity {{phq2_int_sens}} and specificity {{phq2_int_spec}} internally and flagged "
+  "{{phq2_int_flag}}% of participants; the fuzzy model at its development threshold had sensitivity "
+  "{{full_int_Sensitivity}} at specificity {{full_int_Specificity}} and flagged {{full_int_flag}}% (Table 8). The PHQ-2 "
+  "figures are inflated by incorporation, because its two items are part of the outcome; against diagnostic "
+  "interviews its pooled sensitivity was 0.72 at specificity 0.85 [@levis2020], which is still higher than that of any "
+  "non-symptom model here at a far lower referral rate. Internally the fuzzy model's net benefit was "
+  "{{nbabs_int_05_full}} at a threshold probability of 0.05, {{nbabs_int_10_full}} at 0.10 and {{nbabs_int_20_full}} at "
+  "0.20 (referring everyone: {{nbabs_int_05_all}}, {{nbabs_int_10_all}} and {{nbabs_int_20_all}}; Fig. 7). Restricting "
+  "inputs to nine record-typical variables reduced AUROC to {{ehr9_full_int}} internally and {{ehr9_full_tmp}} in "
+  "2021–2023. Removing self-rated health had the largest effect of any input ({{sens_nosrh_full_int}} internally and "
+  "{{sens_nosrh_full_tmp}} in 2021–2023), removing sleep variables a small one ({{sens_nosleep_full_int}} and "
+  "{{sens_nosleep_full_tmp}}).")
+tab("tablePHQ2")
+fig("fig_dca.png", "Fig. 7. Decision curves of the base models. Net benefit of referring for questionnaire completion "
+    "when the predicted probability exceeds the threshold, compared with referring everyone or no one. Dotted: fuzzy "
+    "model after recalibration-in-the-large on the same cohort (illustrative upper reference).", 6.6)
+p("Sensitivity at the common threshold differed by sex: {{sex_ext_male_sens_common}}% in men and "
+  "{{sex_ext_female_sens_common}}% in women in 2005–2014 (logistic regression {{sex_ext_male_sens_lr}}% and "
+  "{{sex_ext_female_sens_lr}}%). Men had lower prevalence and were predicted lower risk, so a common threshold flagged "
+  "fewer of them. Sex-specific thresholds chosen on development data ({{thr_sex_m}} for men and {{thr_sex_f}} for women, "
+  "against the common {{thr_full}}, all on the raw probability scale) brought sensitivity to {{sex_ext_male_sens_sex}}% "
+  "and {{sex_ext_female_sens_sex}}% in 2005–2014, at the cost of flagging {{sex_ext_male_flag_sex}}% of men and "
+  "{{sex_ext_female_flag_sex}}% of women. Discrimination was lowest in adults aged 18–39 in every set, and low for all "
+  "models among Mexican American participants in 2021–2023 ({{sub_tmp_MexicanAmerican_full}}; Table A2).")
+fig("fig_explanation.png", "Fig. 8. Trace of one internal-test participant with PHQ-9 ≥ 10. Bars show each rule's "
+    "contribution to the log-odds (β_r × firing strength), labelled with its signed value; colour repeats the sign. The "
+    "title gives the intercept, the sum of the bars and the resulting log-odds and probability.", 5.8)

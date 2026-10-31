@@ -1,7 +1,7 @@
 {
-  "title": "Abstention by worst-case bounds for missing inputs in an interpretable additive prescreening model (NHANES): code, knowledge schema and results",
+  "title": "Abstaining when inputs are missing: worst-case bounds, imputation spread and pattern submodels (NHANES prescreening): code, knowledge schema and results",
   "upload_type": "software",
-  "description": "Code, JSON-LD knowledge schema, analysis protocol, tests and results for a fuzzy additive model that prescreens elevated depressive symptoms (PHQ-9 >= 10) from non-symptom NHANES survey data, with admissible-value bounds and abstention for missing inputs, a bound-guided input acquisition rule, and comparisons with linear bounds, complete-case abstention and imputation-spread abstention. Includes the statistics file that populates the manuscript.",
+  "description": "Code, JSON-LD knowledge schema, analysis protocol, tests and results for a comparison of abstention rules for missing inputs (worst-case bounds over admissible values, imputation spread, pattern submodels, complete cases) with three base models (a fuzzy additive model built from the knowledge schema, sign-constrained and spline logistic regression), applied to prescreening elevated depressive symptoms (PHQ-9 >= 10) from non-symptom NHANES survey data. Includes algorithms for exact worst-case bounds of fuzzy additive rule bases, a bound-guided input acquisition rule, and the statistics file that populates the manuscript.",
   "creators": [
     {
       "name": "Truong, Hai Bang",
@@ -10,19 +10,22 @@
     },
     {
       "name": "Phan Thi, Van An",
-      "affiliation": "Nguyen Tat Thanh University",
+      "affiliation": "VNU University of Education, Vietnam National University, Hanoi",
       "orcid": "0009-0005-4135-5689"
     }
   ],
   "license": "MIT",
   "keywords": [
+    "missing data",
+    "abstention",
+    "selective prediction",
+    "pattern submodels",
+    "multiple imputation",
     "depression screening",
     "PHQ-9",
     "fuzzy rules",
-    "missing data",
-    "interpretable machine learning",
     "NHANES"
   ],
   "access_right": "open",
-  "version": "3.0.0"
+  "version": "4.0.0"
 }

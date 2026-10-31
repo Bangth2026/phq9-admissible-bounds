@@ -16,5 +16,6 @@ python sec2_models.py && python sec2_missing.py   # spline LR, refits without fr
 python sec3.py                               # imputation-spread abstention, risk-coverage, sex-specific thresholds
 python export_schema.py && python figs_r1.py && python figs_r3.py
 python stats.py && python stats_r1.py && python stats_r2.py && python stats_r3.py && python fig_flow.py
-python manuscript_r3.py && node render.js ../manuscript.docx ../results/manuscript_r3.json
+python sec4.py && python sec4b.py && python rev_splits100.py splits 100 && python figs_r4.py   # abstention rules with the model held fixed
+python stats_r4.py && python manuscript_r4.py && node render.js ../manuscript.docx ../results/manuscript_r4.json
 cd .. && python tests/test_cohort_priors.py && python tests/test_trace_fidelity.py && python tests/test_bounds_bruteforce.py
