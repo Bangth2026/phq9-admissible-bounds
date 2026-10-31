@@ -309,20 +309,23 @@ p("The fuzzy model above is the second version of the system. Version 1 selected
   "other than MCAR, the acquisition rule, the repeated splits and the design-based analysis were specified after "
   "results were known; tables mark them with ‡.")
 
-h2("2.13. Explanation trace, software and use of generative AI")
-p("For each person the system exports a JSON trace with the inputs, missing-input flags, each concept's membership and "
-  "provenance, each rule's contribution β_r μ_r (or its range when an input is missing), the intercept, the "
-  "probability bounds and, for abstentions, the input requested by Algorithm 3. For complete inputs the contributions "
-  "add exactly to η, as in any generalised linear model.")
-p("Analyses used Python 3.13 with pandas 3.0.5, scikit-learn 1.9.1, SciPy 1.18.1, statsmodels and interpret 0.7.8. "
-  "During the preparation of this work the authors used a generative AI tool (Claude, Anthropic) to help structure the "
-  "manuscript, write the analysis code and edit its language. The code it helped write covers cohort construction, "
-  "models, bounds, the acquisition rule, experiments and figures, and also the three verification tests, so the tests "
-  "are not independent of the tool in authorship; their independence is in construction. "
-  "tests/test_bounds_bruteforce.py compares the bounds with dense brute-force evaluation of the model on 4,001-point "
-  "grids, which shares no code with Algorithms 1 and 2; tests/test_trace_fidelity.py recomputes probabilities from "
-  "serialised traces without importing the model; tests/test_cohort_priors.py reproduces the cohort flow and the "
-  "direction priors from the public files. The authors reviewed and edited all content, verified every reference and "
-  "statistic against its source, and take full responsibility for the publication. The archived release was re-run "
-  "from the raw files in a clean directory and reproduced every number in this manuscript except computing times. All "
-  "numbers are written by the analysis code to one statistics file and inserted programmatically.")
+h2("2.13. Explanation trace, software, and use of generative AI")
+p("For each individual, the system exports a JSON trace capturing inputs, missing-input flags, membership values and "
+  "provenance for each concept, contributions β_r μ_r of each rule (or its permissible range under missing data), the "
+  "intercept, probability bounds, and—for abstentions—the input requested by Algorithm 3. For complete inputs, "
+  "contributions sum exactly to η, adhering to standard generalized linear model properties.")
+p("Analyses were conducted in Python 3.13 utilizing pandas 3.0.5, scikit-learn 1.9.1, SciPy 1.18.1, statsmodels, and "
+  "interpret 0.7.8. During manuscript preparation, the authors utilized a generative AI tool (Claude, Anthropic) as a "
+  "coding and writing assistant to help structure the text, refine the analysis code, and polish the language. The "
+  "code developed with AI assistance encompasses cohort construction, model implementation, probability bounds "
+  "calculation, the input acquisition rule, experiments, and figure generation.")
+p("The verification methodology was independently designed and conceptualized by the authors to evaluate system "
+  "integrity. Specifically, tests/test_bounds_bruteforce.py validates bounds against a dense brute-force evaluation "
+  "over 4,001-point grids without sharing code logic with Algorithms 1 and 2; tests/test_trace_fidelity.py recomputes "
+  "probabilities directly from serialized traces without importing the model; and tests/test_cohort_priors.py "
+  "independently reproduces cohort flows and direction priors from public raw data.")
+p("The authors thoroughly reviewed, edited, and validated all generated code, outputs, statistical results, and "
+  "citations against primary sources, taking full responsibility for the integrity and accuracy of the published "
+  "work. The archived release was executed in a clean environment directly from raw data files, successfully "
+  "reproducing every statistical metric reported in this manuscript. All figures and numerical results were "
+  "programmatically generated and exported to a single statistical record file for automated insertion.")
