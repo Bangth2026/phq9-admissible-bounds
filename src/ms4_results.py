@@ -142,13 +142,13 @@ h2("3.5. Summary across scenarios")
 p("Table @SUM@ condenses the 16 scenarios for the fuzzy model, and separates results that held across scenarios from "
   "those confined to a few. Three results held in every scenario with substantial missingness. Worst-case bounds "
   "decided the fewest participants, missed the fewest cases and avoided the fewest questionnaires; their net benefit at "
-  "0.10 was never above that of the best other rule except in 2021–2023; and when an input was absent for everyone, "
+  "0.10 was never above that of the best other rule; and when an input was absent for everyone, "
   "pattern submodels or point-score selective prediction did best on both AURC and net benefit (worst-case AURC up to "
   "{{sum_wc_gap_max}} higher). Two results were confined to particular mechanisms. Worst-case bounds had the lowest "
   "AURC in {{sum_n_wc_aurc_best}} of the 16 scenarios, all with non-random or outcome-dependent masking or in "
-  "2021–2023, but by at most {{sum_wc_lead_max}}. Their net benefit at 0.10 was lower than that of the best rule in "
-  "{{sum_n_wc_nb_lower}} scenarios, similar or equivalent in {{sum_n_wc_nb_eq}} and highest in {{sum_n_wc_nb_high}} "
-  "(2021–2023).")
+  "2021–2023, but by at most {{sum_wc_lead_max}}. With intervals that pool all repetitions of the simulated "
+  "scenarios, their net benefit at 0.10 was lower than that of the best rule in {{sum_n_wc_nb_lower}} scenarios and "
+  "equivalent in {{sum_n_wc_nb_eq}}; it was not higher in any.")
 tab("tableSum")
 
 h2("3.6. Decision consequences")
@@ -164,7 +164,9 @@ p("Table 7 converts each rule into the prescreening currency of Section 2.1, und
   "submodels was {{selps_fuzzy_dnb10}} ({{selps_fuzzy_dnb10_ci}}); at 0.05 the two were equivalent "
   "({{selps_fuzzy_dnb05}}, {{selps_fuzzy_dnb05_ci}}), so in 2005–2014 the better ranking of the point score did not carry over to "
   "the operating point.")
-p("Across scenarios, worst-case bounds always missed the fewest cases and avoided the fewest questionnaires. Their net "
+p("Across scenarios, worst-case bounds missed fewer cases and avoided fewer questionnaires than imputation spread and "
+  "pattern submodels; complete cases, where they decided anyone, missed fewer still, and point-score selective "
+  "prediction matched worst-case bounds where little was missing. Their net "
   "benefit at 0.10 was lower than that of the other rules in 2005–2014, under 30% MCAR ({{a4_mc30_fuzzy_wc_nb10}} against "
   "{{a4_mc30_fuzzy_mi_nb10}} and {{a4_mc30_fuzzy_sel_nb10}}; not bootstrapped) and with an input absent and shifted "
   "(differences {{dnb_sh1srh_fuzzy_mi_10}} and {{dnb_sh1we_fuzzy_mi_10}} for imputation spread). It was equivalent in the "

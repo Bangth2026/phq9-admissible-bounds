@@ -16,7 +16,7 @@ const MARGIN = 1440;
 function runs(text, base = {}) {
   // markup: *italic*, _{sub}, ^{sup}; single-character subscripts written as x_r are converted too
   // URLs and file names are left untouched (no automatic subscripts inside them)
-  text = text.split(/(\s+)/).map(tok => (/:\/\/|www\.|\.htm|\.py|\.json/.test(tok) ? tok :
+  text = text.split(/(\s+)/).map(tok => (/:\/\/|www\.|\.htm|\.py|\.json|[A-Z]{2,}_[A-Z]|[A-Z]_[A-Z]{2,}/.test(tok) ? tok :
     tok.replace(/(?<=[A-Za-zμβησπΣ)𝒳])_([A-Za-z0-9])(?![A-Za-z0-9{])/gu, "_{$1}"))).join("");
   const out = [];
   const re = /(\*[^*]+\*|_\{[^}]*\}|\^\{[^}]*\})/g;
@@ -83,12 +83,13 @@ function flush(orient) {
 }
 
 const portraitW = A4.width - 2 * MARGIN, landW = A4.height - 2 * MARGIN;
-const P = { spacing: { line: 360, after: 120 }, alignment: AlignmentType.JUSTIFIED };
+const DOUBLE = process.env.DOUBLE === "1";
+const P = { spacing: { line: DOUBLE ? 480 : 360, after: 120 }, alignment: DOUBLE ? AlignmentType.LEFT : AlignmentType.JUSTIFIED };
 
 for (const b of blocks) {
   if (b.t === "title") cur.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 240, line: 300 },
       children: runs(b.x, { size: 30, bold: true }) }));
-  else if (b.t === "meta") cur.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 80 }, children: runs(b.x, { size: 22 }) }));
+  else if (b.t === "meta") cur.push(new Paragraph({ alignment: DOUBLE ? AlignmentType.LEFT : AlignmentType.CENTER, spacing: { after: 120, line: DOUBLE ? 480 : 276 }, children: runs(b.x, { size: 22 }) }));
   else if (b.t === "h1") cur.push(new Paragraph({ heading: HeadingLevel.HEADING_1, spacing: { before: 300, after: 120 }, keepNext: true, children: runs(b.x, { size: 24, bold: true }) }));
   else if (b.t === "h2") cur.push(new Paragraph({ heading: HeadingLevel.HEADING_2, spacing: { before: 200, after: 100 }, keepNext: true, children: runs(b.x, { size: 22, bold: true, italics: true }) }));
   else if (b.t === "p") cur.push(new Paragraph({ ...P, children: runs(b.x, { size: 22 }) }));
@@ -105,7 +106,7 @@ for (const b of blocks) {
   } else if (b.t === "table") {
     if (b.head.length > 6) b.tiny = true;
     cur.push(...makeTable(b, portraitW));
-  } else if (b.t === "refs") b.x.forEach((x) => cur.push(new Paragraph({ spacing: { after: 60, line: 276 }, indent: { left: 440, hanging: 440 }, children: runs(x, { size: 20 }) })));
+  } else if (b.t === "refs") b.x.forEach((x) => cur.push(new Paragraph({ spacing: { after: 60, line: DOUBLE ? 480 : 276 }, indent: { left: 440, hanging: 440 }, children: runs(x, { size: 20 }) })));
 }
 flush("P");
 

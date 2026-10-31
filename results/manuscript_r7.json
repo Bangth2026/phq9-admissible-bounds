@@ -1,0 +1,1732 @@
+[
+{
+"t": "title",
+"x": "Abstaining when inputs are missing: worst-case bounds, imputation spread and pattern submodels compared for prescreening elevated depressive symptoms in NHANES"
+},
+{
+"t": "meta",
+"x": "Truong Hai Bang^{a,*}, Van An Phan Thi^{b}"
+},
+{
+"t": "meta",
+"x": "^{a}Faculty of Engineering and Computer Science, Saigon International University, 8C Tong Huu Dinh Street, An Khanh Ward, Ho Chi Minh City, Vietnam"
+},
+{
+"t": "meta",
+"x": "^{b}VNU University of Education, Vietnam National University, Hanoi, G7 Building, No. 144 Xuan Thuy Street, Cau Giay District, Hanoi, Vietnam"
+},
+{
+"t": "meta",
+"x": "*Corresponding author: Truong Hai Bang, Faculty of Engineering and Computer Science, Saigon International University, 8C Tong Huu Dinh Street, An Khanh Ward, Ho Chi Minh City, Vietnam. Email: truonghaibang@siu.edu.vn. Telephone: [telephone number]"
+},
+{
+"t": "meta",
+"x": "ORCID: Truong Hai Bang, https://orcid.org/0000-0001-5094-3128; Van An Phan Thi, https://orcid.org/0009-0005-4135-5689 (phanthivanantlls@gmail.com)"
+},
+{
+"t": "meta",
+"x": "Word count (main text, excluding abstract, tables, boxes, figure captions, declarations and references): 2,834"
+},
+{
+"t": "pb"
+},
+{
+"t": "h1",
+"x": "Abstract"
+},
+{
+"t": "p",
+"x": "*Background and objective:* Models applied to incomplete records must impute or abstain. We compared abstention rules for predicting a Patient Health Questionnaire-9 (PHQ-9) score ≥ 10 from non-symptom survey data."
+},
+{
+"t": "p",
+"x": "*Methods:* NHANES 2017–March 2020 provided development (n = 5,793) and test (n = 2,483) data; 2021–2023 (n = 5,455) and 2005–2014 (n = 26,057; free-day sleep not collected) served as validation. Five rules were applied to three fixed base models (a fuzzy additive model built from a schema of admissible input values, and two logistic regressions): worst-case bounds, which abstain when the probability range over all admissible values of the missing inputs contains the threshold; imputation spread; pattern submodels; point-score selective prediction; and complete cases. Missingness was natural in three cohorts and simulated in 13 scenarios. The rule comparison was specified after initial results were known and is exploratory."
+},
+{
+"t": "p",
+"x": "*Results:* The pre-specified primary contrast (2005–2014 AUROC, fuzzy model minus logistic regression with missing indicators) was +0.008 (+0.0031 to +0.0135), an artefact of indicating an uncollected input. With the fuzzy model fixed, worst-case bounds decided 69.2% of 2005–2014 participants, imputation spread 83.3% and pattern submodels all; balanced accuracy at equal coverage was 0.689, 0.710 and 0.721, and net benefit at threshold 0.10 0.0123, 0.0209 and 0.0276. Worst-case bounds guarantee only that a decision holds for every admissible value under the model, not that it is correct; they missed fewer cases by referring more people, and their net benefit at 0.10 was never higher than that of the best other rule. As a benchmark, PHQ-2 ≥ 3 flagged 9.7% of participants with sensitivity 0.687 (inflated by incorporation); the fuzzy model flagged 47.5% with sensitivity 0.839."
+},
+{
+"t": "p",
+"x": "*Conclusions:* Where two symptom questions can be asked, the PHQ-2 should be used. Where they cannot, worst-case abstention was better only in narrow situations; imputation spread, pattern submodels or point-score selective prediction were usually better, and for an input missing by design a model fitted without it was a simple choice. These exploratory comparisons need confirmation in other data."
+},
+{
+"t": "p",
+"x": "*Keywords:* Missing data; Abstention; Selective prediction; Multiple imputation; Depression screening; NHANES"
+},
+{
+"t": "h1",
+"x": "1. Introduction"
+},
+{
+"t": "p",
+"x": "A prediction model deployed on routine data meets incomplete records. The usual response is to impute the missing inputs and predict, which hides how much a decision depends on what was not observed [1, 2]. The alternative is to abstain: to return no decision for some records, as in the reject option [3] and selective classification [4]. Several abstention rules exist, and they assume different things about the missing values. Credal classifiers compute the prediction over all completions of a record and abstain when the completions disagree, assuming nothing about why values are missing [5, 6]. Rules based on multiple imputation abstain when completed data sets disagree, assuming that the conditional distribution of the missing values is known. Pattern submodels fit one model per missingness pattern and never need the missing values [7]. Conformal prediction with missing values calibrates label sets within patterns [8], and work on imputation for prediction shows when impute-then-predict is consistent [9]. To our knowledge these rules have not been compared on one task with the base model held fixed, on real structural missingness and on simulated missingness built to violate their assumptions. That comparison is the contribution of this study; we do not propose a new model for depression screening."
+},
+{
+"t": "p",
+"x": "The task is to flag adults likely to score ≥ 10 on the PHQ-9, the most widely used threshold for elevated depressive symptoms [10, 11], from non-symptom survey data, as studied before in the National Health and Nutrition Examination Survey (NHANES) [12–14]. Such a model cannot replace the PHQ-9 or its two-item form, the PHQ-2 [15, 16]. It can only help where no symptom questions were asked, for example in surveys, cohorts or registries collected without a symptom scale, to describe risk or decide whom to follow up. NHANES suits the comparison because sleep duration on free days was not collected in 2005–2014, so every record in those cycles has a structural missingness pattern."
+},
+{
+"t": "p",
+"x": "Worst-case abstention needs each input's set of admissible values, which a fitted model does not carry. One of our three base models is therefore a fuzzy additive model built from a schema that declares admissible sets and named concepts with sourced cut-points. We chose it because its bounded terms keep worst-case bounds finite and narrow, giving that rule its best chance, not because we expected it to predict better than regression [17–19]. We asked how five abstention rules compare, with the base model fixed, in coverage, accuracy among decided participants and decision consequences, across natural and simulated missingness."
+},
+{
+"t": "h1",
+"x": "2. Methods"
+},
+{
+"t": "h2",
+"x": "2.1. Study design, data and outcome"
+},
+{
+"t": "p",
+"x": "This retrospective study is reported following TRIPOD+AI [20] (checklist in Supplementary Section S5). NHANES 2017–March 2020 [21] was split 70/30, stratified by outcome, into development (n = 5,793, 537 events) and internal test (n = 2,483) sets. August 2021–August 2023 (n = 5,455) and the five cycles 2005–2006 to 2013–2014 (n = 26,057) served as later- and earlier-period validation of frozen models (Fig. 1). Participants were adults with valid responses to all nine PHQ-9 items [22]; the outcome was a total score ≥ 10. Fourteen predictors were plausibly available without a symptom questionnaire: age, sex, income-to-poverty ratio, education, marital status, body mass index, workday and free-day sleep, self-rated health, smoking, diabetes, hypertension, sedentary time and a count of chronic conditions. Free-day sleep was not collected in 2005–2014. Cohort construction, harmonisation and a sample-size check [23] are in Supplementary Section S1. All estimates are unweighted and refer to study participants."
+},
+{
+"t": "fig",
+"path": "/home/claude/results/fig_flow.png",
+"cap": "Fig. 1. Participant flow. The 2015–2016 cycle was used only to estimate direction priors. Models and thresholds were frozen before evaluation on the later- and earlier-period cohorts.",
+"w": 6.3
+},
+{
+"t": "h2",
+"x": "2.2. Base models"
+},
+{
+"t": "p",
+"x": "Three base models were fitted once on development data. (i) A fuzzy additive model: a knowledge schema, released as a JSON-LD file [24], declares each input's admissible set and 39 concepts with trapezoidal memberships at externally sourced cut-points [25, 26]; the model sums sign-constrained log-odds contributions of 25 single-concept rules, so each term is bounded and constant beyond its outermost cut-points. (ii) Sign-constrained linear logistic regression. (iii) Logistic regression with restricted cubic splines [27]. Each model's referral threshold was the largest raw score reaching an out-of-fold sensitivity of at least 0.80 in development data (0.066 for the fuzzy model). Discrimination was also compared with logistic regression with and without missing indicators, gradient-boosted trees and GA²M [28]. Details are in Supplementary Section S1."
+},
+{
+"t": "h2",
+"x": "2.3. Abstention rules"
+},
+{
+"t": "p",
+"x": "A rule *decides* a person when it returns *refer* (recommend completing the PHQ-9) or *do not refer*; otherwise it *abstains*. *Coverage* is the proportion decided. Under *refer-on-abstain*, every abstention is referred, which turns any rule into a referral decision for everyone. Fig. 2 summarises the design: each base model is held fixed while five rules are applied to the same records."
+},
+{
+"t": "fig",
+"path": "/home/claude/results/fig_design.png",
+"cap": "Fig. 2. Design of the comparison. Each base model is fitted once and held fixed; each rule turns its output into refer, do not refer or abstain for the same records; rules are compared on coverage, accuracy at matched coverage, risk–coverage curves and decision consequences.",
+"w": 6.8
+},
+{
+"t": "p",
+"x": "*Worst-case bounds.* With O and M the observed and missing inputs and 𝒳_M the product of their admissible sets, the rule computes p_L = min σ(η(x_O, x_M)) and p_U = max σ(η(x_O, x_M)) over x_M ∈ 𝒳_M, refers if p_L ≥ t, does not refer if p_U < t, and abstains otherwise. A decision then holds for every admissible value of the missing inputs, but only under the model: if the model is miscalibrated, such a decision can still be wrong."
+},
+{
+"t": "p",
+"x": "*Imputation spread.* Five chained-equation models (Bayesian ridge, posterior sampling, 10 iterations), fitted once on development predictors without the outcome, produced 20 completed copies of each record; the base model scored each copy, and the rule refers if at least 90% of the 20 probabilities exceed t, does not refer if at most 10% do, and abstains otherwise."
+},
+{
+"t": "p",
+"x": "*Pattern submodels.* For each missingness pattern, the base model was refitted without the missing inputs, with its own threshold, and applied to records with that pattern; every record is decided. They were not fitted under random masking, where patterns are numerous."
+},
+{
+"t": "p",
+"x": "*Point-score selective prediction.* The rule abstains when the single-imputation point score lies within a band around the threshold, |logit p − logit t| < δ, with δ set so that 90% of development participants are decided. It ignores which inputs are missing. Split-conformal prediction for a binary outcome reduces to such a band [29], so we did not fit it separately."
+},
+{
+"t": "p",
+"x": "*Complete cases.* Only records with every input observed are decided."
+},
+{
+"t": "h2",
+"x": "2.4. Computing worst-case bounds"
+},
+{
+"t": "p",
+"x": "Because σ is monotone it suffices to bound η. For the fuzzy main-effects model, η is a sum of univariate piecewise-linear terms with breakpoints at the trapezoid corners, so its extremes are sums of each missing input's extremes, attained at a range end or a corner (Algorithm 1, Box 1). Rule bases with two-concept conjunctions, such as the conjunctive first version of the system kept as a comparator, couple inputs; Algorithm 2 (Box 2) enumerates a finite candidate set per connected component of missing inputs, which is exact by two statements. *Statement 1:* with one continuous missing input x, each term β_r min(μ_k(x), c_r) is piecewise linear with breakpoints at the trapezoid corners and where μ_k(x) = c_r, so the extremes lie on that finite set. *Statement 2:* with two continuous missing inputs, the switching lines μ_k(x) = μ_m(z) cut each rectangle of the breakpoint grid into convex polygons on which η is affine, so the extremes lie at polygon vertices. Components with more than two continuous missing inputs use an outer box bound. Proofs, costs and checks against brute force are in Supplementary Section S1.7. For linear regression the bounds lie at range ends; for spline regression they were found on a 2,001-point grid per input."
+},
+{
+"t": "table",
+"cap": "Box 1. Algorithm 1: worst-case bounds and abstention for a main-effects rule base.",
+"head": [
+"Steps"
+],
+"rows": [
+[
+"Input: intercept β_0; single-concept rules (k, β_k) with trapezoidal or set memberships μ_k; record with observed inputs x_O and missing set M; admissible sets 𝒳_{v} (Supplementary Table S8); threshold t."
+],
+[
+"1. η_0 ← β_0 + Σ over rules whose variable is observed of β_k μ_k(x_v)."
+],
+[
+"2. For each missing variable v: candidate set C_v ← category values of v (discrete), or {range ends of 𝒳_{v}} ∪ {trapezoid corners of the concepts of v inside 𝒳_{v}} (continuous)."
+],
+[
+"3.   g_v(c) ← Σ over rules on v of β_k μ_k(c) for every c in C_v; lo_v ← min g_v, hi_v ← max g_v."
+],
+[
+"4. η_L ← η_0 + Σ_v lo_v,  η_U ← η_0 + Σ_v hi_v;  p_L ← σ(η_L),  p_U ← σ(η_U)."
+],
+[
+"5. Decision: refer if p_L ≥ t; do not refer if p_U < t; otherwise abstain."
+],
+[
+"Cost: O(Σ_v |C_v| · rules on v). Exactness: each g_v is piecewise linear with breakpoints at trapezoid corners, so its extremes on a closed interval lie in C_v."
+]
+],
+"note": "",
+"w": [
+1.0
+],
+"small": true
+},
+{
+"t": "table",
+"cap": "Box 2. Algorithm 2: exact worst-case bounds for rule bases with one- and two-concept antecedents.",
+"head": [
+"Steps"
+],
+"rows": [
+[
+"Input: rule base {(A_r, β_r)}, β_0; record with observed x_O and missing set M; admissible sets 𝒳_{v} (Supplementary Table S8)."
+],
+[
+"1. Build the graph on M with an edge between two missing variables if some rule contains both; take connected components M_1, …, M_q."
+],
+[
+"2. η_L ← η_U ← β_0 + Σ over rules with no missing variable of β_r μ_r(x_O)."
+],
+[
+"3. For each component M_c with rule set ℛ_{c}: enumerate the categories of its discrete variables; for each combination:"
+],
+[
+"   (a) one continuous variable x: candidates 𝒞 = {l, u} ∪ trapezoid corners ∪ {a + c_r(b − a), d − c_r(d − c)} for every rule with observed partner membership c_r (Statement 1);"
+],
+[
+"   (b) two continuous variables (x, z): on each rectangle of the breakpoint grid add corners, intersections of switching lines μ_k(x) = μ_m(z) with the edges, and pairwise intersections of switching lines (Statement 2);"
+],
+[
+"   (c) more than two continuous variables: use the box bound for ℛ_{c} (outer bound; flagged in the trace)."
+],
+[
+"   Evaluate g_c = Σ β_r μ_r over the rules in ℛ_{c} on all candidates; keep the minimum and maximum over candidates and combinations."
+],
+[
+"4. η_L ← η_L + Σ_c min g_c,  η_U ← η_U + Σ_c max g_c;  return p_L = σ(η_L), p_U = σ(η_U)."
+],
+[
+"Return the bounds; components handled by step 3(c) are flagged in the trace."
+]
+],
+"note": "",
+"w": [
+1.0
+],
+"small": true
+},
+{
+"t": "h2",
+"x": "2.5. Missingness scenarios"
+},
+{
+"t": "p",
+"x": "The three cohorts were analysed as observed. Thirteen scenarios were simulated on the internal test set (10 repetitions each), chosen to violate one rule's assumption at a time rather than to reproduce a particular survey: 30% missing completely at random (MCAR); income or self-rated health missing not at random (MNAR) with probabilities 0.6/0.1 or 0.9/0.05 in low-income or fair-or-poor-health participants versus others, or both inputs; outcome-dependent masking of both (0.6 in cases, 0.1 otherwise); and self-rated health or free-day sleep absent for everyone in target samples resampled with probability ∝ exp(γ s z), where z is the standardised residual of the input given the other inputs (γ = 0, 0.5, 1; s chosen so that the imputation model imputes healthier values and longer sleep than the truth). Real missingness is likely milder and mixed, so the scenarios bracket rather than represent practice. Supplementary Section S1.8 gives details, including a repeat with ordinal residuals [30]."
+},
+{
+"t": "h2",
+"x": "2.6. Outcomes and statistical analysis"
+},
+{
+"t": "p",
+"x": "Rules were compared with the base model fixed on (1) coverage, split into decisions to refer and not to refer; (2) sensitivity, specificity and balanced accuracy among the participants each rule is most confident about, up to the coverage of worst-case bounds; (3) the area under the risk–coverage curve (AURC; balanced error against coverage 0.05–1; lower is better); and (4) under refer-on-abstain, participants referred, cases missed and questionnaires avoided per 1,000, and net benefit [31] at threshold probabilities 0.05 and 0.10. Intervals are 95% percentile bootstrap intervals: paired resamples of participants for the cohorts, and resamples within each of the 10 repetitions, pooled, for simulated scenarios. A difference whose interval includes zero is called equivalent. The pre-specified primary analysis was the 2005–2014 AUROC of the fuzzy model against logistic regression with missing indicators, with a design-based bootstrap over strata and primary sampling units as a check. Other pre-specified analyses are secondary. The comparison of abstention rules was specified after the original results were known and is exploratory; tables mark exploratory analyses with ‡."
+},
+{
+"t": "h2",
+"x": "2.7. Software, code and use of generative AI"
+},
+{
+"t": "p",
+"x": "Analyses used Python 3.13, scikit-learn 1.9.1, SciPy 1.18.1, statsmodels and interpret 0.7.8. The analysis code, including three verification tests, was drafted with a generative AI tool (Claude, Anthropic) under the authors' specification; the tests check the bounds against dense brute force, recompute probabilities from serialised traces, and reproduce the cohort flow from public files. The authors reviewed the code, outputs and text. The analyses were re-run from the archived release in a clean directory (of 13,741 statistics written by the analyses, 13,741 were identical, and none differed apart from computing times)."
+},
+{
+"t": "h1",
+"x": "3. Results"
+},
+{
+"t": "h2",
+"x": "3.1. Cohorts and base models"
+},
+{
+"t": "p",
+"x": "Prevalence of PHQ-9 ≥ 10 was 8.8% in 2005–2014, 9.3% in 2017–2020 and 13.3% in 2021–2023 (Table 1). Excluding the uncollected free-day sleep, 30.2% of 2005–2014 participants had at least one missing predictor. The primary contrast was +0.008 (+0.0031 to +0.0135; design-based +0.0046 to +0.0119), but it reflects the indicator for an input never collected: logistic regression without indicators reached 0.787, the same as the fuzzy model (0.787). Spline regression ranked best (0.797). The base models therefore discriminated about equally well: at 80% sensitivity in 2005–2014 the fuzzy model flagged 430 participants per 1,000 and spline regression 407. All models under-predicted in 2021–2023 (O/E 1.61 for the fuzzy model). Full results for nine models are in Supplementary Section S2."
+},
+{
+"t": "table",
+"cap": "Table 1. Characteristics of the development, internal test, later-period and earlier-period validation cohorts (unweighted unless stated).",
+"head": [
+"Characteristic",
+"Development (2017–2020)",
+"Internal test (2017–2020)",
+"Later period (2021–2023)",
+"Earlier period (2005–2014)"
+],
+"rows": [
+[
+"N",
+"5793",
+"2483",
+"5455",
+"26057"
+],
+[
+"PHQ-9 ≥ 10, n (%)",
+"537 (9.3)",
+"230 (9.3)",
+"723 (13.3)",
+"2294 (8.8)"
+],
+[
+"Weighted prevalence (%)",
+"8.0",
+"9.9",
+"12.8",
+"7.6"
+],
+[
+"Age, years, median (IQR)",
+"50.0 (33.0-64.0)",
+"50.0 (34.0-64.0)",
+"56.0 (37.0-67.0)",
+"47.0 (31.0-63.0)"
+],
+[
+"Income-to-poverty ratio, median (IQR)",
+"2.2 (1.2-4.2)",
+"2.3 (1.2-4.3)",
+"2.9 (1.5-5.0)",
+"2.1 (1.1-4.0)"
+],
+[
+"BMI, kg/m², median (IQR)",
+"28.7 (24.7-33.8)",
+"28.7 (24.7-33.6)",
+"28.3 (24.5-33.4)",
+"27.7 (24.1-32.2)"
+],
+[
+"Sleep, workdays (h), median (IQR)",
+"7.5 (6.5-8.5)",
+"7.5 (6.5-8.5)",
+"8.0 (7.0-8.5)",
+"7.0 (6.0-8.0)"
+],
+[
+"Sleep, free days (h), median (IQR)",
+"8.0 (7.0-9.0)",
+"8.0 (7.0-9.0)",
+"8.0 (7.5-9.0)",
+"not collected"
+],
+[
+"Sedentary time (h/day), median (IQR)",
+"5.0 (3.0-8.0)",
+"5.0 (3.0-8.0)",
+"6.0 (4.0-8.0)",
+"5.0 (3.0-8.0)"
+],
+[
+"Female, %",
+"51.2",
+"49.9",
+"54.4",
+"50.8"
+],
+[
+"Current smoker, %",
+"17.3",
+"18.7",
+"14.2",
+"21.2"
+],
+[
+"Diabetes, %",
+"14.4",
+"15.0",
+"13.2",
+"11.4"
+],
+[
+"Hypertension, %",
+"36.7",
+"37.1",
+"35.9",
+"33.8"
+],
+[
+"≥ 1 chronic condition, %",
+"50.0",
+"49.8",
+"54.5",
+"43.3"
+],
+[
+"College graduate, %",
+"25.0",
+"24.7",
+"37.8",
+"22.2"
+],
+[
+"Married/partnered, %",
+"58.1",
+"57.7",
+"54.1",
+"58.7"
+],
+[
+"Self-rated health fair/poor, %",
+"24.2",
+"23.3",
+"17.7",
+"22.8"
+],
+[
+"Any predictor missing, %",
+"20.0",
+"18.6",
+"18.2",
+"100.0"
+],
+[
+"Income-to-poverty ratio missing, %",
+"13.3",
+"13.0",
+"12.1",
+"7.5"
+],
+[
+"Any predictor missing, %, excluding free-day sleep",
+"19.8",
+"18.3",
+"18.0",
+"30.2"
+]
+],
+"note": "IQR, interquartile range; BMI, body mass index. Percentages of categorical variables use non-missing values as denominator. Weighted prevalence uses NHANES interview weights; it differs between development and internal test because the split was stratified on the unweighted outcome. Free-day sleep was not collected in 2005–2014; workday sleep was recorded in whole hours. The last row excludes free-day sleep, which was not collected in 2005–2014.",
+"w": [
+2.2,
+1.1,
+1.1,
+1.1,
+1.1
+],
+"small": true
+},
+{
+"t": "h2",
+"x": "3.2. Abstention rules in the cohorts as observed"
+},
+{
+"t": "p",
+"x": "Where few inputs were missing, the rules differed little (Table 2). In 2005–2014, with the fuzzy model, worst-case bounds decided 69.2% of participants (41.6% referred, 27.6% not referred), imputation spread 83.3%, point-score selective prediction 89.9% and pattern submodels everyone. The asymmetry of worst-case decisions follows from one coefficient: with free-day sleep unknown, the ShortSleepFreeDay term (+0.433 log-odds, from a prior that was never estimated) can raise the upper bound but not the lower one. At the coverage of worst-case bounds, balanced accuracy was 0.689 for worst-case bounds, 0.710 for imputation spread, 0.721 for pattern submodels and 0.726 for point-score selective prediction (Fig. 3). Ranking by the distance of the point score from the threshold gave the lowest AURC (0.289 against 0.338 for worst-case bounds). The same ordering held with the regression base models."
+},
+{
+"t": "table",
+"cap": "Table 2. Abstention rules compared with the base model held fixed: cohorts as observed.",
+"head": [
+"Cohort",
+"Base model",
+"Rule",
+"Decided, % (refer / do not refer)",
+"Decided: Sens. / Spec. (%)",
+"At matched coverage: Sens. / Spec. (%)",
+"At matched coverage: balanced accuracy",
+"AURC (95% CI)",
+"ΔAURC vs worst-case bounds (95% CI)"
+],
+"rows": [
+[
+"Internal test (2017–2020)",
+"Fuzzy additive",
+"Worst-case bounds",
+"95.1 (45.5 / 49.6)",
+"85.3 / 55.9",
+"85.3 / 55.9",
+"0.706",
+"0.285 (0.266–0.306)",
+"–"
+],
+[
+"",
+"",
+"Imputation spread ‡",
+"97.9 (46.3 / 51.6)",
+"83.6 / 56.4",
+"85.2 / 56.5",
+"0.709",
+"0.285 (0.266–0.305)",
+"0.000 (−0.004 to +0.003)"
+],
+[
+"",
+"",
+"Pattern submodels ‡",
+"100.0 (47.7 / 52.3)",
+"83.9 / 56.0",
+"85.1 / 56.2",
+"0.707",
+"0.287 (0.268–0.306)",
+"+0.001 (−0.002 to +0.005)"
+],
+[
+"",
+"",
+"Point-score selective ‡",
+"90.9 (43.0 / 47.9)",
+"85.2 / 56.7",
+"84.5 / 56.4",
+"0.705",
+"0.285 (0.266–0.304)",
+"−0.001 (−0.003 to +0.003)"
+],
+[
+"",
+"",
+"Complete case ‡",
+"81.4 (38.4 / 43.0)",
+"84.6 / 56.5",
+"84.9 / 56.1",
+"0.705",
+"0.284 (0.261–0.305)",
+"−0.002 (−0.007 to +0.004)"
+],
+[
+"Later period (2021–2023)",
+"Fuzzy additive",
+"Worst-case bounds",
+"94.4 (38.2 / 56.3)",
+"75.5 / 64.8",
+"75.5 / 64.8",
+"0.701",
+"0.251 (0.236–0.267)",
+"–"
+],
+[
+"",
+"",
+"Imputation spread ‡",
+"97.3 (38.8 / 58.5)",
+"73.6 / 65.2",
+"74.4 / 65.6",
+"0.700",
+"0.253 (0.237–0.269)",
+"+0.002 (−0.001 to +0.005)"
+],
+[
+"",
+"",
+"Pattern submodels ‡",
+"100.0 (40.6 / 59.4)",
+"74.3 / 64.5",
+"75.4 / 65.5",
+"0.705",
+"0.251 (0.236–0.267)",
+"+0.000 (−0.003 to +0.003)"
+],
+[
+"",
+"",
+"Point-score selective ‡",
+"91.3 (36.3 / 55.0)",
+"75.6 / 65.8",
+"75.4 / 65.5",
+"0.704",
+"0.251 (0.236–0.266)",
+"+0.000 (−0.003 to +0.002)"
+],
+[
+"",
+"",
+"Complete case ‡",
+"81.8 (32.5 / 49.3)",
+"74.2 / 65.2",
+"75.3 / 65.1",
+"0.702",
+"0.255 (0.239–0.273)",
+"+0.004 (0.000 to +0.009)"
+],
+[
+"Earlier period (2005–2014)",
+"Fuzzy additive",
+"Worst-case bounds",
+"69.2 (41.6 / 27.6)",
+"93.8 / 43.9",
+"93.8 / 43.9",
+"0.689",
+"0.338 (0.333–0.343)",
+"–"
+],
+[
+"",
+"",
+"Imputation spread ‡",
+"83.3 (43.3 / 40.0)",
+"88.5 / 51.9",
+"91.8 / 50.2",
+"0.710",
+"0.303 (0.298–0.309)",
+"−0.035 (−0.036 to −0.033)"
+],
+[
+"",
+"",
+"Pattern submodels ‡",
+"100.0 (50.2 / 49.8)",
+"85.2 / 53.2",
+"90.9 / 53.4",
+"0.721",
+"0.295 (0.289–0.301)",
+"−0.043 (−0.045 to −0.041)"
+],
+[
+"",
+"",
+"Point-score selective ‡",
+"89.9 (43.9 / 46.0)",
+"86.1 / 54.9",
+"90.3 / 54.9",
+"0.726",
+"0.289 (0.283–0.294)",
+"−0.049 (−0.051 to −0.047)"
+],
+[
+"",
+"",
+"Complete case ‡",
+"0.0 (0.0 / 0.0)",
+"–",
+"90.3 / 54.9",
+"0.726",
+"0.289 (0.283–0.295)",
+"−0.049 (−0.051 to −0.047)"
+],
+[
+"",
+"Sign-constrained LR ‡",
+"Worst-case bounds",
+"56.4 (27.7 / 28.7)",
+"92.0 / 56.4",
+"92.0 / 56.4",
+"0.742",
+"0.254 (0.248–0.260)",
+"–"
+],
+[
+"",
+"",
+"Imputation spread ‡",
+"88.6 (42.2 / 46.4)",
+"86.7 / 56.4",
+"91.9 / 58.6",
+"0.753",
+"0.244 (0.238–0.251)",
+"−0.010 (−0.011 to −0.007)"
+],
+[
+"",
+"",
+"Pattern submodels ‡",
+"100.0 (47.3 / 52.7)",
+"84.6 / 56.3",
+"91.8 / 59.8",
+"0.758",
+"0.239 (0.233–0.246)",
+"−0.015 (−0.016 to −0.012)"
+],
+[
+"",
+"",
+"Point-score selective ‡",
+"89.4 (41.9 / 47.4)",
+"85.9 / 57.0",
+"91.4 / 59.8",
+"0.756",
+"0.240 (0.233–0.246)",
+"−0.014 (−0.016 to −0.012)"
+],
+[
+"",
+"",
+"Complete case ‡",
+"0.0 (0.0 / 0.0)",
+"–",
+"91.4 / 59.8",
+"0.756",
+"0.240 (0.233–0.246)",
+"−0.014 (−0.016 to −0.012)"
+],
+[
+"",
+"Spline LR ‡",
+"Worst-case bounds",
+"52.2 (30.9 / 21.3)",
+"95.5 / 46.1",
+"95.5 / 46.1",
+"0.708",
+"0.293 (0.287–0.298)",
+"–"
+],
+[
+"",
+"",
+"Imputation spread ‡",
+"85.4 (38.2 / 47.3)",
+"86.6 / 59.7",
+"91.5 / 63.6",
+"0.775",
+"0.224 (0.218–0.231)",
+"−0.069 (−0.071 to −0.065)"
+],
+[
+"",
+"",
+"Pattern submodels ‡",
+"100.0 (46.4 / 53.6)",
+"84.0 / 57.2",
+"92.1 / 62.5",
+"0.773",
+"0.228 (0.221–0.234)",
+"−0.065 (−0.067 to −0.062)"
+],
+[
+"",
+"",
+"Point-score selective ‡",
+"90.8 (38.7 / 52.0)",
+"83.8 / 61.5",
+"90.5 / 67.2",
+"0.789",
+"0.211 (0.203–0.218)",
+"−0.082 (−0.085 to −0.078)"
+],
+[
+"",
+"",
+"Complete case ‡",
+"0.0 (0.0 / 0.0)",
+"–",
+"90.5 / 67.2",
+"0.789",
+"0.211 (0.204–0.218)",
+"−0.082 (−0.085 to −0.079)"
+],
+[
+"",
+"LR, multiple imputation ‡",
+"Imputation spread ‡",
+"87.3 (40.3 / 47.0)",
+"86.4 / 57.9",
+"89.2 / 59.4",
+"0.743",
+"0.235 (0.229–0.242)",
+"–"
+]
+],
+"note": "Matched coverage: each rule decides the participants it is most confident about, up to the coverage of worst-case bounds of the same base model. AURC, area under the balanced-error/coverage curve over coverage 0.05–1 (lower is better); ΔAURC negative favours the rule over worst-case bounds; percentile bootstrap intervals (500 resamples; 300 in 2005–2014). Complete-case abstention decides nobody in 2005–2014, where free-day sleep was not collected, and its AURC and accuracy at matched coverage there equal those of point-score selective prediction, which ranks by the same distance of the point score from the threshold. Point-score selective prediction abstains when |logit p − logit t| < δ, with δ set on development out-of-fold predictions to decide 90% of development participants. Last row: the imputation-spread rule of the previous analysis, on the chained-equation logistic model. ‡ Specified after the original results were known.",
+"w": [
+1.05,
+1.0,
+1.05,
+1.0,
+0.8,
+0.85,
+0.6,
+0.95,
+1.05
+],
+"tiny": true
+},
+{
+"t": "fig",
+"path": "/home/claude/results/fig_riskcov4.png",
+"cap": "Fig. 3. Risk–coverage curves with the fuzzy additive model as the fixed base model: balanced accuracy among decided participants against the percentage decided, participants ranked by each rule's confidence. Open circles mark each rule's own operating point. Simulated panels show the first of 10 repetitions; pattern submodels were not fitted under MCAR.",
+"w": 6.8
+},
+{
+"t": "h2",
+"x": "3.3. Simulated missingness"
+},
+{
+"t": "p",
+"x": "Table 3 summarises all 16 scenarios. Three results held wherever much was missing. Worst-case bounds decided the fewest participants; their net benefit at 0.10 was never above that of the best other rule (lower in 8 scenarios, equivalent in 8); and when an input was absent for everyone, pattern submodels or point-score selective prediction did best. Under 30% MCAR, worst-case bounds decided 33.5% and imputation spread 66.0%, with balanced accuracy at matched coverage 0.641 against 0.716. Other results were confined to particular mechanisms. Worst-case bounds had the lowest AURC in 7 scenarios, all with non-random or outcome-dependent masking or in 2021–2023, by at most 0.010. When self-rated health was absent and the imputation model was made wrong (γ = 1), prevalence rose from 9.3% to 14.2%, and the sensitivity of imputation spread fell from 90.7% to 87.4%; worst-case bounds kept 98.6% by deciding only 43.3% of participants, and the records they decided were classified less accurately (0.536 against 0.686). Setting the point-score band to decide 80% or 95% of development participants instead of 90% changed the best rule (by AURC or net benefit) in 1 and 2 of the 16 scenarios. Results for every base model are in Supplementary Table S16."
+},
+{
+"t": "table",
+"cap": "Table 3. Summary across the 16 missingness scenarios, fuzzy additive base model: the rule with the lowest AURC and the rule with the highest net benefit at 0.10, and how worst-case bounds compared.",
+"head": [
+"Scenario",
+"Lowest AURC: rule (value)",
+"AURC, worst-case bounds",
+"Highest net benefit at 0.10: rule (value)",
+"Net benefit at 0.10, worst-case bounds",
+"Worst-case net benefit at 0.10 vs best other rule"
+],
+"rows": [
+[
+"Internal test, as observed",
+"point-score selective (0.285)",
+"0.285",
+"pattern submodels (0.0333)",
+"0.0326",
+"equivalent"
+],
+[
+"2021–2023, as observed",
+"worst-case (0.251)",
+"0.251",
+"worst-case (0.0655)",
+"0.0655",
+"equivalent"
+],
+[
+"2005–2014, as observed (free-day sleep never collected)",
+"point-score selective (0.289)",
+"0.338",
+"pattern submodels (0.0276)",
+"0.0123",
+"lower"
+],
+[
+"30% MCAR",
+"point-score selective (0.298)",
+"0.357",
+"point-score selective (0.0253)",
+"0.0000",
+"lower"
+],
+[
+"MNAR 0.6/0.1: income",
+"worst-case (0.275)",
+"0.275",
+"pattern submodels (0.0335)",
+"0.0319",
+"equivalent"
+],
+[
+"MNAR 0.6/0.1: self-rated health",
+"worst-case (0.261)",
+"0.261",
+"pattern submodels (0.0319)",
+"0.0280",
+"equivalent"
+],
+[
+"MNAR 0.6/0.1: both",
+"worst-case (0.252)",
+"0.252",
+"pattern submodels (0.0321)",
+"0.0280",
+"equivalent"
+],
+[
+"MNAR 0.9/0.05: income",
+"worst-case (0.268)",
+"0.268",
+"pattern submodels (0.0337)",
+"0.0322",
+"equivalent"
+],
+[
+"MNAR 0.9/0.05: self-rated health",
+"worst-case (0.238)",
+"0.238",
+"pattern submodels (0.0316)",
+"0.0297",
+"equivalent"
+],
+[
+"Outcome-dependent",
+"worst-case (0.270)",
+"0.270",
+"imputation spread (0.0352)",
+"0.0350",
+"equivalent"
+],
+[
+"Self-rated health absent, γ = 0",
+"pattern submodels (0.286)",
+"0.424",
+"pattern submodels (0.0290)",
+"−0.0043",
+"lower"
+],
+[
+"Self-rated health absent, γ = 0.5",
+"pattern submodels (0.297)",
+"0.431",
+"pattern submodels (0.0484)",
+"0.0256",
+"lower"
+],
+[
+"Self-rated health absent, γ = 1",
+"pattern submodels (0.308)",
+"0.436",
+"point-score selective (0.0648)",
+"0.0484",
+"lower"
+],
+[
+"Free-day sleep absent, γ = 0",
+"pattern submodels (0.279)",
+"0.327",
+"pattern submodels (0.0341)",
+"0.0217",
+"lower"
+],
+[
+"Free-day sleep absent, γ = 0.5",
+"pattern submodels (0.293)",
+"0.341",
+"pattern submodels (0.0372)",
+"0.0243",
+"lower"
+],
+[
+"Free-day sleep absent, γ = 1",
+"pattern submodels (0.324)",
+"0.367",
+"pattern submodels (0.0401)",
+"0.0266",
+"lower"
+]
+],
+"note": "Rules compared: worst-case bounds, imputation spread, pattern submodels (not under MCAR) and point-score selective prediction; complete cases are omitted because they decide nobody when an input is absent. 'Lower' and 'equivalent': the 95% bootstrap interval for the difference in net benefit between the best rule and worst-case bounds excludes or includes zero (cohorts: paired resamples; simulated scenarios: resamples within each of the 10 repetitions, pooled). Where worst-case bounds had the highest point estimate, the comparison is with the next rule. Simulated scenarios are means of 10 repetitions. Details for all base models are in Tables 2 and 4 and Supplementary Tables S9 and S16.",
+"w": [
+2.2,
+1.45,
+0.75,
+1.55,
+0.8,
+1.15
+],
+"small": true
+},
+{
+"t": "h2",
+"x": "3.4. Decision consequences"
+},
+{
+"t": "p",
+"x": "Under refer-on-abstain in 2005–2014, per 1,000 participants, worst-case bounds referred 724, missed 4.6 cases and avoided 276 questionnaires; pattern submodels referred 502, missed 13.0 and avoided 498 (Table 4). Worst-case bounds missed fewer cases than imputation spread and pattern submodels in every scenario, because they referred more people. At a threshold probability of 0.05, which weighs a missed case as 19 unnecessary referrals, worst-case bounds exceeded imputation spread and pattern submodels in 2021–2023 (−0.0027 (−0.0044 to −0.0011) for imputation spread minus worst-case bounds), where every model under-predicted, exceeded pattern submodels and point-score selective prediction under outcome-dependent masking, and exceeded pattern submodels with self-rated health absent and shifted (γ = 1). Complete cases, which refer everyone when an input is absent, are not counted in these comparisons."
+},
+{
+"t": "table",
+"cap": "Table 4. Decision consequences of each abstention rule under refer-on-abstain, fuzzy additive base model, per 1,000 participants.",
+"head": [
+"Scenario (prevalence, %)",
+"Rule",
+"Referred",
+"Cases missed",
+"Questionnaires avoided",
+"Sensitivity (%)",
+"Net benefit at 0.05",
+"ΔNB at 0.05 vs worst-case (95% CI)",
+"Net benefit at 0.10",
+"ΔNB at 0.10 vs worst-case (95% CI)"
+],
+"rows": [
+[
+"Internal test, natural (9.3%)",
+"Worst-case bounds",
+"504",
+"12.9",
+"496",
+"86.1",
+"0.0574",
+"–",
+"0.0326",
+"–"
+],
+[
+"",
+"Imputation spread ‡",
+"484",
+"14.9",
+"516",
+"83.9",
+"0.0563",
+"−0.0011 (−0.0028 to +0.0006)",
+"0.0326",
+"+0.0000 (−0.0020 to +0.0018)"
+],
+[
+"",
+"Pattern submodels ‡",
+"477",
+"14.9",
+"523",
+"83.9",
+"0.0567",
+"−0.0007 (−0.0025 to +0.0009)",
+"0.0333",
+"+0.0008 (−0.0012 to +0.0026)"
+],
+[
+"",
+"Point-score selective ‡",
+"521",
+"12.9",
+"479",
+"86.1",
+"0.0565",
+"−0.0009 (−0.0029 to +0.0015)",
+"0.0307",
+"−0.0018 (−0.0042 to +0.0007)"
+],
+[
+"",
+"Complete case ‡",
+"570",
+"11.3",
+"430",
+"87.8",
+"0.0556",
+"−0.0018 (−0.0032 to 0.0000)",
+"0.0270",
+"−0.0055 (−0.0072 to −0.0036)"
+],
+[
+"2021–2023, natural (13.3%)",
+"Worst-case bounds",
+"437",
+"29.9",
+"563",
+"77.5",
+"0.0850",
+"–",
+"0.0655",
+"–"
+],
+[
+"",
+"Imputation spread ‡",
+"415",
+"33.5",
+"585",
+"74.7",
+"0.0824",
+"−0.0027 (−0.0044 to −0.0011)",
+"0.0639",
+"−0.0016 (−0.0032 to 0.0000)"
+],
+[
+"",
+"Pattern submodels ‡",
+"406",
+"34.1",
+"594",
+"74.3",
+"0.0822",
+"−0.0028 (−0.0045 to −0.0011)",
+"0.0642",
+"−0.0012 (−0.0029 to +0.0004)"
+],
+[
+"",
+"Point-score selective ‡",
+"450",
+"29.9",
+"550",
+"77.5",
+"0.0844",
+"−0.0007 (−0.0027 to +0.0015)",
+"0.0641",
+"−0.0014 (−0.0034 to +0.0009)"
+],
+[
+"",
+"Complete case ‡",
+"507",
+"26.4",
+"493",
+"80.1",
+"0.0850",
+"+0.0000 (−0.0015 to +0.0017)",
+"0.0616",
+"−0.0039 (−0.0055 to −0.0021)"
+],
+[
+"2005–2014, natural (8.8%)",
+"Worst-case bounds",
+"724",
+"4.6",
+"276",
+"94.8",
+"0.0498",
+"–",
+"0.0123",
+"–"
+],
+[
+"",
+"Imputation spread ‡",
+"600",
+"9.2",
+"400",
+"89.5",
+"0.0514",
+"+0.0016 (+0.0008 to +0.0025)",
+"0.0209",
+"+0.0086 (+0.0077 to +0.0095)"
+],
+[
+"",
+"Pattern submodels ‡",
+"502",
+"13.0",
+"498",
+"85.2",
+"0.0525",
+"+0.0028 (+0.0016 to +0.0038)",
+"0.0276",
+"+0.0152 (+0.0141 to +0.0166)"
+],
+[
+"",
+"Point-score selective ‡",
+"540",
+"11.5",
+"460",
+"87.0",
+"0.0522",
+"+0.0024 (+0.0014 to +0.0034)",
+"0.0251",
+"+0.0127 (+0.0116 to +0.0138)"
+],
+[
+"",
+"Complete case ‡",
+"1000",
+"0.0",
+"0",
+"100.0",
+"0.0400",
+"−0.0097 (−0.0106 to −0.0090)",
+"−0.0133",
+"−0.0256 (−0.0267 to −0.0245)"
+],
+[
+"30% MCAR (9.3%)",
+"Worst-case bounds",
+"910",
+"1.6",
+"90",
+"98.3",
+"0.0479",
+"–",
+"0.0000",
+"–"
+],
+[
+"",
+"Imputation spread ‡",
+"671",
+"7.8",
+"329",
+"91.6",
+"0.0540",
+"+0.0060 (+0.0015 to +0.0095)",
+"0.0197",
+"+0.0197 (+0.0148 to +0.0241)"
+],
+[
+"",
+"Point-score selective ‡",
+"553",
+"14.6",
+"447",
+"84.3",
+"0.0530",
+"+0.0052 (−0.0010 to +0.0104)",
+"0.0253",
+"+0.0253 (+0.0185 to +0.0312)"
+],
+[
+"",
+"Complete case ‡",
+"994",
+"0.1",
+"6",
+"99.9",
+"0.0451",
+"n.c.",
+"−0.0077",
+"n.c."
+],
+[
+"MNAR 0.6/0.1: health ‡ (9.3%)",
+"Worst-case bounds",
+"556",
+"11.8",
+"444",
+"87.3",
+"0.0558",
+"–",
+"0.0280",
+"–"
+],
+[
+"",
+"Imputation spread ‡",
+"496",
+"15.2",
+"504",
+"83.6",
+"0.0554",
+"−0.0004 (−0.0038 to +0.0021)",
+"0.0309",
+"+0.0029 (−0.0005 to +0.0058)"
+],
+[
+"",
+"Pattern submodels ‡",
+"457",
+"18.2",
+"543",
+"80.4",
+"0.0543",
+"−0.0014 (−0.0051 to +0.0020)",
+"0.0319",
+"+0.0040 (0.0000 to +0.0076)"
+],
+[
+"",
+"Point-score selective ‡",
+"505",
+"14.9",
+"495",
+"83.9",
+"0.0552",
+"−0.0005 (−0.0041 to +0.0026)",
+"0.0302",
+"+0.0022 (−0.0015 to +0.0057)"
+],
+[
+"",
+"Complete case ‡",
+"619",
+"9.9",
+"381",
+"89.3",
+"0.0544",
+"n.c.",
+"0.0230",
+"n.c."
+],
+[
+"MNAR 0.9/0.05: health ‡ (9.3%)",
+"Worst-case bounds",
+"535",
+"12.4",
+"465",
+"86.6",
+"0.0563",
+"–",
+"0.0297",
+"–"
+],
+[
+"",
+"Imputation spread ‡",
+"483",
+"16.1",
+"517",
+"82.6",
+"0.0551",
+"−0.0011 (−0.0043 to +0.0014)",
+"0.0313",
+"+0.0017 (−0.0016 to +0.0045)"
+],
+[
+"",
+"Pattern submodels ‡",
+"440",
+"20.1",
+"560",
+"78.3",
+"0.0531",
+"−0.0031 (−0.0069 to +0.0004)",
+"0.0316",
+"+0.0020 (−0.0020 to +0.0057)"
+],
+[
+"",
+"Point-score selective ‡",
+"489",
+"16.4",
+"511",
+"82.3",
+"0.0546",
+"−0.0017 (−0.0054 to +0.0018)",
+"0.0304",
+"+0.0008 (−0.0031 to +0.0045)"
+],
+[
+"",
+"Complete case ‡",
+"601",
+"10.5",
+"399",
+"88.7",
+"0.0548",
+"−0.0018 (−0.0033 to 0.0000)",
+"0.0245",
+"−0.0056 (−0.0073 to −0.0036)"
+],
+[
+"Outcome-dependent ‡ (9.3%)",
+"Worst-case bounds",
+"568",
+"4.4",
+"432",
+"95.3",
+"0.0630",
+"–",
+"0.0350",
+"–"
+],
+[
+"",
+"Imputation spread ‡",
+"510",
+"9.9",
+"490",
+"89.3",
+"0.0602",
+"−0.0028 (−0.0072 to +0.0005)",
+"0.0352",
+"+0.0002 (−0.0040 to +0.0038)"
+],
+[
+"",
+"Pattern submodels ‡",
+"479",
+"16.1",
+"521",
+"82.6",
+"0.0553",
+"−0.0077 (−0.0131 to −0.0028)",
+"0.0318",
+"−0.0032 (−0.0087 to +0.0018)"
+],
+[
+"",
+"Point-score selective ‡",
+"528",
+"12.5",
+"472",
+"86.5",
+"0.0565",
+"−0.0065 (−0.0109 to −0.0023)",
+"0.0303",
+"−0.0047 (−0.0092 to −0.0003)"
+],
+[
+"",
+"Complete case ‡",
+"660",
+"1.7",
+"340",
+"98.1",
+"0.0609",
+"−0.0020 (−0.0038 to +0.0004)",
+"0.0277",
+"−0.0072 (−0.0096 to −0.0046)"
+],
+[
+"Health absent, γ = 0 ‡ (9.3%)",
+"Worst-case bounds",
+"964",
+"0.7",
+"36",
+"99.3",
+"0.0467",
+"–",
+"−0.0043",
+"–"
+],
+[
+"",
+"Imputation spread ‡",
+"659",
+"8.7",
+"341",
+"90.7",
+"0.0543",
+"+0.0077 (+0.0027 to +0.0121)",
+"0.0207",
+"+0.0250 (+0.0192 to +0.0306)"
+],
+[
+"",
+"Pattern submodels ‡",
+"489",
+"18.3",
+"511",
+"80.4",
+"0.0532",
+"+0.0065 (−0.0015 to +0.0131)",
+"0.0290",
+"+0.0332 (+0.0247 to +0.0405)"
+],
+[
+"",
+"Point-score selective ‡",
+"573",
+"12.4",
+"427",
+"86.7",
+"0.0549",
+"+0.0082 (+0.0011 to +0.0141)",
+"0.0261",
+"+0.0304 (+0.0228 to +0.0375)"
+],
+[
+"",
+"Complete case ‡",
+"1000",
+"0.0",
+"0",
+"100.0",
+"0.0455",
+"n.c.",
+"−0.0075",
+"n.c."
+],
+[
+"Health absent, γ = 1 ‡ (14.2%)",
+"Worst-case bounds",
+"965",
+"2.0",
+"35",
+"98.6",
+"0.0967",
+"–",
+"0.0484",
+"–"
+],
+[
+"",
+"Imputation spread ‡",
+"684",
+"17.9",
+"316",
+"87.4",
+"0.0948",
+"−0.0020 (−0.0118 to +0.0050)",
+"0.0621",
+"+0.0135 (+0.0030 to +0.0214)"
+],
+[
+"",
+"Pattern submodels ‡",
+"520",
+"35.2",
+"480",
+"75.3",
+"0.0852",
+"−0.0115 (−0.0233 to −0.0018)",
+"0.0611",
+"+0.0126 (+0.0003 to +0.0232)"
+],
+[
+"",
+"Point-score selective ‡",
+"598",
+"24.0",
+"402",
+"83.2",
+"0.0929",
+"−0.0038 (−0.0118 to +0.0036)",
+"0.0648",
+"+0.0164 (+0.0080 to +0.0247)"
+],
+[
+"",
+"Complete case ‡",
+"1000",
+"0.0",
+"0",
+"100.0",
+"0.0970",
+"+0.0003 (−0.0014 to +0.0021)",
+"0.0468",
+"−0.0017 (−0.0034 to +0.0004)"
+],
+[
+"Free-day sleep absent, γ = 0 ‡ (9.3%)",
+"Worst-case bounds",
+"685",
+"5.2",
+"315",
+"94.4",
+"0.0566",
+"–",
+"0.0217",
+"–"
+],
+[
+"",
+"Imputation spread ‡",
+"539",
+"11.8",
+"461",
+"87.4",
+"0.0573",
+"+0.0007 (−0.0048 to +0.0051)",
+"0.0306",
+"+0.0088 (+0.0030 to +0.0137)"
+],
+[
+"",
+"Pattern submodels ‡",
+"473",
+"15.3",
+"527",
+"83.6",
+"0.0572",
+"+0.0005 (−0.0066 to +0.0055)",
+"0.0341",
+"+0.0123 (+0.0053 to +0.0180)"
+],
+[
+"",
+"Point-score selective ‡",
+"524",
+"12.4",
+"476",
+"86.8",
+"0.0576",
+"+0.0009 (−0.0039 to +0.0052)",
+"0.0317",
+"+0.0099 (+0.0047 to +0.0149)"
+],
+[
+"",
+"Complete case ‡",
+"1000",
+"0.0",
+"0",
+"100.0",
+"0.0455",
+"n.c.",
+"−0.0075",
+"n.c."
+],
+[
+"Free-day sleep absent, γ = 1 ‡ (10.2%)",
+"Worst-case bounds",
+"728",
+"5.7",
+"272",
+"94.4",
+"0.0636",
+"–",
+"0.0266",
+"–"
+],
+[
+"",
+"Imputation spread ‡",
+"600",
+"10.4",
+"400",
+"89.8",
+"0.0653",
+"+0.0017 (−0.0026 to +0.0053)",
+"0.0356",
+"+0.0089 (+0.0042 to +0.0128)"
+],
+[
+"",
+"Pattern submodels ‡",
+"535",
+"12.9",
+"465",
+"87.4",
+"0.0662",
+"+0.0025 (−0.0030 to +0.0075)",
+"0.0401",
+"+0.0134 (+0.0076 to +0.0189)"
+],
+[
+"",
+"Point-score selective ‡",
+"590",
+"11.3",
+"410",
+"89.0",
+"0.0650",
+"+0.0014 (−0.0031 to +0.0052)",
+"0.0358",
+"+0.0091 (+0.0045 to +0.0130)"
+],
+[
+"",
+"Complete case ‡",
+"1000",
+"0.0",
+"0",
+"100.0",
+"0.0553",
+"−0.0090 (−0.0115 to −0.0060)",
+"0.0028",
+"−0.0243 (−0.0277 to −0.0206)"
+]
+],
+"note": "Refer-on-abstain: every abstention is referred, and decided participants follow the rule's decision (pattern submodels decide everyone). Questionnaires avoided = participants not referred. Net benefit = (true positives − false positives × p_t/(1 − p_t))/n at threshold probability p_t; referring no one gives 0; complete-case abstention refers everyone when an input is absent. ΔNB: difference to worst-case bounds with 95% percentile bootstrap interval (cohorts: 1,000 paired resamples, 500 in 2005–2014; simulated scenarios: 200 resamples within each of the 10 repetitions, pooled, for the fuzzy model; regression base models: first repetition); n.c., not computed. Simulated scenarios are means of 10 repetitions. ‡ Specified after the original results were known. The same quantities for the regression base models are in Supplementary Table S9.",
+"w": [
+1.35,
+1.2,
+0.5,
+0.5,
+0.65,
+0.55,
+0.55,
+1.05,
+0.55,
+1.05
+],
+"tiny": true
+},
+{
+"t": "h2",
+"x": "3.5. PHQ-2 benchmark"
+},
+{
+"t": "p",
+"x": "PHQ-2 ≥ 3 had sensitivity 0.687 and specificity 0.963 internally and flagged 9.7% of participants, against 0.839, 0.562 and 47.5% for the fuzzy model. Both PHQ-2 items are part of the outcome, so its figures are inflated; against diagnostic interviews its pooled sensitivity was 0.72 at specificity 0.85 [16], still far more efficient than any non-symptom model here (Supplementary Section S2.9)."
+},
+{
+"t": "h1",
+"x": "4. Discussion"
+},
+{
+"t": "h2",
+"x": "4.1. Principal findings"
+},
+{
+"t": "p",
+"x": "With the base model held fixed, the choice of abstention rule mattered more than the choice among base models, which discriminated about equally well. Imputation spread, pattern submodels and point-score selective prediction decided more participants than worst-case bounds and classified them more accurately. For an input never collected, a model fitted without it decided everyone and gave the highest net benefit at 0.10, while ranking by the point score gave the best risk–coverage curve. Worst-case bounds missed fewer cases only by referring more people."
+},
+{
+"t": "h2",
+"x": "4.2. When are worst-case bounds worth their cost?"
+},
+{
+"t": "p",
+"x": "We had proposed that worst-case bounds suit an input absent by design whose distribution in the target population is unknown. In 2005–2014 that is the situation, and the bounds lost: imputation drew free-day sleep from its 2017–2020 distribution, an assumption that cannot be checked, and still decided more participants more accurately. When the imputation model was made wrong on purpose, imputation lost some sensitivity but the bounds did not become more accurate. The bounds came closest to the other rules where missingness signalled risk, because their habit of referring incomplete records was then right, and in 2021–2023, where referring more people partly offset under-prediction; a recalibrated model with a lower threshold might do the same. Three features explain this. The guarantee concerns the model's output and frozen threshold, not the outcome. The width of the bounds is set by single coefficients and admissible ranges, not by how plausible an extreme completion is for the person. And distance of the bounds from the threshold is a poor confidence measure. Refer-on-abstain also has a cost: in 2005–2014 worst-case bounds referred 724 of every 1,000 participants to miss 4.6 cases, against 502 referrals and 13.0 missed cases for pattern submodels. In practice, an input missing by design calls for a model fitted without it; sporadic missingness for imputation spread or a band around the point score; and worst-case bounds only where missingness is likely to signal risk and a missed case weighs much more than an unnecessary referral."
+},
+{
+"t": "h2",
+"x": "4.3. Limitations and generalisability"
+},
+{
+"t": "p",
+"x": "The rule comparison and every simulated scenario except MCAR were specified after the original results were known, so the findings are exploratory. The fuzzy model was designed after a first version had been evaluated, and its protocol was not registered. Both validation cohorts come from one survey; NHANES is a United States household survey with standardised interviews, and the predictors, their missingness, the prevalence of symptoms and model calibration will differ in health records, other surveys and other countries. The simulated mechanisms are stylised. Imputation used one model and a 90/10 rule. The outcome is a questionnaire threshold, not a diagnosis [11], and self-rated health overlaps in content with it. Estimates are unweighted. Further limitations are discussed in Supplementary Section S3."
+},
+{
+"t": "h1",
+"x": "5. Conclusions"
+},
+{
+"t": "p",
+"x": "Where two symptom questions can be asked, the PHQ-2 is far more efficient than any non-symptom model studied here. Where they cannot and inputs are missing, the abstention rule matters more than the base model. In these exploratory comparisons, worst-case bounds over admissible values decided fewer participants, less accurately, than imputation spread, pattern submodels or point-score selective prediction; their net benefit at 0.10 was never higher, and at 0.05 it was higher than some rules only where all models under-predicted or where missingness was related to the outcome or to a shifted input. Their guarantee concerns the model's output, not the person's outcome. For an input missing by design, a model fitted without it was a simple and good choice."
+},
+{
+"t": "h1",
+"x": "Acknowledgements"
+},
+{
+"t": "p",
+"x": "None."
+},
+{
+"t": "h1",
+"x": "Declarations"
+},
+{
+"t": "p",
+"x": "*Ethics approval and consent:* NHANES protocols were approved by the NCHS Research Ethics Review Board and all participants provided informed consent. This secondary analysis of public de-identified data did not require further approval under the policy of Saigon International University."
+},
+{
+"t": "p",
+"x": "*Data availability:* NHANES data are publicly available from the National Center for Health Statistics (components DEMO, DPQ, SLQ, BMX, HUQ, SMQ, PAQ, MCQ, DIQ and BPQ, 2005–2006 to August 2021–August 2023)."
+},
+{
+"t": "p",
+"x": "*Code availability:* Code, the knowledge schema, the analysis protocol and the statistics file that populates this manuscript are available at https://github.com/Bangth2026/phq9-admissible-bounds (release v7.0.0) and archived at Zenodo ([Zenodo DOI of release v7.0.0, pending])."
+},
+{
+"t": "p",
+"x": "*Funding:* This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors."
+},
+{
+"t": "p",
+"x": "*Declaration of competing interest:* The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper."
+},
+{
+"t": "p",
+"x": "*CRediT authorship contribution statement:* Truong Hai Bang: Conceptualization, Methodology, Software, Formal analysis, Visualization, Writing – original draft, Writing – review & editing, Supervision. Van An Phan Thi: Conceptualization, Data curation, Investigation, Validation, Writing – review & editing."
+},
+{
+"t": "h1",
+"x": "Declaration of generative AI and AI-assisted technologies in the manuscript preparation process"
+},
+{
+"t": "p",
+"x": "During the preparation of this work the authors used Claude (Anthropic) to draft the analysis code and the verification tests under the authors' specification (Section 2.7), to help structure the manuscript and to edit its language. After using this tool, the authors reviewed and edited the content as needed and take full responsibility for the content of the published article."
+},
+{
+"t": "h1",
+"x": "References"
+},
+{
+"t": "refs",
+"x": [
+"[1] M. van Smeden, R.H.H. Groenwold, K.G.M. Moons, A cautionary note on the use of the missing indicator method for handling missing data in prediction research, J. Clin. Epidemiol. 125 (2020) 188–190. https://doi.org/10.1016/j.jclinepi.2020.06.007",
+"[2] B. Kompa, J. Snoek, A.L. Beam, Second opinion needed: communicating uncertainty in medical machine learning, NPJ Digit. Med. 4 (2021) 4. https://doi.org/10.1038/s41746-020-00367-3",
+"[3] C.K. Chow, On optimum recognition error and reject tradeoff, IEEE Trans. Inf. Theory 16 (1970) 41–46. https://doi.org/10.1109/TIT.1970.1054406",
+"[4] Y. Geifman, R. El-Yaniv, Selective classification for deep neural networks, in: Adv. Neural Inf. Process. Syst. 30 (NIPS 2017), 2017, pp. 4878–4887.",
+"[5] M. Zaffalon, The naive credal classifier, J. Stat. Plan. Inference 105 (2002) 5–21. https://doi.org/10.1016/S0378-3758(01)00201-4",
+"[6] G. Corani, M. Zaffalon, Learning reliable classifiers from small or incomplete data sets: the naive credal classifier 2, J. Mach. Learn. Res. 9 (2008) 581–621.",
+"[7] S. Fletcher Mercaldo, J.D. Blume, Missing data and prediction: the pattern submodel, Biostatistics 21 (2020) 236–252. https://doi.org/10.1093/biostatistics/kxy040",
+"[8] M. Zaffran, A. Dieuleveut, J. Josse, Y. Romano, Conformal prediction with missing values, in: Proc. 40th Int. Conf. Mach. Learn., PMLR 202 (2023) 40578–40604.",
+"[9] M. Le Morvan, J. Josse, E. Scornet, G. Varoquaux, What's a good imputation to predict with missing values?, in: Adv. Neural Inf. Process. Syst. 34 (NeurIPS 2021), 2021, pp. 11530–11540.",
+"[10] K. Kroenke, R.L. Spitzer, J.B.W. Williams, The PHQ-9: validity of a brief depression severity measure, J. Gen. Intern. Med. 16 (2001) 606–613. https://doi.org/10.1046/j.1525-1497.2001.016009606.x",
+"[11] B. Levis, A. Benedetti, B.D. Thombs, DEPRESsion Screening Data (DEPRESSD) Collaboration, Accuracy of Patient Health Questionnaire-9 (PHQ-9) for screening to detect major depression: individual participant data meta-analysis, BMJ 365 (2019) l1476. https://doi.org/10.1136/bmj.l1476",
+"[12] Y. Zhang, W. Tian, X. Han, G. Yan, Y. Ma, S. Huo, et al., Assessing the depression risk in the U.S. adults using nomogram, BMC Public Health 22 (2022) 416. https://doi.org/10.1186/s12889-022-12798-6",
+"[13] X. Liu, X. Jin, W. Cen, Y. Liu, S. Luo, J. You, S. Tian, Building a predictive model for depression risk in fracture patients: insights from cross-sectional NHANES 2005–2020 data and an external hospital-based dataset, BMC Public Health 24 (2024) 2328. https://doi.org/10.1186/s12889-024-19696-z",
+"[14] T. Vu, R. Dawadi, M. Yamamoto, J.T. Tay, N. Watanabe, Y. Kuriya, et al., Prediction of depressive disorder using machine learning approaches: findings from the NHANES, BMC Med. Inform. Decis. Mak. 25 (2025) 83. https://doi.org/10.1186/s12911-025-02903-1",
+"[15] K. Kroenke, R.L. Spitzer, J.B.W. Williams, The Patient Health Questionnaire-2: validity of a two-item depression screener, Med. Care 41 (2003) 1284–1292. https://doi.org/10.1097/01.MLR.0000093487.78664.3C",
+"[16] B. Levis, Y. Sun, C. He, Y. Wu, A. Krishnan, P.M. Bhandari, et al., Accuracy of the PHQ-2 alone and in combination with the PHQ-9 for screening to detect major depression: systematic review and meta-analysis, JAMA 323 (2020) 2290–2300. https://doi.org/10.1001/jama.2020.6504",
+"[17] T. Hastie, R. Tibshirani, Generalized additive models, Stat. Sci. 1 (1986) 297–310. https://doi.org/10.1214/ss/1177013604",
+"[18] C. Rudin, Stop explaining black box machine learning models for high stakes decisions and use interpretable models instead, Nat. Mach. Intell. 1 (2019) 206–215. https://doi.org/10.1038/s42256-019-0048-x",
+"[19] Y. Lou, R. Caruana, J. Gehrke, G. Hooker, Accurate intelligible models with pairwise interactions, in: Proc. 19th ACM SIGKDD Int. Conf. Knowl. Discov. Data Min., ACM, 2013, pp. 623–631. https://doi.org/10.1145/2487575.2487579",
+"[20] G.S. Collins, K.G.M. Moons, P. Dhiman, R.D. Riley, A.L. Beam, B. Van Calster, et al., TRIPOD+AI statement: updated guidance for reporting clinical prediction models that use regression or machine learning methods, BMJ 385 (2024) e078378. https://doi.org/10.1136/bmj-2023-078378",
+"[21] L.J. Akinbami, T.-C. Chen, O. Davy, C.L. Ogden, S. Fink, J. Clark, et al., National Health and Nutrition Examination Survey, 2017–March 2020 prepandemic file: sample design, estimation, and analytic guidelines, Vital Health Stat. 1 (190), National Center for Health Statistics, 2022. https://doi.org/10.15620/cdc:115434",
+"[22] Centers for Disease Control and Prevention, National Health and Nutrition Examination Survey 2017–March 2020 data documentation, codebook, and frequencies: Mental Health – Depression Screener (P_DPQ). https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_DPQ.htm (accessed 28 October 2026).",
+"[23] R.D. Riley, J. Ensor, K.I.E. Snell, F.E. Harrell Jr, G.P. Martin, J.B. Reitsma, et al., Calculating the sample size required for developing a clinical prediction model, BMJ 368 (2020) m441. https://doi.org/10.1136/bmj.m441",
+"[24] G. Kellogg, P.-A. Champin, D. Longley (Eds.), JSON-LD 1.1: a JSON-based serialization for linked data, W3C Recommendation, 16 July 2020. https://www.w3.org/TR/json-ld11/",
+"[25] World Health Organization, Obesity: preventing and managing the global epidemic. Report of a WHO consultation, WHO Technical Report Series 894, World Health Organization, Geneva, 2000.",
+"[26] N.F. Watson, M.S. Badr, G. Belenky, D.L. Bliwise, O.M. Buxton, D. Buysse, et al., Recommended amount of sleep for a healthy adult: a joint consensus statement of the American Academy of Sleep Medicine and Sleep Research Society, Sleep 38 (2015) 843–844. https://doi.org/10.5665/sleep.4716",
+"[27] F.E. Harrell Jr, Regression Modeling Strategies, 2nd ed., Springer, Cham, 2015. https://doi.org/10.1007/978-3-319-19425-7",
+"[28] H. Nori, S. Jenkins, P. Koch, R. Caruana, InterpretML: a unified framework for machine learning interpretability, arXiv:1909.09223 (2019). https://doi.org/10.48550/arXiv.1909.09223",
+"[29] A.N. Angelopoulos, S. Bates, Conformal prediction: a gentle introduction, Found. Trends Mach. Learn. 16 (2023) 494–591. https://doi.org/10.1561/2200000101",
+"[30] C. Li, B.E. Shepherd, A new residual for ordinal outcomes, Biometrika 99 (2012) 473–480. https://doi.org/10.1093/biomet/asr073",
+"[31] A.J. Vickers, E.B. Elkin, Decision curve analysis: a novel method for evaluating prediction models, Med. Decis. Making 26 (2006) 565–574. https://doi.org/10.1177/0272989X06295361"
+]
+},
+{
+"t": "h1",
+"x": "Appendix A. Supplementary material"
+},
+{
+"t": "p",
+"x": "Supplementary material to this article (extended methods and results, Supplementary Tables S1–S17, Supplementary Figs. S1–S6 and the TRIPOD+AI checklist) is provided as a separate file."
+}
+]

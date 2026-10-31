@@ -19,5 +19,6 @@ python stats.py && python stats_r1.py && python stats_r2.py && python stats_r3.p
 python sec4.py && python sec4b.py && python rev_splits100.py splits 100 && python figs_r4.py   # abstention rules with the model held fixed
 python sec5.py && python sec5b.py && python stats_r4.py && python stats_r5.py   # point-score selective prediction, net-benefit intervals
 python sec6.py && python stats_r6.py && python fig_design.py   # operational AUROC differences, scenario summary, design figure
-python manuscript_r6.py && node render.js ../manuscript.docx ../results/manuscript_r6.json
+python sec7.py && python stats_r7.py && python fig_export7.py   # pooled intervals, figure export
+python manuscript_full7.py && python manuscript_r7.py && DOUBLE=1 node render.js ../manuscript.docx ../results/manuscript_r7.json lines && node render.js ../supplementary.docx ../results/supplement_r7.json nolines
 cd .. && python tests/test_cohort_priors.py && python tests/test_trace_fidelity.py && python tests/test_bounds_bruteforce.py

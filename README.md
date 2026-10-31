@@ -21,7 +21,7 @@ diagnostic tool and is not a substitute for the PHQ-2 where symptom questions ca
 | `src/rev_common.py` | Comparators: sign-constrained LR (exact linear bounds), spline LR (restricted cubic splines, grid bounds), LR without indicators, LR with multiple imputation, monotone GBT, EBM (GA²M) |
 | `schema/knowledge_schema.jsonld` | Knowledge schema as JSON-LD 1.1 with a SKOS concept scheme |
 | `results/protocol_v2.md` | Analysis protocol of version 2 with its addendum (not registered; time stamps are file modification times recorded in the addendum) |
-| `results/paper_stats_r6.json` | Every number in the manuscript, written by `src/stats_r6.py` (earlier statistics files are kept) |
+| `results/paper_stats_r7.json` | Every number in the manuscript and Supplementary Material, written by `src/stats_r7.py` (earlier statistics files are kept) |
 | `results/v1/` | Archived outputs of version 1 (conjunctive rule base), used as inputs |
 | `results/secondary/` | Outputs of the secondary analyses |
 | `run_all.sh` | Full pipeline in order |
@@ -32,6 +32,10 @@ Python ≥ 3.11 (`pip install -r requirements.txt`); Node.js with `docx` for the
 under `/home/claude/` (`data/`, `results/`, `src/`); create that layout or edit the `R`/`D` constants. Then
 `bash run_all.sh` (about 5 hours on two CPU cores). The tests run at the end (`python tests/test_*.py`). Random seed 2026 throughout. Building the manuscript fails if
 any statistic is missing, so no number is typed by hand. Model pickles are not stored (they are regenerated).
+
+## Clean re-run
+
+The analyses added after release v3.0.0 were re-run from the v6.0.0 code in a clean directory; `src/rerun_compare.py` compares the resulting statistics file with the published one (`results/secondary/rerun_compare.json`: all 13,741 statistics identical apart from computing times).
 
 ## Use of generative AI
 
