@@ -134,8 +134,8 @@ p("*Data availability:* NHANES data are publicly available from the National Cen
 p("*Code availability:* The full pipeline (cohort construction, knowledge schema in JSON-LD, models, Algorithms 1–3, "
   "abstention rules, comparators, experiments, tests, figures, the analysis protocol with its addendum, and the "
   "statistics file that populates this manuscript) is publicly available at {{repo_url}} (release v5.0.0) and archived "
-  "at Zenodo ({{zenodo_doi_v5}}). Re-run from the public NHANES files, the archived release reproduces every number "
-  "reported here except computing times.")
+  "at Zenodo ({{zenodo_doi_v5}}). The release contains the scripts and the statistics file that produced every number "
+  "reported here.")
 p("*Funding:* This research did not receive any specific grant from funding agencies in the public, commercial, or "
   "not-for-profit sectors.")
 p("*Declaration of competing interest:* The authors declare that they have no known competing financial interests or "

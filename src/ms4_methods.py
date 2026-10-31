@@ -340,6 +340,8 @@ p("Analyses used Python 3.13 with pandas 3.0.5, scikit-learn 1.9.1, SciPy 1.18.1
   "and 2; tests/test_trace_fidelity.py recomputes probabilities from serialised traces without importing the model; "
   "tests/test_cohort_priors.py reproduces the cohort flow and the direction priors from the public files. The tool was "
   "also used to help structure the manuscript and edit its language. The authors reviewed the code, outputs and text "
-  "and checked references and statistics against their sources. The archived release was re-run from the raw files in "
-  "a clean directory and reproduced every number in this manuscript except computing times. All numbers are written "
+  "and checked references and statistics against their sources. All analyses use the seed 2026. The release that "
+  "accompanied the previous version of this manuscript was re-run from the raw files in a clean directory and "
+  "reproduced every number except computing times; the analyses added since then were run once with the archived "
+  "code. All numbers are written "
   "by the analysis code to one statistics file and inserted programmatically.")
