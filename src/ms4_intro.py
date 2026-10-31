@@ -12,40 +12,34 @@ meta("*Corresponding author: Truong Hai Bang, truonghaibang@siu.edu.vn")
 
 h1("Highlights")
 bullets([
-    "Four abstention rules for missing inputs were compared with the base model held fixed.",
-    "Pattern submodels decided every 2005–2014 participant with the highest net benefit.",
+    "Five abstention rules for missing inputs were compared with the base model fixed.",
+    "Pattern submodels and point-score selective prediction did best in 2005–2014.",
     "Worst-case bounds decided fewest participants, least accurately at equal coverage.",
-    "Bounds missed fewer cases only by referring more people, even when imputation was wrong.",
-    "PHQ-2 flagged {{phq2_int_flag}}% of participants (sensitivity {{phq2_int_sens}}); the model flagged {{full_int_flag}}% ({{full_int_Sensitivity}}).",
+    "Worst-case bounds missed fewer cases only by referring more people.",
+    "PHQ-2 flagged {{phq2_int_flag}}% (sensitivity {{phq2_int_sens}}); the model flagged {{full_int_flag}}% ({{full_int_Sensitivity}}).",
 ])
 
 h1("Abstract")
-p("*Background and objective:* Prediction models applied to incomplete records either impute the missing inputs or "
-  "abstain. We compared rules for abstaining in a prescreening task: predicting a Patient Health Questionnaire-9 "
-  "(PHQ-9) score ≥ 10 from non-symptom survey data.")
-p("*Methods:* NHANES 2017–March 2020 provided development (n = {{n_dev}}) and internal test (n = {{n_int}}) data; "
-  "August 2021–August 2023 (n = {{n_tmp}}) and 2005–2014 (n = {{n_ext}}, free-day sleep not collected) served as "
-  "validation. Three base models were fitted: a fuzzy additive model built from a schema that declares each input's "
-  "admissible values, sign-constrained linear and spline logistic regression. Four rules were applied to each: "
-  "worst-case bounds (abstain when the range of predicted probabilities over all admissible values of the missing "
-  "inputs contains the threshold), imputation spread over 20 multiple imputations, pattern submodels and complete "
-  "cases. Missingness was natural, random, not at random, outcome-dependent, or structural with a shifted "
-  "conditional distribution.")
-p("*Results:* The pre-specified primary contrast, 2005–2014 AUROC of the fuzzy model minus logistic regression with "
-  "missing indicators, was {{d_lr_ext}} ({{d_lr_ext_ci}}); it reflects the indicator for an input never collected, and "
-  "regression without indicators matched the fuzzy model ({{lrni_ext_AUROC}}). With the fuzzy model fixed, worst-case "
-  "bounds decided {{a4_ext_fuzzy_wc_cov}}% of 2005–2014 participants, imputation spread {{a4_ext_fuzzy_mi_cov}}% and pattern "
-  "submodels all; at equal coverage, balanced accuracy was {{a4_ext_fuzzy_wc_atb}}, {{a4_ext_fuzzy_mi_atb}} and "
-  "{{a4_ext_fuzzy_ps_atb}}. With self-rated health absent for everyone in a "
-  "sample shifted away from the imputation model, imputation spread missed {{a4_sh1srh_fuzzy_mi_mis}} cases per 1,000 and "
-  "worst-case bounds {{a4_sh1srh_fuzzy_wc_mis}}, but the bounds referred {{a4_sh1srh_fuzzy_wc_ref}} per 1,000 and still "
-  "decided less accurately. Worst-case bounds had the highest net benefit only when missingness depended on health or "
-  "on the outcome and a missed case was weighed as 19 unnecessary referrals. PHQ-2 ≥ 3 flagged {{phq2_int_flag}}% of participants with sensitivity "
-  "{{phq2_int_sens}}, inflated because both items are part of the outcome.")
-p("*Conclusions:* With the base model fixed, worst-case abstention decided fewer participants, and "
-  "less accurately, than imputation spread or pattern submodels; it missed fewer cases only by referring more people. "
-  "For an input missing by design, a model fitted without it was the better choice. No non-symptom model approached "
-  "the PHQ-2.")
+p("*Background and objective:* Models applied to incomplete records must impute or abstain. We compared abstention "
+  "rules for predicting a PHQ-9 score ≥ 10 from non-symptom survey data.")
+p("*Methods:* NHANES 2017–March 2020 provided development (n = {{n_dev}}) and test (n = {{n_int}}) data; 2021–2023 "
+  "(n = {{n_tmp}}) and 2005–2014 (n = {{n_ext}}; free-day sleep not collected) served as validation. Five rules were "
+  "applied to three fixed base models (a fuzzy additive model built from a schema of admissible input values, and two "
+  "logistic regressions): worst-case bounds, which abstain when the probability range over all admissible values of "
+  "the missing inputs contains the threshold; imputation spread; pattern submodels; point-score selective "
+  "prediction; and complete cases. Missingness was natural or simulated in 13 scenarios.")
+p("*Results:* The pre-specified primary contrast (2005–2014 AUROC, fuzzy model minus logistic regression with missing "
+  "indicators) was {{d_lr_ext}} ({{d_lr_ext_ci}}), an artefact of indicating an uncollected input. With the fuzzy model "
+  "fixed, worst-case bounds decided {{a4_ext_fuzzy_wc_cov}}% of 2005–2014 participants, imputation spread "
+  "{{a4_ext_fuzzy_mi_cov}}% and pattern submodels all; balanced accuracy at equal coverage was {{a4_ext_fuzzy_wc_atb}}, "
+  "{{a4_ext_fuzzy_mi_atb}} and {{a4_ext_fuzzy_ps_atb}}, and net benefit at threshold 0.10 {{a4_ext_fuzzy_wc_nb10}}, "
+  "{{a4_ext_fuzzy_mi_nb10}} and {{a4_ext_fuzzy_ps_nb10}}. Worst-case bounds missed fewer cases by referring more people; "
+  "their net benefit was equivalent or higher only where little was missing, where missingness signalled risk, or "
+  "where models under-predicted. PHQ-2 ≥ 3 flagged {{phq2_int_flag}}% of participants (sensitivity {{phq2_int_sens}}, "
+  "inflated by incorporation).")
+p("*Conclusions:* Worst-case abstention was rarely better than imputation spread, pattern submodels or point-score "
+  "selective prediction. For an input missing by design, a model fitted without it was a simple, good choice. No "
+  "non-symptom model approached the PHQ-2.")
 p("*Keywords:* Missing data; Abstention; Selective prediction; Pattern submodels; Multiple imputation; Depression "
   "screening; PHQ-9; Fuzzy rule-based systems; NHANES")
 
@@ -82,13 +76,13 @@ p("Worst-case abstention needs the set of admissible values of each input, which
   "[@rudin2019,@lou2013,@caruana2015,@nori2019]. Two logistic regression models with unbounded terms serve as further "
   "base models.")
 p("The study asks three questions. (RQ1) With the base model held fixed, how do worst-case bounds, imputation spread, "
-  "pattern submodels and complete-case abstention compare in coverage, accuracy of decided records and decision "
+  "pattern submodels, point-score selective prediction and complete-case abstention compare in coverage, accuracy of decided records and decision "
   "consequences, under natural, random, non-random, outcome-dependent and structural missingness, including a target "
   "population in which the imputation model is wrong? (RQ2) How do the base models compare in discrimination and "
   "calibration across three survey periods? (RQ3) Does a request rule guided by the bounds resolve abstentions with "
   "fewer inputs or at lower cost?")
-p("The contributions, in order of evidential weight, are: (i) a comparison of four abstention rules across three base "
-  "models and sixteen missingness scenarios on real survey data, with coverage split by decision, accuracy at matched "
+p("The contributions, in order of evidential weight, are: (i) a comparison of five abstention rules across three base "
+  "models and sixteen missingness scenarios (three cohorts as observed and 13 simulated; Table 6) on real survey data, with coverage split by decision, accuracy at matched "
   "coverage, risk–coverage curves and decision consequences per 1,000 participants; (ii) a validation of the base "
   "models in three survey periods against eight comparators, with the PHQ-2 as a reference point; (iii) algorithms for "
   "worst-case bounds of fuzzy additive rule bases, elementary for main effects (Algorithm 1) and exact for components "

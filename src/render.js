@@ -15,7 +15,9 @@ const MARGIN = 1440;
 
 function runs(text, base = {}) {
   // markup: *italic*, _{sub}, ^{sup}; single-character subscripts written as x_r are converted too
-  text = text.replace(/(?<=[A-Za-zμβησπΣ)𝒳])_([A-Za-z0-9])(?![A-Za-z0-9{])/gu, "_{$1}");
+  // URLs and file names are left untouched (no automatic subscripts inside them)
+  text = text.split(/(\s+)/).map(tok => (/:\/\/|www\.|\.htm|\.py|\.json/.test(tok) ? tok :
+    tok.replace(/(?<=[A-Za-zμβησπΣ)𝒳])_([A-Za-z0-9])(?![A-Za-z0-9{])/gu, "_{$1}"))).join("");
   const out = [];
   const re = /(\*[^*]+\*|_\{[^}]*\}|\^\{[^}]*\})/g;
   let last = 0, m;

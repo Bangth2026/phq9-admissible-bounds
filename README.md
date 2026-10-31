@@ -14,13 +14,14 @@ diagnostic tool and is not a substitute for the PHQ-2 where symptom questions ca
 | `src/fofs.py` `bounds()` | **Algorithm 1** (Box 1): worst-case bounds for a main-effects rule base |
 | `src/exact.py` | **Algorithm 2** (Box 2: exact worst-case bounds for rule bases with conjunctions) and **Algorithm 3** (Box 3: bound-guided input acquisition) |
 | `src/sec4.py` | Abstention rules with the base model held fixed: worst-case bounds, imputation spread, pattern submodels, complete cases; natural, MCAR, MNAR, outcome-dependent and shifted missingness; risk–coverage, AURC, decision consequences |
+| `src/sec5.py`, `src/sec5b.py` | Point-score selective prediction, net-benefit intervals, prevalence of shifted samples, ordinal-residual shift |
 | `src/sec4b.py` | Design-based bootstrap, minimum sample size, calibration maps, acquisition with item costs |
 | `src/sec3.py` | Earlier imputation-spread analysis, sex-specific thresholds |
 | `tests/` | Independent checks: cohort flow and priors, bounds against brute force, trace re-evaluation |
 | `src/rev_common.py` | Comparators: sign-constrained LR (exact linear bounds), spline LR (restricted cubic splines, grid bounds), LR without indicators, LR with multiple imputation, monotone GBT, EBM (GA²M) |
 | `schema/knowledge_schema.jsonld` | Knowledge schema as JSON-LD 1.1 with a SKOS concept scheme |
 | `results/protocol_v2.md` | Analysis protocol of version 2 with its addendum (not registered; time stamps are file modification times recorded in the addendum) |
-| `results/paper_stats_r4.json` | Every number in the manuscript, written by `src/stats_r4.py` (earlier statistics files are kept) |
+| `results/paper_stats_r5.json` | Every number in the manuscript, written by `src/stats_r5.py` (earlier statistics files are kept) |
 | `results/v1/` | Archived outputs of version 1 (conjunctive rule base), used as inputs |
 | `results/secondary/` | Outputs of the secondary analyses |
 | `run_all.sh` | Full pipeline in order |

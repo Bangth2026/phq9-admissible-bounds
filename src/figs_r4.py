@@ -4,7 +4,7 @@ import json
 import numpy as np
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-exec(open("/home/claude/src/sec4.py").read().split("OUT = {}")[0])
+exec(open("/home/claude/src/sec5.py").read().split("# ---------------------------------------------------------------- scenario data")[0])
 
 
 def residual_z(var):
@@ -35,20 +35,20 @@ def scen_data():
     return out
 
 
-LAB = {"wc": "Worst-case bounds", "mi": "Imputation spread", "ps": "Pattern submodels", "cc": "Complete case / point-score margin"}
-COL = {"wc": "#c0504d", "mi": "#4f81bd", "ps": "#2e8b57", "cc": "#7f7f7f"}
+LAB = {"wc": "Worst-case bounds", "mi": "Imputation spread", "ps": "Pattern submodels", "sel": "Point-score selective"}
+COL = {"wc": "#c0504d", "mi": "#4f81bd", "ps": "#2e8b57", "sel": "#7f7f7f"}
 fig, axes = plt.subplots(1, 4, figsize=(13.5, 3.6), sharey=True)
 store = {}
 for ax, (lab, d) in zip(axes, scen_data()):
-    res, arr = evaluate(d, with_ps="MCAR" not in lab, keep=True)
+    res, arr = evaluate(d, with_ps="MCAR" not in lab, keep=True); arr = with_sel(d, arr)
     y = d.y.values; rules = arr["fuzzy"]; store[lab] = {}
-    for r in ("wc", "mi", "ps", "cc"):
+    for r in ("wc", "mi", "ps", "sel"):
         if r not in rules: continue
         cov, dec, conf = rules[r]
         ba = rc_curve(y, conf, dec)
         ax.plot(100 * GRID, ba, color=COL[r], lw=1.8, label=LAB[r])
         oc = cov.mean()
-        if 0.05 <= oc <= 1.0 and r != "cc":
+        if 0.05 <= oc <= 1.0:
             ax.plot(100 * oc, np.interp(oc, GRID, ba), "o", mfc="white", mec=COL[r], ms=6)
         store[lab][r] = dict(curve=[float(x) for x in ba], own=float(oc))
     ax.set_title(lab, fontsize=9.5); ax.set_xlabel("Participants decided (%)"); ax.grid(alpha=0.3)

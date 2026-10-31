@@ -1,34 +1,40 @@
-# Discussion, conclusions, declarations and appendices of version 4.
+# Discussion, conclusions, declarations and appendices.
 from ms4_helpers import *  # noqa
 
 h1("4. Discussion")
 h2("4.1. Principal findings")
 p("For RQ1, with the base model held fixed, the abstention rules differed little where few inputs were missing and "
-  "clearly where many were. Imputation spread and pattern submodels decided more participants than worst-case bounds, "
-  "classified the decided participants more accurately at equal coverage, and gave higher net benefit at a threshold "
-  "probability of 0.10 under structural, random and non-random missingness. Pattern submodels were the best response "
-  "to an input that was never collected. Worst-case bounds missed the fewest cases in every scenario, because they "
-  "referred more people; this bought the highest net benefit at a threshold probability of 0.05 only when missingness "
-  "depended on self-rated health or on the outcome itself. For RQ2, the fuzzy additive model ranked people about as "
-  "well as linear logistic regression in all three periods and slightly less well than spline regression; the "
-  "pre-specified primary contrast favoured it only because the comparator coded an input that was not collected "
-  "with an indicator. For RQ3, the bound-guided request rule saved a small number of inputs, and a cost-weighted "
-  "version had the lowest expected cost of the orders compared.")
+  "clearly where many were. Imputation spread, pattern submodels and point-score selective prediction decided more "
+  "participants than worst-case bounds and classified the decided participants more accurately at equal coverage. "
+  "Their net benefit at a threshold probability of 0.10 was higher in 2005–2014, under 30% MCAR and when an input was "
+  "absent with a shifted distribution; it was equivalent to that of imputation spread and pattern submodels under "
+  "non-random and outcome-dependent masking and in the internal test set, and in 2021–2023 worst-case bounds were equivalent or better. For the input that was never "
+  "collected, pattern submodels gave the highest net benefit at 0.10, and ranking by the distance of the point score "
+  "from the threshold gave the best risk–coverage curve; the two were equivalent in net benefit at 0.05. Worst-case "
+  "bounds missed the fewest cases in every scenario, because they referred more people. For RQ2, the fuzzy additive "
+  "model ranked people about as well as linear logistic regression in all three periods and slightly less well than "
+  "spline regression; the pre-specified primary contrast favoured it only because the comparator coded an input that "
+  "was not collected with an indicator. For RQ3, the bound-guided request rule saved a small number of inputs, and a "
+  "cost-weighted version had the lowest expected cost of the orders compared.")
 
 h2("4.2. When are worst-case bounds worth their cost?")
 p("We had proposed that worst-case bounds are worth having where an input is absent by design and its distribution in "
   "the target population is unknown. The 2005–2014 cohort is that setting, and the bounds lost there: the imputation "
   "model drew free-day sleep from its 2017–2020 conditional distribution, an assumption that cannot be checked, and "
-  "still decided more participants more accurately. The added analyses explain why and show where the ordering "
-  "changes. When the imputation model was made wrong on purpose, by sampling a target population whose self-rated "
-  "health or free-day sleep departed systematically from what the other inputs predict, imputation spread and pattern "
-  "submodels became less sensitive, missing about twice as many cases per 1,000 as without shift, but the "
-  "records they chose to decide were still classified better than those decided by the bounds. The bounds did not "
-  "become more accurate; they stayed conservative and referred almost everyone. Under non-random and outcome-dependent "
-  "masking the picture was similar, with one difference: because a missing value then signals risk, the bounds' habit "
-  "of referring incomplete records happened to be right, and for the fuzzy model their risk–coverage curve was better than "
-  "those of imputation spread and pattern submodels. The ordering therefore reverses only on measures that weigh missed cases heavily, and only when "
-  "missingness carries information about the outcome.")
+  "still decided more participants more accurately. The added analyses show where the ordering changes. When the "
+  "imputation model was made wrong on purpose, by sampling a target population whose self-rated health or free-day "
+  "sleep departed systematically from what the other inputs predict, imputation spread and pattern submodels lost "
+  "some sensitivity (from {{a4_sh0srh_fuzzy_mi_sensr}}% to {{a4_sh1srh_fuzzy_mi_sensr}}% and from "
+  "{{a4_sh0srh_fuzzy_ps_sensr}}% to {{a4_sh1srh_fuzzy_ps_sensr}}% with self-rated health absent), while the records they "
+  "chose to decide were still classified better than those decided by the bounds, and their net benefit stayed higher. "
+  "The bounds did not become more accurate; they stayed conservative and referred almost everyone. The shifted samples "
+  "also had a higher prevalence, so the rise in cases missed per 1,000 overstates the loss of sensitivity. Under "
+  "non-random and outcome-dependent masking, a missing value signals risk, the bounds' habit of referring incomplete "
+  "records happened to be right, and their net benefit became equivalent to that of the other rules. In 2021–2023 the "
+  "conservative rule was favoured for a different reason: every model under-predicted, so referring more people "
+  "partly corrected the miscalibration, and worst-case bounds had the highest net benefit at 0.05. Worst-case bounds "
+  "therefore come out ahead only when missingness or miscalibration makes referring more people the right thing to do, "
+  "which a recalibrated model with a lower threshold would also achieve.")
 p("Three features of the bounds explain the rest. First, the guarantee is relative to the model and its frozen "
   "threshold, not to the outcome: in 2021–2023, where every model under-predicted by a factor of about 1.6, a decision "
   "that holds for every admissible completion is wrong in the same way as the model's decision on a complete record. "
@@ -36,16 +42,17 @@ p("Three features of the bounds explain the rest. First, the guarantee is relati
   "extreme completions are for the person. In 2005–2014 the free-day sleep coefficients made the bounds asymmetric, so "
   "they decided many participants to refer and few not to refer; with self-rated health missing, its range spans most "
   "of the linear predictor and the regression models' bounds decided almost nobody. Third, the distance of the bounds "
-  "from the threshold is a poor confidence measure: ranking participants by the distance of the point score from the "
-  "threshold gave a better risk–coverage curve in 2005–2014 than ranking by the bounds. Bounded terms, which the "
-  "schema's saturating memberships provide, keep the bounds narrower than those of linear or spline regression, but "
-  "they do not change these three features.")
+  "from the threshold is a poor confidence measure: for the fuzzy model in 2005–2014, ranking by the distance of the "
+  "point score from the threshold gave an AURC of {{a4_ext_fuzzy_sel_aurc}} against {{a4_ext_fuzzy_wc_aurc}} for the "
+  "bounds. Bounded terms, which the schema's saturating memberships provide, keep the bounds narrower than those of "
+  "linear or spline regression, but they do not change these three features.")
 p("For practice this suggests a simple order of preference. If an input is missing by design in a whole population, "
   "fit a model without it (a pattern submodel); the cost in discrimination here was nil. If inputs are missing "
-  "sporadically and the mechanism is plausibly ignorable given the observed inputs, abstain on imputation spread. "
-  "Worst-case bounds are a defensible choice only when missingness is likely to signal risk and a missed case weighs "
-  "much more than an unnecessary referral, and even then their advantage over referring every incomplete record is "
-  "small.")
+  "sporadically, abstain on imputation spread or on a band around the threshold of the point score; the latter needs "
+  "no imputation model and did about as well as imputation spread here, better under random masking and structural "
+  "absence and worse under outcome-dependent masking. Worst-case bounds "
+  "are a defensible choice only when missingness is likely to signal risk and a missed case weighs much more than an "
+  "unnecessary referral, and even then their advantage over referring every incomplete record is small.")
 
 h2("4.3. Relation to other approaches and what the schema contributes")
 p("Worst-case bounds are the credal-classifier logic [@zaffalon2002,@corani2008] applied to an additive model with "
@@ -107,13 +114,13 @@ p("The fuzzy model was designed after version-1 results on the internal and late
   "for several groups.")
 
 h1("5. Conclusions")
-p("With the base model held fixed, abstaining on the spread of multiple imputations or using pattern submodels "
-  "decided more participants than abstaining on worst-case bounds over admissible input values, decided them more "
-  "accurately, and gave higher net benefit at a threshold probability of 0.10, including for an input never collected "
-  "and when the imputation model was wrong for the target population. Worst-case bounds missed fewer cases because "
-  "they referred more people; this paid off only when missingness signalled risk and missed cases were weighted "
-  "heavily. Their guarantee concerns the model's output, not the person's outcome. For an input missing by design, a "
-  "model fitted without it was the simplest and best option. The fuzzy additive model built on the knowledge schema "
+p("With the base model held fixed, abstaining on worst-case bounds over admissible input values decided fewer "
+  "participants than abstaining on the spread of multiple imputations, on a band around the threshold of the point "
+  "score, or using pattern submodels, and decided them less accurately. Its net benefit at a threshold probability of "
+  "0.10 was lower when an input was missing by design or at random and equivalent when missingness signalled risk; it "
+  "was higher only where all models under-predicted. Worst-case bounds missed fewer cases because they referred more "
+  "people, and their guarantee concerns the model's output, not the person's outcome. For an input missing by design, "
+  "a model fitted without it was a simple and good choice. The fuzzy additive model built on the knowledge schema "
   "ranked people as well as linear logistic regression, and two symptom questions remain far more efficient than any "
   "non-symptom model where they can be asked.")
 
@@ -126,8 +133,8 @@ p("*Data availability:* NHANES data are publicly available from the National Cen
   "August 2021–August 2023.")
 p("*Code availability:* The full pipeline (cohort construction, knowledge schema in JSON-LD, models, Algorithms 1–3, "
   "abstention rules, comparators, experiments, tests, figures, the analysis protocol with its addendum, and the "
-  "statistics file that populates this manuscript) is publicly available at {{repo_url}} (release v4.0.0) and archived "
-  "at Zenodo ({{zenodo_doi_v4}}). Re-run from the public NHANES files, the archived release reproduces every number "
+  "statistics file that populates this manuscript) is publicly available at {{repo_url}} (release v5.0.0) and archived "
+  "at Zenodo ({{zenodo_doi_v5}}). Re-run from the public NHANES files, the archived release reproduces every number "
   "reported here except computing times.")
 p("*Funding:* This research did not receive any specific grant from funding agencies in the public, commercial, or "
   "not-for-profit sectors.")
@@ -137,9 +144,10 @@ p("*CRediT authorship contribution statement:* Truong Hai Bang: Conceptualizatio
   "analysis, Visualization, Writing – original draft, Writing – review & editing, Supervision. Van An Phan Thi: "
   "Conceptualization, Data curation, Investigation, Validation, Writing – review & editing.")
 p("*Declaration of generative AI and AI-assisted technologies in the manuscript preparation process:* During the "
-  "preparation of this work the authors used Claude (Anthropic) to help structure the manuscript, write analysis code "
-  "and edit its language. The authors reviewed and edited all content, verified every reference and statistic against "
-  "its source, and take full responsibility for the publication.")
+  "preparation of this work the authors used Claude (Anthropic) to draft the analysis code and the verification tests "
+  "under the authors' specification (Section 2.13), to help structure the manuscript and to edit its language. After "
+  "using this tool, the authors reviewed and edited the content as needed and take full responsibility for the content "
+  "of the published article.")
 
 h1("References")
 B.append({"t": "refs"})

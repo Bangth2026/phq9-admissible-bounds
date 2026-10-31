@@ -17,5 +17,6 @@ python sec3.py                               # imputation-spread abstention, ris
 python export_schema.py && python figs_r1.py && python figs_r3.py
 python stats.py && python stats_r1.py && python stats_r2.py && python stats_r3.py && python fig_flow.py
 python sec4.py && python sec4b.py && python rev_splits100.py splits 100 && python figs_r4.py   # abstention rules with the model held fixed
-python stats_r4.py && python manuscript_r4.py && node render.js ../manuscript.docx ../results/manuscript_r4.json
+python sec5.py && python sec5b.py && python stats_r4.py && python stats_r5.py   # point-score selective prediction, net-benefit intervals
+python manuscript_r5.py && node render.js ../manuscript.docx ../results/manuscript_r5.json
 cd .. && python tests/test_cohort_priors.py && python tests/test_trace_fidelity.py && python tests/test_bounds_bruteforce.py

@@ -144,9 +144,13 @@ p("and refers if p_L ≥ t, does not refer if p_U < t, and abstains otherwise. A
   "decision that holds for every completion can still be wrong, and it is wrong in the same way as the model's "
   "decision on a complete record. Section 2.7 describes how the bounds are computed for each base model.")
 p("*Imputation spread* uses the conditional distribution of the missing inputs given the observed ones, learnt in the "
-  "development data. The chained-equation model fitted for the comparator produced 20 completed copies of each record "
-  "(four posterior draws from each of five imputation models; discrete inputs rounded and all inputs clipped to their "
-  "admissible sets), the base model scored each copy, and the rule refers if at least 90% of the 20 probabilities "
+  "development data. The imputation model is the one fitted for the chained-equation comparator: five chained-equation "
+  "models (scikit-learn IterativeImputer with Bayesian ridge conditional models, posterior sampling and 10 iterations), "
+  "fitted once on the development predictors and kept fixed for every cohort and scenario; they were never refitted on "
+  "test data. Each conditional model regresses one input on all the others (the 14 predictors, with marital status as "
+  "three indicators); the outcome was not included, because it is unknown when a prediction is made. The five models "
+  "produced 20 completed copies of each record (four posterior draws from each; discrete inputs rounded and all inputs "
+  "clipped to their admissible sets), the base model scored each copy, and the rule refers if at least 90% of the 20 probabilities "
   "exceed t, does not refer if at most 10% do, and abstains otherwise. Unlike the original analysis, in which the rule "
   "ran on the chained-equation logistic model, the imputations here pass through the same base model as the bounds, so "
   "the comparison holds the model fixed.")
@@ -156,10 +160,15 @@ p("*Pattern submodels* [@fletchermercaldo2020] avoid assumptions about the missi
   "pattern. Every record therefore receives a decision. Because the number of patterns grows quickly when many inputs "
   "are masked at random, pattern submodels were evaluated under natural, non-random, outcome-dependent and shifted "
   "missingness, where patterns are few, but not under 30% MCAR. *Complete-case abstention* decides only records with "
-  "every input observed.")
+  "every input observed. *Point-score selective prediction* ignores which inputs are missing: the base model's point "
+  "score (single imputation as in Section 2.5) is compared with the threshold, and the rule abstains when the score lies "
+  "within a band around the threshold, |logit p − logit t| < δ. The half-width δ was set on development out-of-fold "
+  "predictions so that 90% of development participants would be decided. This is ordinary selective classification "
+  "[@geifman2017] with no missing-data rule, and it shows what the other rules add to it.")
 p("We did not use conformal prediction as a baseline. For a binary outcome, split-conformal prediction with a "
   "score-based nonconformity measure returns the set {0, 1}, the analogue of abstention, whenever the predicted "
-  "probability falls in a band set by the target coverage level [@geifman2017]; the band does not depend on which "
+  "probability falls in a band set by the target coverage level [@angelopoulos2023]; it is then a point-score rule like "
+  "the one above, and the band does not depend on which "
   "inputs are missing. Conformal methods designed for missing inputs calibrate the band within missingness patterns "
   "and guarantee coverage of the label set marginally or conditionally on the pattern, under exchangeability between "
   "calibration and test data [@zaffran2023]. That guarantee concerns a different quantity from ours (how often the "
@@ -233,21 +242,29 @@ p("*Structural absence with a shifted conditional distribution.* Imputation spre
   "free-day sleep (shorter sleep than predicted), and γ = 0, 0.5 or 1 (10 samples each). With γ = 1 the mean residual in "
   "the target sample was {{shm_srh_1}} SD for self-rated health and {{shm_we_1}} SD for free-day sleep, so an imputation "
   "model trained on development data systematically imputes healthier values and longer sleep than the truth. The "
-  "input was then masked for every participant.")
+  "input was then masked for every participant. Because the outcome is related to both inputs, the resampling also "
+  "changed the prevalence of PHQ-9 ≥ 10 in the target samples; we report it for each sample, and we compare rules on "
+  "sensitivity as well as on counts per 1,000. The residual of self-rated health, a five-level ordinal variable, came "
+  "from a linear model because it serves only to tilt the sampling weights towards participants whose health is worse "
+  "than their other inputs predict. To check that this choice does not drive the results, the γ = 1 shift for "
+  "self-rated health was repeated with the probability-scale residual of a proportional-odds model, P(Y < y) − P(Y > y) "
+  "[@li2012].")
 
 h2("2.9. Comparison of abstention rules")
-p("Rules were compared with the base model held fixed, on four outputs. (1) Coverage, the proportion of participants "
+p("Rules were compared with the base model held fixed, on four kinds of output. (1) Coverage, the proportion of participants "
   "decided, split into decisions to refer and decisions not to refer. (2) Classification of decided participants at "
   "matched coverage: each rule ranks participants by its confidence (distance of the bounds from the threshold on the "
-  "log-odds scale; distance of the imputation share from 0.5; for pattern submodels and complete cases, distance of "
-  "the score from the threshold) and decides the most confident ones up to the coverage reached by worst-case bounds "
+  "log-odds scale; distance of the imputation share from 0.5; for pattern submodels, point-score selective prediction and complete cases, "
+  "distance of the score from the threshold) and decides the most confident ones up to the coverage reached by worst-case bounds "
   "of the same base model; we report sensitivity, specificity and balanced accuracy among them. (3) The "
   "risk–coverage curve [@geifman2017], balanced error among the decided against the proportion decided over coverage "
   "0.05–1, summarised by the area under it (AURC; lower is better) with a percentile bootstrap interval (500 resamples "
   "of participants in the natural cohorts, 300 in 2005–2014 and in the first repetition of each simulated scenario) "
   "and a paired interval for the difference to worst-case bounds. (4) Decision consequences under refer-on-abstain, "
   "per 1,000 participants: participants referred, cases missed and questionnaires avoided (participants not "
-  "referred), and net benefit [@vickers2006] at threshold probabilities 0.05 and 0.10. Balanced accuracy at matched "
+  "referred), and net benefit [@vickers2006] at threshold probabilities 0.05 and 0.10, with paired percentile bootstrap "
+  "intervals for the difference to worst-case bounds (1,000 resamples; 500 in 2005–2014; first repetition of the "
+  "simulated scenarios). Differences whose interval includes zero are described as equivalent. Balanced accuracy at matched "
   "coverage depends on which participants each rule chooses to decide, so the decision-consequence measures are the "
   "ones that correspond to the prescreening costs of Section 2.1.")
 
@@ -304,28 +321,25 @@ p("The fuzzy model above is the second version of the system. Version 1 selected
   "AUROC in 2005–2014 of the fuzzy model versus logistic regression with missing indicators. According to the "
   "protocol's addendum, the 2005–2014 files were downloaded after the protocol was saved; no independently verifiable "
   "record predates the download, and the earliest verifiable record of the protocol is its deposit with the code "
-  "({{zenodo_doi_v3}}). The 2005–2014 comparison is therefore free of earlier results according to our records only. "
+  "({{zenodo_doi_v3}}); the protocol file is unchanged in every later release. The 2005–2014 comparison is therefore free of earlier results according to our records only. "
   "Every other comparator, every abstention rule other than worst-case bounds, every simulated missingness scenario "
   "other than MCAR, the acquisition rule, the repeated splits and the design-based analysis were specified after "
   "results were known; tables mark them with ‡.")
 
-h2("2.13. Explanation trace, software, and use of generative AI")
-p("For each individual, the system exports a JSON trace capturing inputs, missing-input flags, membership values and "
-  "provenance for each concept, contributions β_r μ_r of each rule (or its permissible range under missing data), the "
-  "intercept, probability bounds, and—for abstentions—the input requested by Algorithm 3. For complete inputs, "
-  "contributions sum exactly to η, adhering to standard generalized linear model properties.")
-p("Analyses were conducted in Python 3.13 utilizing pandas 3.0.5, scikit-learn 1.9.1, SciPy 1.18.1, statsmodels, and "
-  "interpret 0.7.8. During manuscript preparation, the authors utilized a generative AI tool (Claude, Anthropic) as a "
-  "coding and writing assistant to help structure the text, refine the analysis code, and polish the language. The "
-  "code developed with AI assistance encompasses cohort construction, model implementation, probability bounds "
-  "calculation, the input acquisition rule, experiments, and figure generation.")
-p("The verification methodology was independently designed and conceptualized by the authors to evaluate system "
-  "integrity. Specifically, tests/test_bounds_bruteforce.py validates bounds against a dense brute-force evaluation "
-  "over 4,001-point grids without sharing code logic with Algorithms 1 and 2; tests/test_trace_fidelity.py recomputes "
-  "probabilities directly from serialized traces without importing the model; and tests/test_cohort_priors.py "
-  "independently reproduces cohort flows and direction priors from public raw data.")
-p("The authors thoroughly reviewed, edited, and validated all generated code, outputs, statistical results, and "
-  "citations against primary sources, taking full responsibility for the integrity and accuracy of the published "
-  "work. The archived release was executed in a clean environment directly from raw data files, successfully "
-  "reproducing every statistical metric reported in this manuscript. All figures and numerical results were "
-  "programmatically generated and exported to a single statistical record file for automated insertion.")
+h2("2.13. Explanation trace, software and use of generative AI")
+p("For each person the system exports a JSON trace with the inputs, missing-input flags, each concept's membership and "
+  "provenance, each rule's contribution β_r μ_r (or its range when an input is missing), the intercept, the "
+  "probability bounds and, for abstentions, the input requested by Algorithm 3. For complete "
+  "inputs the contributions add exactly to η, as in any generalised linear model.")
+p("Analyses used Python 3.13 with pandas 3.0.5, scikit-learn 1.9.1, SciPy 1.18.1, statsmodels and interpret 0.7.8. "
+  "The analysis code was drafted with a generative AI tool (Claude, Anthropic) under the authors' specification: "
+  "cohort construction, models, bounds, the acquisition rule, experiments, figure scripts and the three verification "
+  "tests. The authors specified what each test checks; the test files were implemented with the same tool, so they are "
+  "independent of the analysis code in construction, not in authorship. tests/test_bounds_bruteforce.py compares the "
+  "bounds with dense brute-force evaluation of the model on 4,001-point grids and shares no code with Algorithms 1 "
+  "and 2; tests/test_trace_fidelity.py recomputes probabilities from serialised traces without importing the model; "
+  "tests/test_cohort_priors.py reproduces the cohort flow and the direction priors from the public files. The tool was "
+  "also used to help structure the manuscript and edit its language. The authors reviewed the code, outputs and text "
+  "and checked references and statistics against their sources. The archived release was re-run from the raw files in "
+  "a clean directory and reproduced every number in this manuscript except computing times. All numbers are written "
+  "by the analysis code to one statistics file and inserted programmatically.")
