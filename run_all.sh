@@ -20,5 +20,6 @@ python sec4.py && python sec4b.py && python rev_splits100.py splits 100 && pytho
 python sec5.py && python sec5b.py && python stats_r4.py && python stats_r5.py   # point-score selective prediction, net-benefit intervals
 python sec6.py && python stats_r6.py && python fig_design.py   # operational AUROC differences, scenario summary, design figure
 python sec7.py && python stats_r7.py && python fig_export7.py   # pooled intervals, figure export
-python manuscript_full7.py && python manuscript_r7.py && DOUBLE=1 node render.js ../manuscript.docx ../results/manuscript_r7.json lines && node render.js ../supplementary.docx ../results/supplement_r7.json nolines
+python sec8.py && python stats_r8.py && python fig_tradeoff.py   # configuration sensitivity, recalibration, trade-off figure
+python manuscript_full7.py && python manuscript_r8.py && DOUBLE=1 node render.js ../manuscript.docx ../results/manuscript_r8.json lines && DOUBLE=1 node render.js ../supplementary.docx ../results/supplement_r8.json nolines
 cd .. && python tests/test_cohort_priors.py && python tests/test_trace_fidelity.py && python tests/test_bounds_bruteforce.py

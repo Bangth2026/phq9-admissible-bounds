@@ -11,17 +11,19 @@ diagnostic tool and is not a substitute for the PHQ-2 where symptom questions ca
 | Path | What it is |
 | --- | --- |
 | `src/fofs.py` | Model: variables, admissible ranges, concepts, provenance; sign-constrained fuzzy additive rules; JSON trace |
-| `src/fofs.py` `bounds()` | **Algorithm 1** (Box 1): worst-case bounds for a main-effects rule base |
-| `src/exact.py` | **Algorithm 2** (Box 2: exact worst-case bounds for rule bases with conjunctions) and **Algorithm 3** (Box 3: bound-guided input acquisition) |
+| `src/fofs.py` `bounds()` | **Algorithm 1** (Box 2 of the article): worst-case bounds for a main-effects rule base |
+| `src/exact.py` | **Algorithm 2** (Box 3 of the article: exact worst-case bounds for rule bases with conjunctions) and **Algorithm 3** (Box S1 of the Supplementary Material: bound-guided input acquisition) |
 | `src/sec4.py` | Abstention rules with the base model held fixed: worst-case bounds, imputation spread, pattern submodels, complete cases; natural, MCAR, MNAR, outcome-dependent and shifted missingness; risk–coverage, AURC, decision consequences |
 | `src/sec5.py`, `src/sec5b.py` | Point-score selective prediction, net-benefit intervals, prevalence of shifted samples, ordinal-residual shift |
+| `src/sec8.py` | Imputation spread with 10 or 20 completions and 80/20, 90/10, 95/5 cut-offs; the rules in 2021–2023 after recalibration-in-the-large |
+| `src/fig_tradeoff.py` | Fig. 4: cases missed against questionnaires avoided per 1,000 |
 | `src/sec4b.py` | Design-based bootstrap, minimum sample size, calibration maps, acquisition with item costs |
 | `src/sec3.py` | Earlier imputation-spread analysis, sex-specific thresholds |
 | `tests/` | Independent checks: cohort flow and priors, bounds against brute force, trace re-evaluation |
 | `src/rev_common.py` | Comparators: sign-constrained LR (exact linear bounds), spline LR (restricted cubic splines, grid bounds), LR without indicators, LR with multiple imputation, monotone GBT, EBM (GA²M) |
 | `schema/knowledge_schema.jsonld` | Knowledge schema as JSON-LD 1.1 with a SKOS concept scheme |
 | `results/protocol_v2.md` | Analysis protocol of version 2 with its addendum (not registered; time stamps are file modification times recorded in the addendum) |
-| `results/paper_stats_r7.json` | Every number in the manuscript and Supplementary Material, written by `src/stats_r7.py` (earlier statistics files are kept) |
+| `results/paper_stats_r8.json` | Every number in the manuscript and Supplementary Material, written by `src/stats_r8.py` (earlier statistics files are kept) |
 | `results/v1/` | Archived outputs of version 1 (conjunctive rule base), used as inputs |
 | `results/secondary/` | Outputs of the secondary analyses |
 | `run_all.sh` | Full pipeline in order |
